@@ -9,17 +9,17 @@ import {} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({}));
 
-interface DescriptionProps {}
+interface ReflectionProps {}
 
-const Description: FC<DescriptionProps> = () => {
+const Reflection: FC<ReflectionProps> = () => {
   const classes = useStyles();
 
   return (
     <>
-      <Heading>Describe your day</Heading>
-      <TextArea label="Description" placeholder="Today was ..." />
+      <Heading>Reflect on your day</Heading>
+      <TextArea label="Reflections" placeholder="Reflections: " />
     </>
   );
 };
 
-export default Description;
+export default Reflection;

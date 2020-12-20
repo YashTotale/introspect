@@ -7,6 +7,7 @@ import {
   createMuiTheme,
   ThemeProvider,
   CssBaseline,
+  colors,
 } from "@material-ui/core";
 
 export const alternativeFont = "Arial, sans-serif";
@@ -21,6 +22,8 @@ const Theme: React.FC = ({ children }) => {
     },
     palette: {
       type: prefersDarkMode ? "dark" : "light",
+      primary: colors.amber,
+      secondary: colors.lightBlue,
     },
     spacing: 8,
   });

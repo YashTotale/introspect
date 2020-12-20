@@ -58,10 +58,9 @@ const RatingRadio: FC<RatingRadioProps> = ({ value }) => {
   return (
     <FormControlLabel
       value={value}
-      control={<Radio />}
+      control={<Radio color="primary" />}
       label={value}
       labelPlacement="bottom"
-      color="primary"
       className={classes.radio}
     />
   );

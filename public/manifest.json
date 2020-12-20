@@ -2,7 +2,7 @@
   "name": "Introspect",
   "version": "1.0.0",
   "manifest_version": 2,
-  "description": "Reflect on your day, everyday",
+  "description": "Rate, Describe, & Reflect on your day, everyday",
   "icons": {
     "512": "logo512.png"
   },

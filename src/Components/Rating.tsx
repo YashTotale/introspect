@@ -1,16 +1,12 @@
+// React Imports
 import React, { useState, FC } from "react";
-
-import {
-  RadioGroup,
-  Radio,
-  FormControlLabel,
-  Divider,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import Heading from "./Heading";
 
+// Material UI Imports
+import { RadioGroup, Radio, FormControlLabel } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
 const useStyles = makeStyles((theme) => ({
-  heading: {},
   divider: {},
   ratings: {
     display: "flex",
@@ -30,7 +26,6 @@ const Rating: FC<RatingProps> = () => {
   return (
     <>
       <Heading>Rate your day</Heading>
-      <Divider className={classes.divider} />
       <RadioGroup
         aria-label="rating"
         name="rating"

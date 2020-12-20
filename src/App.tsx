@@ -1,6 +1,7 @@
 // React Imports
 import React, { FC } from "react";
 import Rating from "./Components/Rating";
+import Description from "./Components/Description";
 
 // Material UI Imports
 import Theme from "./Theme";
@@ -22,6 +23,7 @@ const App: FC = () => {
     <Theme>
       <Paper className={classes.container}>
         <Rating />
+        <Description />
       </Paper>
     </Theme>
   );

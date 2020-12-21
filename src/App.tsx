@@ -1,9 +1,10 @@
 // React Imports
 import React, { FC } from "react";
+import { SnackbarProvider } from "notistack";
 
-import Rating from "./Sections.tsx/Rating";
-import Description from "./Sections.tsx/Description";
-import Reflection from "./Sections.tsx/Reflection";
+import Rating from "./Sections/Rating";
+import Description from "./Sections/Description";
+import Reflection from "./Sections/Reflection";
 
 import SnackBar from "./Components/Snackbar";
 
@@ -29,12 +30,14 @@ const App: FC = () => {
   return (
     <ReduxStore>
       <Theme>
-        <Paper className={classes.container}>
-          <Rating />
-          <Description />
-          <Reflection />
-          <SnackBar />
-        </Paper>
+        <SnackbarProvider>
+          <Paper className={classes.container}>
+            <Rating />
+            <Description />
+            <Reflection />
+            <SnackBar />
+          </Paper>
+        </SnackbarProvider>
       </Theme>
     </ReduxStore>
   );

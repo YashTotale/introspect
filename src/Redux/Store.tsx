@@ -7,7 +7,7 @@ import {
   configureStore,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 
 // Redux Persist Imports
 import {
@@ -24,10 +24,10 @@ import { PersistGate } from "redux-persist/lib/integration/react";
 import storage from "redux-persist/lib/storage";
 
 // Reducer Imports
-import todaySlice from "./today.slice";
+import { todayReducer } from "./today.slice";
 
 const reducers = combineReducers({
-  today: todaySlice.reducer,
+  today: todayReducer,
 });
 
 const persistConfig = {
@@ -47,6 +47,9 @@ const store = configureStore({
   }),
   devTools: true,
 });
+
+export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export type RootState = ReturnType<typeof store.getState>;
 

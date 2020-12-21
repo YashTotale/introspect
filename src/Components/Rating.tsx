@@ -1,10 +1,14 @@
 // React Imports
-import React, { useState, FC } from "react";
+import React, { FC } from "react";
 import Heading from "./Heading";
+
+// Redux Imports
+import { getRating, setRating, useAppDispatch } from "../Redux";
 
 // Material UI Imports
 import { RadioGroup, Radio, FormControlLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   divider: {},
@@ -20,8 +24,9 @@ interface RatingProps {}
 
 const Rating: FC<RatingProps> = () => {
   const classes = useStyles();
+  const dispatch = useAppDispatch();
 
-  const [rating, setRating] = useState(0);
+  const rating = useSelector(getRating);
 
   return (
     <>
@@ -30,11 +35,11 @@ const Rating: FC<RatingProps> = () => {
         aria-label="rating"
         name="rating"
         value={rating}
-        onChange={(e, value) => setRating(parseInt(value))}
+        onChange={(e, value) => dispatch(setRating(parseInt(value)))}
         className={classes.ratings}
       >
         {[...Array(6)].map((x, i) => (
-          <RatingRadio value={i} />
+          <RatingRadio key={i} value={i} />
         ))}
       </RadioGroup>
     </>

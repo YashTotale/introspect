@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./Store";
 
 const todaySlice = createSlice({
@@ -9,18 +9,30 @@ const todaySlice = createSlice({
     reflection: "",
   },
   reducers: {
-    setRating: (state, action) => (state.rating = action.payload),
-    setDescription: (state, action) => (state.description = action.payload),
-    setReflection: (state, action) => (state.reflection = action.payload),
+    setRating: (state, action: PayloadAction<number>) => ({
+      ...state,
+      rating: action.payload,
+    }),
+    setDescription: (state, action: PayloadAction<string>) => ({
+      ...state,
+      description: action.payload,
+    }),
+    setReflection: (state, action: PayloadAction<string>) => ({
+      ...state,
+      reflection: action.payload,
+    }),
   },
 });
 
-//Actions
+// Actions
 export const { setDescription, setRating, setReflection } = todaySlice.actions;
 
 // Selectors
 export const getRating = (state: RootState) => state.today.rating;
 export const getDescription = (state: RootState) => state.today.description;
 export const getReflection = (state: RootState) => state.today.reflection;
+
+// Reducer
+export const todayReducer = todaySlice.reducer;
 
 export default todaySlice;

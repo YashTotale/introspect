@@ -6,6 +6,7 @@ import Rating from "./Sections/Rating";
 import Description from "./Sections/Description";
 import Reflection from "./Sections/Reflection";
 
+import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
 // Redux Imports
@@ -20,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
+  },
+  sections: {
+    display: "flex",
+    flexDirection: "column",
     padding: theme.spacing(1),
   },
 }));
@@ -32,9 +37,12 @@ const App: FC = () => {
       <Theme>
         <SnackbarProvider>
           <Paper className={classes.container}>
-            <Rating />
-            <Description />
-            <Reflection />
+            <Header />
+            <div className={classes.sections}>
+              <Rating />
+              <Description />
+              <Reflection />
+            </div>
             <Footer />
           </Paper>
         </SnackbarProvider>

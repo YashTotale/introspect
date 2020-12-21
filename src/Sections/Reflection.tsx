@@ -1,7 +1,7 @@
 // React Imports
 import React, { FC } from "react";
-import Heading from "../Components/Heading";
-import TextArea from "../Components/TextArea";
+import Heading from "../Components/Reusable/Heading";
+import TextArea from "../Components/Reusable/TextArea";
 
 // Redux Imports
 import {

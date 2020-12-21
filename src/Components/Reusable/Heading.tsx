@@ -22,15 +22,17 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
   },
   title: {},
-  clearTooltip: {
-    marginTop: theme.spacing(1),
-  },
   clear: {
     position: "absolute",
     top: "50%",
     right: theme.spacing(1),
     transform: "translate(0%,-50%)",
+  },
+  clearButton: {
     padding: theme.spacing(1),
+  },
+  clearTooltip: {
+    marginTop: theme.spacing(1),
   },
 }));
 
@@ -77,31 +79,33 @@ const Heading: FC<HeadingProps> = ({
             tooltip: classes.clearTooltip,
           }}
         >
-          <IconButton
-            size="small"
-            className={`${classes.clear} ${clearClassName}`}
-            onClick={() => {
-              clear();
-              enqueueSnackbar(`${name} cleared`, {
-                variant: "success",
-                autoHideDuration: 4000,
-                action: (key) => (
-                  <Button
-                    onClick={() => {
-                      undo();
-                      closeSnackbar(key);
-                    }}
-                    variant="text"
-                  >
-                    Undo
-                  </Button>
-                ),
-              });
-            }}
-            disabled={!clearable}
-          >
-            <Clear fontSize="small" />
-          </IconButton>
+          <span className={`${classes.clear} ${clearClassName}`}>
+            <IconButton
+              size="small"
+              className={classes.clearButton}
+              onClick={() => {
+                clear();
+                enqueueSnackbar(`${name} cleared`, {
+                  variant: "success",
+                  autoHideDuration: 4000,
+                  action: (key) => (
+                    <Button
+                      onClick={() => {
+                        undo();
+                        closeSnackbar(key);
+                      }}
+                      variant="text"
+                    >
+                      Undo
+                    </Button>
+                  ),
+                });
+              }}
+              disabled={!clearable}
+            >
+              <Clear fontSize="small" />
+            </IconButton>
+          </span>
         </Tooltip>
       </div>
     </>

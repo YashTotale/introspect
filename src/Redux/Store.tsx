@@ -9,6 +9,23 @@ import {
 } from "@reduxjs/toolkit";
 import { Provider, useDispatch } from "react-redux";
 
+// Firebase Imports
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/firestore";
+import { firebaseConfig } from "../Utils/CONFIDENTIAL";
+import {
+  getFirebase,
+  actionTypes as rrfActionTypes,
+  firebaseReducer,
+  ReactReduxFirebaseProvider,
+} from "react-redux-firebase";
+import {
+  constants as rfConstants,
+  createFirestoreInstance,
+  firestoreReducer,
+} from "redux-firestore";
+
 // Redux Persist Imports
 import {
   persistStore,
@@ -28,6 +45,8 @@ import { todayReducer } from "./today.slice";
 
 const reducers = combineReducers({
   today: todayReducer,
+  firebase: firebaseReducer,
+  firestore: firestoreReducer,
 });
 
 const persistConfig = {
@@ -38,11 +57,33 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
+const extraArgument = {
+  getFirebase,
+};
+
 const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware({
     serializableCheck: {
-      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      ignoredActions: [
+        FLUSH,
+        REHYDRATE,
+        PAUSE,
+        PERSIST,
+        PURGE,
+        REGISTER,
+        // just ignore every redux-firebase and react-redux-firebase action type
+        ...Object.keys(rfConstants.actionTypes).map(
+          (type) => `${rfConstants.actionsPrefix}/${type}`
+        ),
+        ...Object.keys(rrfActionTypes).map(
+          (type) => `@@reactReduxFirebase/${type}`
+        ),
+      ],
+      ignoredPaths: ["firebase", "firestore"],
+    },
+    thunk: {
+      extraArgument,
     },
   }),
   devTools: true,
@@ -57,12 +98,27 @@ export type RootState = ReturnType<typeof store.getState>;
 
 const persistor = persistStore(store);
 
+firebase.initializeApp(firebaseConfig);
+
+firebase.firestore();
+
 const ReduxStore: FC = ({ children }) => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        {children}
-      </PersistGate>
+      <ReactReduxFirebaseProvider
+        dispatch={store.dispatch}
+        firebase={firebase}
+        config={{
+          logErrors: true,
+          useFirestoreForProfile: true,
+          userProfile: "users",
+        }}
+        createFirestoreInstance={createFirestoreInstance}
+      >
+        <PersistGate loading={null} persistor={persistor}>
+          {children}
+        </PersistGate>
+      </ReactReduxFirebaseProvider>
     </Provider>
   );
 };

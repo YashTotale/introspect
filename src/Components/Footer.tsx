@@ -2,6 +2,7 @@
 import React, { FC } from "react";
 
 // Redux Imports
+import { useFirebase } from "react-redux-firebase";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -20,6 +21,8 @@ const useStyles = makeStyles((theme) => ({
 interface FooterProps {}
 
 const Footer: FC<FooterProps> = () => {
+  const firebase = useFirebase();
+  console.log(firebase);
   const classes = useStyles();
 
   return (

@@ -4,7 +4,12 @@ import Heading from "./Heading";
 import TextArea from "./TextArea";
 
 // Redux Imports
-import { getReflection, setReflection, useAppDispatch } from "../Redux";
+import {
+  clearReflection,
+  getReflection,
+  setReflection,
+  useAppDispatch,
+} from "../Redux";
 import { useSelector } from "react-redux";
 
 // Material UI Imports
@@ -24,7 +29,9 @@ const Reflection: FC<ReflectionProps> = () => {
 
   return (
     <>
-      <Heading>Reflect on your day</Heading>
+      <Heading onClear={() => dispatch(clearReflection())}>
+        Reflect on your day
+      </Heading>
       <TextArea
         value={reflection}
         setValue={(value) => dispatch(setReflection(value))}

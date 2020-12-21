@@ -4,7 +4,12 @@ import Heading from "./Heading";
 import TextArea from "./TextArea";
 
 // Redux Imports
-import { getDescription, setDescription, useAppDispatch } from "../Redux";
+import {
+  clearDescription,
+  getDescription,
+  setDescription,
+  useAppDispatch,
+} from "../Redux";
 import { useSelector } from "react-redux";
 
 // Material UI Imports
@@ -24,7 +29,9 @@ const Description: FC<DescriptionProps> = () => {
 
   return (
     <>
-      <Heading>Describe your day</Heading>
+      <Heading onClear={() => dispatch(clearDescription())}>
+        Describe your day
+      </Heading>
       <TextArea
         value={description}
         setValue={(value) => dispatch(setDescription(value))}

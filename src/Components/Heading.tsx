@@ -32,6 +32,7 @@ interface HeadingProps {
   headingClassName?: string;
   titleClassName?: string;
   clearClassName?: string;
+  onClear: () => void;
 }
 
 const Heading: FC<HeadingProps> = ({
@@ -39,6 +40,7 @@ const Heading: FC<HeadingProps> = ({
   headingClassName,
   titleClassName,
   clearClassName,
+  onClear,
   children,
 }) => {
   const classes = useStyles();
@@ -63,6 +65,7 @@ const Heading: FC<HeadingProps> = ({
           <IconButton
             size="small"
             className={`${classes.clear} ${clearClassName}`}
+            onClick={onClear}
           >
             <Clear fontSize="small" />
           </IconButton>

@@ -10,7 +10,14 @@ export { default as todaySlice } from "./today.slice";
 export { getRating, getDescription, getReflection } from "./today.slice";
 
 // -> Actions
-export { setRating, setDescription, setReflection } from "./today.slice";
+export {
+  setRating,
+  clearRating,
+  setDescription,
+  clearDescription,
+  setReflection,
+  clearReflection,
+} from "./today.slice";
 
 // -> Reducer
 export { todayReducer } from "./today.slice";

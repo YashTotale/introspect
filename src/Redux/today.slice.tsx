@@ -13,19 +13,38 @@ const todaySlice = createSlice({
       ...state,
       rating: action.payload,
     }),
+    clearRating: (state) => ({
+      ...state,
+      rating: null,
+    }),
     setDescription: (state, action: PayloadAction<string>) => ({
       ...state,
       description: action.payload,
+    }),
+    clearDescription: (state) => ({
+      ...state,
+      description: "",
     }),
     setReflection: (state, action: PayloadAction<string>) => ({
       ...state,
       reflection: action.payload,
     }),
+    clearReflection: (state) => ({
+      ...state,
+      reflection: "",
+    }),
   },
 });
 
 // Actions
-export const { setDescription, setRating, setReflection } = todaySlice.actions;
+export const {
+  setRating,
+  clearRating,
+  setDescription,
+  clearDescription,
+  setReflection,
+  clearReflection,
+} = todaySlice.actions;
 
 // Selectors
 export const getRating = (state: RootState) => state.today.rating;

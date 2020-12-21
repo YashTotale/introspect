@@ -1,5 +1,5 @@
 // React Imports
-import React, { FC, useState, KeyboardEvent } from "react";
+import React, { FC, KeyboardEvent } from "react";
 
 // Material UI Imports
 import { TextField, TextFieldProps } from "@material-ui/core";
@@ -14,16 +14,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-type TextAreaProps = TextFieldProps;
+type TextAreaProps = TextFieldProps & {
+  setValue: (value: string) => void;
+  value: string;
+};
 
 const TextArea: FC<TextAreaProps> = (props) => {
   const classes = useStyles();
 
-  const [value, setValue] = useState("");
-
   const checkForAutoFill = (e: KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "ArrowRight" && !value.length) {
-      setValue(
+    if (e.key === "ArrowRight" && !props.value.length) {
+      props.setValue(
         props.placeholder ??
           (typeof props.label === "string" ? props.label : "")
       );
@@ -32,8 +33,9 @@ const TextArea: FC<TextAreaProps> = (props) => {
 
   return (
     <TextField
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
+      {...props}
+      value={props.value}
+      onChange={(e) => props.setValue(e.target.value)}
       onKeyDown={checkForAutoFill}
       variant="outlined"
       rows={3}
@@ -45,7 +47,6 @@ const TextArea: FC<TextAreaProps> = (props) => {
         },
       }}
       className={classes.textArea}
-      {...props}
     />
   );
 };

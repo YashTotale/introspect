@@ -3,6 +3,10 @@ import React, { FC } from "react";
 import Heading from "./Heading";
 import TextArea from "./TextArea";
 
+// Redux Imports
+import { getReflection, setReflection, useAppDispatch } from "../Redux";
+import { useSelector } from "react-redux";
+
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import {} from "@material-ui/core";
@@ -14,10 +18,19 @@ interface ReflectionProps {}
 const Reflection: FC<ReflectionProps> = () => {
   const classes = useStyles();
 
+  const reflection = useSelector(getReflection);
+
+  const dispatch = useAppDispatch();
+
   return (
     <>
       <Heading>Reflect on your day</Heading>
-      <TextArea label="Reflections" placeholder="Reflections: " />
+      <TextArea
+        value={reflection}
+        setValue={(value) => dispatch(setReflection(value))}
+        label="Reflections"
+        placeholder="Reflections: "
+      />
     </>
   );
 };

@@ -1,13 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { RootState } from "./Store";
+
+export interface TodayState {
+  rating: number | null;
+  description: string;
+  reflection: string;
+}
+
+const initialState: TodayState = {
+  rating: null,
+  description: "",
+  reflection: "",
+};
 
 const todaySlice = createSlice({
   name: "today",
-  initialState: {
-    rating: null as number | null,
-    description: "",
-    reflection: "",
-  },
+  initialState,
   reducers: {
     setRating: (state, action: PayloadAction<number | null>) => ({
       ...state,

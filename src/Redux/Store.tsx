@@ -25,9 +25,11 @@ import storage from "redux-persist/lib/storage";
 
 // Reducer Imports
 import { todayReducer } from "./today.slice";
+import { snackbarReducer } from "./snackbar.slice";
 
 const reducers = combineReducers({
   today: todayReducer,
+  snackbar: snackbarReducer,
 });
 
 const persistConfig = {

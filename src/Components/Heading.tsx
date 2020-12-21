@@ -1,8 +1,15 @@
 // React Imports
 import React, { FC } from "react";
+import { useSnackbar } from "notistack";
 
 // Material UI Imports
-import { Typography, Divider, IconButton, Tooltip } from "@material-ui/core";
+import {
+  Typography,
+  Divider,
+  IconButton,
+  Tooltip,
+  Button,
+} from "@material-ui/core";
 import { Clear } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -28,22 +35,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface HeadingProps {
+  name: string;
+  clear: () => void;
+  undo: () => void;
+  clearable: boolean;
   dividerClassName?: string;
   headingClassName?: string;
   titleClassName?: string;
   clearClassName?: string;
-  onClear: () => void;
 }
 
 const Heading: FC<HeadingProps> = ({
+  name,
+  clear,
+  undo,
+  clearable,
+  children,
   dividerClassName,
   headingClassName,
   titleClassName,
   clearClassName,
-  onClear,
-  children,
 }) => {
   const classes = useStyles();
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   return (
     <>
       <Divider className={`${classes.divider} ${dividerClassName}`} />
@@ -65,7 +81,25 @@ const Heading: FC<HeadingProps> = ({
           <IconButton
             size="small"
             className={`${classes.clear} ${clearClassName}`}
-            onClick={onClear}
+            onClick={() => {
+              clear();
+              enqueueSnackbar(`${name} cleared`, {
+                variant: "success",
+                autoHideDuration: 4000,
+                action: (key) => (
+                  <Button
+                    onClick={() => {
+                      undo();
+                      closeSnackbar(key);
+                    }}
+                    variant="text"
+                  >
+                    Undo
+                  </Button>
+                ),
+              });
+            }}
+            disabled={!clearable}
           >
             <Clear fontSize="small" />
           </IconButton>

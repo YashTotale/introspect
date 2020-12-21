@@ -4,14 +4,20 @@ import { RootState } from "./Store";
 
 export interface TodayState {
   rating: number | null;
+  lastRating: number | null;
   description: string;
+  lastDescription: string;
   reflection: string;
+  lastReflection: string;
 }
 
 const initialState: TodayState = {
   rating: null,
+  lastRating: null,
   description: "",
+  lastDescription: "",
   reflection: "",
+  lastReflection: "",
 };
 
 const todaySlice = createSlice({
@@ -20,27 +26,30 @@ const todaySlice = createSlice({
   reducers: {
     setRating: (state, action: PayloadAction<number | null>) => ({
       ...state,
+      lastRating: state.rating,
       rating: action.payload,
     }),
-    clearRating: (state) => ({
+    undoRating: (state) => ({
       ...state,
-      rating: null,
+      rating: state.lastRating,
     }),
     setDescription: (state, action: PayloadAction<string>) => ({
       ...state,
+      lastDescription: state.description,
       description: action.payload,
     }),
-    clearDescription: (state) => ({
+    undoDescription: (state) => ({
       ...state,
-      description: "",
+      description: state.lastDescription,
     }),
     setReflection: (state, action: PayloadAction<string>) => ({
       ...state,
+      lastReflection: state.reflection,
       reflection: action.payload,
     }),
-    clearReflection: (state) => ({
+    undoReflection: (state) => ({
       ...state,
-      reflection: "",
+      reflection: state.lastReflection,
     }),
   },
 });
@@ -48,11 +57,11 @@ const todaySlice = createSlice({
 // Actions
 export const {
   setRating,
-  clearRating,
+  undoRating,
   setDescription,
-  clearDescription,
+  undoDescription,
   setReflection,
-  clearReflection,
+  undoReflection,
 } = todaySlice.actions;
 
 // Selectors

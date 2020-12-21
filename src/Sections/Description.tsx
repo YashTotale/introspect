@@ -5,9 +5,9 @@ import TextArea from "../Components/TextArea";
 
 // Redux Imports
 import {
-  clearDescription,
   getDescription,
   setDescription,
+  undoDescription,
   useAppDispatch,
 } from "../Redux";
 import { useSelector } from "react-redux";
@@ -22,14 +22,18 @@ interface DescriptionProps {}
 
 const Description: FC<DescriptionProps> = () => {
   const classes = useStyles();
+  const dispatch = useAppDispatch();
 
   const description = useSelector(getDescription);
 
-  const dispatch = useAppDispatch();
-
   return (
     <>
-      <Heading onClear={() => dispatch(clearDescription())}>
+      <Heading
+        name="Description"
+        clear={() => dispatch(setDescription(""))}
+        undo={() => dispatch(undoDescription())}
+        clearable={!!description.length}
+      >
         Describe your day
       </Heading>
       <TextArea

@@ -5,9 +5,9 @@ import TextArea from "../Components/TextArea";
 
 // Redux Imports
 import {
-  clearReflection,
   getReflection,
   setReflection,
+  undoReflection,
   useAppDispatch,
 } from "../Redux";
 import { useSelector } from "react-redux";
@@ -29,7 +29,12 @@ const Reflection: FC<ReflectionProps> = () => {
 
   return (
     <>
-      <Heading onClear={() => dispatch(clearReflection())}>
+      <Heading
+        name="Reflections"
+        clear={() => dispatch(setReflection(""))}
+        undo={() => dispatch(undoReflection())}
+        clearable={!!reflection}
+      >
         Reflect on your day
       </Heading>
       <TextArea

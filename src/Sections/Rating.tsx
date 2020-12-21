@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import Heading from "../Components/Heading";
 
 // Redux Imports
-import { clearRating, getRating, setRating, useAppDispatch } from "../Redux";
+import { getRating, setRating, undoRating, useAppDispatch } from "../Redux";
 
 // Material UI Imports
 import { RadioGroup, Radio, FormControlLabel } from "@material-ui/core";
@@ -31,7 +31,14 @@ const Rating: FC<RatingProps> = () => {
 
   return (
     <>
-      <Heading onClear={() => dispatch(clearRating())}>Rate your day</Heading>
+      <Heading
+        name="Rating"
+        clear={() => dispatch(setRating(null))}
+        undo={() => dispatch(undoRating())}
+        clearable={!!rating}
+      >
+        Rate your day
+      </Heading>
       <RadioGroup
         aria-label="rating"
         name="rating"

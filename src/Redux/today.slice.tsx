@@ -4,12 +4,12 @@ import { RootState } from "./Store";
 const todaySlice = createSlice({
   name: "today",
   initialState: {
-    rating: 0,
+    rating: null as number | null,
     description: "",
     reflection: "",
   },
   reducers: {
-    setRating: (state, action: PayloadAction<number>) => ({
+    setRating: (state, action: PayloadAction<number | null>) => ({
       ...state,
       rating: action.payload,
     }),

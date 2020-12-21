@@ -16,6 +16,19 @@ const Theme: React.FC = ({ children }) => {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
 
   const theme = createMuiTheme({
+    overrides: {
+      MuiTooltip: {
+        arrow: {
+          color: "rgb(0, 0, 0, 0.76)",
+        },
+        tooltip: {
+          fontFamily: alternativeFont,
+          fontWeight: 600,
+          fontSize: "0.72rem",
+          backgroundColor: "rgb(0, 0, 0, 0.76)",
+        },
+      },
+    },
     typography: {
       fontFamily: "Palatino, Georgia, Serif",
       fontWeightBold: 600,

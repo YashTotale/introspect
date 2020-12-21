@@ -2,38 +2,72 @@
 import React, { FC } from "react";
 
 // Material UI Imports
-import { Typography, Divider } from "@material-ui/core";
+import { Typography, Divider, IconButton, Tooltip } from "@material-ui/core";
+import { Clear } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-  heading: {},
   divider: {
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  heading: {
+    position: "relative",
+  },
+  title: {},
+  clearTooltip: {
+    marginTop: theme.spacing(1),
+  },
+  clear: {
+    position: "absolute",
+    top: "50%",
+    right: theme.spacing(1),
+    transform: "translate(0%,-50%)",
+    padding: theme.spacing(1),
+  },
 }));
 
 interface HeadingProps {
-  className?: string;
   dividerClassName?: string;
+  headingClassName?: string;
+  titleClassName?: string;
+  clearClassName?: string;
 }
 
 const Heading: FC<HeadingProps> = ({
-  className,
   dividerClassName,
+  headingClassName,
+  titleClassName,
+  clearClassName,
   children,
 }) => {
   const classes = useStyles();
   return (
     <>
       <Divider className={`${classes.divider} ${dividerClassName}`} />
-      <Typography
-        className={`${classes.heading} ${className}`}
-        variant="h5"
-        align="center"
-      >
-        {children}
-      </Typography>
+      <div className={`${classes.heading} ${headingClassName}`}>
+        <Typography
+          className={`${classes.title} ${titleClassName}`}
+          variant="h5"
+          align="center"
+        >
+          {children}
+        </Typography>
+        <Tooltip
+          title="Clear"
+          interactive
+          classes={{
+            tooltip: classes.clearTooltip,
+          }}
+        >
+          <IconButton
+            size="small"
+            className={`${classes.clear} ${clearClassName}`}
+          >
+            <Clear fontSize="small" />
+          </IconButton>
+        </Tooltip>
+      </div>
     </>
   );
 };

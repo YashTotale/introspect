@@ -1,4 +1,4 @@
-export { useAppDispatch } from "./Store";
+export { useAppDispatch, getState } from "./Store";
 export type { AppDispatch } from "./Store";
 
 /**
@@ -35,10 +35,16 @@ export type { TodayState } from "./today.slice";
 export { default as snackbarSlice } from "./snackbar.slice";
 
 // -> Selectors
-export { getMessage, getSeverity } from "./snackbar.slice";
+export {
+  getSnackbarMessage,
+  getSnackbarSeverity,
+  getSnackbarType,
+  getSnackbarOpen,
+  getSnackbarUndo,
+} from "./snackbar.slice";
 
 // -> Actions
-export { setSnackbar } from "./snackbar.slice";
+export { setSnackbar, toggleSnackbar } from "./snackbar.slice";
 
 // -> Reducer
 export { snackbarReducer } from "./snackbar.slice";

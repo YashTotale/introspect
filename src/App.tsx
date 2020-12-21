@@ -1,8 +1,11 @@
 // React Imports
 import React, { FC } from "react";
-import Rating from "./Components/Rating";
-import Description from "./Components/Description";
-import Reflection from "./Components/Reflection";
+
+import Rating from "./Sections.tsx/Rating";
+import Description from "./Sections.tsx/Description";
+import Reflection from "./Sections.tsx/Reflection";
+
+import SnackBar from "./Components/Snackbar";
 
 // Redux Imports
 import ReduxStore from "./Redux/Store";
@@ -30,6 +33,7 @@ const App: FC = () => {
           <Rating />
           <Description />
           <Reflection />
+          <SnackBar />
         </Paper>
       </Theme>
     </ReduxStore>

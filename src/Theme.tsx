@@ -28,6 +28,12 @@ const Theme: React.FC = ({ children }) => {
           backgroundColor: "rgb(0, 0, 0, 0.76)",
         },
       },
+      MuiButton: {
+        label: {
+          fontFamily: alternativeFont,
+          fontWeight: 600,
+        },
+      },
     },
     typography: {
       fontFamily: "Palatino, Georgia, Serif",

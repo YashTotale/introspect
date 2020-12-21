@@ -35,7 +35,7 @@ const Rating: FC<RatingProps> = () => {
         name="Rating"
         clear={() => dispatch(setRating(null))}
         undo={() => dispatch(undoRating())}
-        clearable={!!rating}
+        clearable={rating !== null}
       >
         Rate your day
       </Heading>

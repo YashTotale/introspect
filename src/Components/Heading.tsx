@@ -73,7 +73,6 @@ const Heading: FC<HeadingProps> = ({
         </Typography>
         <Tooltip
           title="Clear"
-          interactive
           classes={{
             tooltip: classes.clearTooltip,
           }}

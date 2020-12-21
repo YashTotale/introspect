@@ -6,6 +6,8 @@ import Rating from "./Sections/Rating";
 import Description from "./Sections/Description";
 import Reflection from "./Sections/Reflection";
 
+import Footer from "./Components/Footer";
+
 // Redux Imports
 import ReduxStore from "./Redux/Store";
 
@@ -33,6 +35,7 @@ const App: FC = () => {
             <Rating />
             <Description />
             <Reflection />
+            <Footer />
           </Paper>
         </SnackbarProvider>
       </Theme>

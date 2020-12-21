@@ -36,8 +36,8 @@ const TextArea: FC<TextAreaProps> = (props) => {
       onChange={(e) => setValue(e.target.value)}
       onKeyDown={checkForAutoFill}
       variant="outlined"
-      rows={2}
-      rowsMax={10}
+      rows={3}
+      rowsMax={11}
       multiline
       InputProps={{
         classes: {

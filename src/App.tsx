@@ -4,6 +4,9 @@ import Rating from "./Components/Rating";
 import Description from "./Components/Description";
 import Reflection from "./Components/Reflection";
 
+// Redux Imports
+import ReduxStore from "./Redux/Store";
+
 // Material UI Imports
 import Theme from "./Theme";
 import { Paper } from "@material-ui/core";
@@ -21,13 +24,15 @@ const App: FC = () => {
   const classes = useStyles();
 
   return (
-    <Theme>
-      <Paper className={classes.container}>
-        <Rating />
-        <Description />
-        <Reflection />
-      </Paper>
-    </Theme>
+    <ReduxStore>
+      <Theme>
+        <Paper className={classes.container}>
+          <Rating />
+          <Description />
+          <Reflection />
+        </Paper>
+      </Theme>
+    </ReduxStore>
   );
 };
 

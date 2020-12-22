@@ -19,6 +19,7 @@ import {
   Tooltip,
   MenuItem,
   IconButton,
+  CircularProgress,
 } from "@material-ui/core";
 import { Person } from "@material-ui/icons";
 
@@ -41,7 +42,7 @@ const Header: FC<HeaderProps> = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
 
-  const currentUser = useSelector(getUser);
+  const user = useSelector(getUser);
 
   return (
     <AppBar
@@ -51,7 +52,9 @@ const Header: FC<HeaderProps> = () => {
       variant="elevation"
     >
       <Toolbar className={classes.toolbar}>
-        {currentUser.isEmpty ? (
+        {!user.isLoaded ? (
+          <CircularProgress />
+        ) : user.isEmpty ? (
           <Tooltip title="Login" classes={{ tooltip: classes.profileTooltip }}>
             <IconButton
               onClick={() =>
@@ -62,7 +65,7 @@ const Header: FC<HeaderProps> = () => {
             </IconButton>
           </Tooltip>
         ) : (
-          <ProfileMenu dispatch={dispatch} user={currentUser} />
+          <ProfileMenu dispatch={dispatch} user={user} />
         )}
       </Toolbar>
     </AppBar>

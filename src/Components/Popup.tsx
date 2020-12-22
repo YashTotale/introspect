@@ -90,8 +90,8 @@ const Popup: FC<PopupProps> = () => {
           <DialogTitle>Confirm Logout</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Your data will be preserved, however, you will not be able to save
-              any new Introspections.
+              Your data will be preserved, but you will not be able to save any
+              new Introspections.
             </DialogContentText>
           </DialogContent>
           <DialogActions>

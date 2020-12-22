@@ -8,14 +8,14 @@ export interface PopupState {
   type: PopupType;
 }
 
-const initialState: PopupState = {
+export const initialPopupState: PopupState = {
   open: false,
   type: "login",
 };
 
 const popupSlice = createSlice({
   name: "popup",
-  initialState,
+  initialState: initialPopupState,
   reducers: {
     togglePopup: (
       state,

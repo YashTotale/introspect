@@ -12,7 +12,7 @@ export interface TodayState {
   done: boolean;
 }
 
-const initialState: TodayState = {
+export const initialTodayState: TodayState = {
   rating: null,
   lastRating: null,
   description: "",
@@ -24,7 +24,7 @@ const initialState: TodayState = {
 
 const todaySlice = createSlice({
   name: "today",
-  initialState,
+  initialState: initialTodayState,
   reducers: {
     // Rating
     setRating: (state, action: PayloadAction<number | null>) => ({

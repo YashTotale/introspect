@@ -1,62 +1,60 @@
 import { RootState } from "../Store";
 
-export type { RootState, AppDispatch } from "../Store";
+export type { RootState, AppDispatch, Profile, StoreSchema } from "../Store";
 export { useAppDispatch, getState } from "../Store";
 
 /**
  * Today Slice
  */
 
-// -> Slice
-export { default as todaySlice } from "./today.slice";
-
-// -> Selectors
 export {
+  // -> Slice
+  default as todaySlice,
+  // -> Selectors
   getRating,
   getDescription,
   getReflection,
   getTodayData,
-} from "./today.slice";
-
-// -> Actions
-export {
-  // Rating
+  // -> Actions
+  // -> -> Rating
   setRating,
   clearRating,
   undoRating,
-  // Description
+  // -> -> Description
   setDescription,
   clearDescription,
   undoDescription,
-  // Reflection
+  // -> -> Reflection
   setReflection,
   clearReflection,
   undoReflection,
+  // -> Reducer
+  todayReducer,
+  // -> State
+  initialTodayState,
 } from "./today.slice";
 
-// -> Reducer
-export { todayReducer } from "./today.slice";
-
-// -> State
 export type { TodayState } from "./today.slice";
 
 /**
  * Popup Slice
  */
 
-// -> Slice
-export { default as popupSlice } from "./popup.slice";
+export {
+  // -> Slice
+  default as popupSlice,
+  // -> Selectors
+  getPopupOpen,
+  getPopupType,
+  // -> Actions
+  togglePopup,
+  setPopupType,
+  // -> Reducer
+  popupReducer,
+  // -> State
+  initialPopupState,
+} from "./popup.slice";
 
-// -> Selectors
-export { getPopupOpen, getPopupType } from "./popup.slice";
-
-// -> Actions
-export { togglePopup, setPopupType } from "./popup.slice";
-
-// -> Reducer
-export { popupReducer } from "./popup.slice";
-
-// -> State
 export type { PopupState } from "./popup.slice";
 
 /**

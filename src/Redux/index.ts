@@ -1,5 +1,7 @@
-export { useAppDispatch, getState } from "./Store";
-export type { AppDispatch } from "./Store";
+import { RootState } from "../Store";
+
+export type { RootState, AppDispatch } from "../Store";
+export { useAppDispatch, getState } from "../Store";
 
 /**
  * Today Slice
@@ -54,8 +56,12 @@ export { togglePopup, setPopupType } from "./popup.slice";
 // -> Reducer
 export { popupReducer } from "./popup.slice";
 
+// -> State
+export type { PopupState } from "./popup.slice";
+
 /**
  * Firebase
  */
 
-export { getProfile, getUser } from "./firebase.selectors";
+export const getUser = (state: RootState) => state.firebase.auth;
+export const getProfile = (state: RootState) => state.firebase.profile;

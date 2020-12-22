@@ -116,13 +116,12 @@ const LoginPopup: FC<PopupProps> = ({
           signInFlow: "popup",
           callbacks: {
             signInSuccessWithAuthResult(result) {
-              console.log(result);
               const isNew = result.additionalUserInfo.isNewUser;
               if (isNew) {
                 const name = result.additionalUserInfo.profile.name;
                 snackbar.enqueueSnackbar(`Welcome to Introspection, ${name}!`, {
                   variant: "default",
-                  autoHideDuration: 4000,
+                  autoHideDuration: 6000,
                 });
               }
               return true;

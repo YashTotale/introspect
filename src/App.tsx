@@ -9,7 +9,7 @@ import Footer from "./Components/Footer";
 import Page from "./Components/Loading/Page";
 
 // Redux Imports
-import ReduxStore from "./Redux/Store";
+import ReduxStore from "./Store";
 
 // Material UI Imports
 import Theme from "./Theme";

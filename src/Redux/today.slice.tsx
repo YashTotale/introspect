@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { RootState } from "./Store";
+import { RootState } from "./index";
 
 export interface TodayState {
   rating: number | null;

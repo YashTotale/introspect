@@ -1,6 +1,6 @@
 // React Imports
 import React, { FC } from "react";
-import Page from "../Components/Loading/Page";
+import Page from "./Components/Loading/Page";
 
 // Redux Imports
 import {
@@ -14,7 +14,7 @@ import { Provider, useDispatch } from "react-redux";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
-import { firebaseConfig } from "../Utils/CONFIDENTIAL";
+import { firebaseConfig } from "./Utils/CONFIDENTIAL";
 import {
   getFirebase,
   actionTypes as rrfActionTypes,
@@ -44,17 +44,17 @@ import { PersistGate } from "redux-persist/lib/integration/react";
 import storage from "redux-persist/lib/storage";
 
 // Reducer Imports
-import { todayReducer, TodayState } from "./today.slice";
-import { popupReducer, PopupState } from "./popup.slice";
+import { todayReducer, TodayState } from "./Redux/today.slice";
+import { popupReducer, PopupState } from "./Redux/popup.slice";
 
-interface Schema {}
+export interface StoreSchema {}
 
-interface Profile {}
+export interface Profile {}
 
 interface State {
   today: TodayState;
   popup: PopupState;
-  firebase: FirebaseReducer.Reducer<Profile, Schema>;
+  firebase: FirebaseReducer.Reducer<Profile, StoreSchema>;
   firestore: FirestoreReducer.Reducer;
 }
 

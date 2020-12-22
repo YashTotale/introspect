@@ -48,6 +48,11 @@
       "extensions": "ts,tsx"
     }
   },
+  "jest": {
+    "testMatch": [
+      "**/__tests__/**/*[^helpers].ts?(x)"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

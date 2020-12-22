@@ -3,8 +3,7 @@ import React, { FC, useState } from "react";
 
 // Redux Imports
 import { useSelector } from "react-redux";
-import { getUser, togglePopup } from "../Redux";
-import { AppDispatch, useAppDispatch } from "../Redux/Store";
+import { getUser, togglePopup, useAppDispatch, AppDispatch } from "../Redux";
 
 // Firebase Imports
 import { FirebaseReducer } from "react-redux-firebase";

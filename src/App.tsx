@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-  sections: {
+  page: {
     display: "flex",
     flexDirection: "column",
     padding: theme.spacing(1),
@@ -38,14 +38,14 @@ const App: FC = () => {
           <SnackbarProvider>
             <Paper className={classes.container}>
               <Header />
-              <div className={classes.sections}>
+              <div className={classes.page}>
                 <Switch>
                   <Route exact path="/popup.html">
                     <Home />
                   </Route>
-                  {/* <Route path="/">
+                  <Route path="/">
                     <Home />
-                  </Route> */}
+                  </Route>
                 </Switch>
               </div>
               <Footer />

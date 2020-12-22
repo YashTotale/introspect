@@ -1,19 +1,24 @@
 // React Imports
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
+import LoginPopup from "./LoginPopup";
+
+// Firebase Imports
+import { useFirebase } from "react-redux-firebase";
 
 // Redux Imports
+import { useSelector } from "react-redux";
+import { RootState } from "../Redux/Store";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
-  IconButton,
+  Avatar,
   Menu,
-  MenuItem,
   Toolbar,
   Tooltip,
+  MenuItem,
 } from "@material-ui/core";
-import { Person } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -23,12 +28,21 @@ const useStyles = makeStyles((theme) => ({
   profileTooltip: {
     marginTop: theme.spacing(0.75),
   },
+  avatar: {
+    cursor: "pointer",
+    // width: theme.spacing() * 2,
+    // height: theme.spacing() * 2,
+  },
 }));
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
   const classes = useStyles();
+
+  const currentUser = useSelector<RootState>(
+    (state) => state.firebase.auth
+  ) as any;
 
   return (
     <AppBar
@@ -38,32 +52,41 @@ const Header: FC<HeaderProps> = () => {
       variant="elevation"
     >
       <Toolbar className={classes.toolbar}>
-        <ProfileMenu />
+        {currentUser.isEmpty ? (
+          <LoginPopup />
+        ) : (
+          <ProfileMenu user={currentUser} />
+        )}
       </Toolbar>
     </AppBar>
   );
 };
 
-interface ProfileMenuProps {}
+interface ProfileMenuProps {
+  user: any;
+}
 
-const ProfileMenu: FC<ProfileMenuProps> = () => {
+const ProfileMenu: FC<ProfileMenuProps> = ({ user }) => {
   const classes = useStyles();
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const firebaseInstance = useFirebase();
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) =>
     setAnchorEl(event.currentTarget);
-  };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const handleClose = () => setAnchorEl(null);
 
   return (
     <>
       <Tooltip title="Profile" classes={{ tooltip: classes.profileTooltip }}>
-        <IconButton onClick={handleClick}>
-          <Person />
-        </IconButton>
+        <Avatar
+          alt="Profile Picture"
+          src={user.photoURL}
+          variant="circular"
+          className={classes.avatar}
+          onClick={handleClick}
+        />
       </Tooltip>
       <Menu
         elevation={6}
@@ -71,14 +94,27 @@ const ProfileMenu: FC<ProfileMenuProps> = () => {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        getContentAnchorEl={null}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
         }}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+          }}
+        >
+          Profile
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            firebaseInstance.logout();
+            handleClose();
+          }}
+        >
+          Logout
+        </MenuItem>
       </Menu>
     </>
   );

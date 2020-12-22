@@ -34,6 +34,12 @@ const Theme: React.FC = ({ children }) => {
           fontWeight: 600,
         },
       },
+      MuiMenuItem: {
+        root: {
+          fontFamily: alternativeFont,
+          fontWeight: 600,
+        },
+      },
     },
     typography: {
       fontFamily: "Palatino, Georgia, Serif",

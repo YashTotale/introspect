@@ -1,20 +1,27 @@
 // React Imports
 import React, { FC } from "react";
-import { StyledFirebaseAuth } from "react-firebaseui";
 
 // Redux Imports
-import { useFirebase } from "react-redux-firebase";
-import firebase from "firebase";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import { AppBar, Toolbar } from "@material-ui/core";
-import {} from "@material-ui/icons";
+import {
+  AppBar,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Tooltip,
+} from "@material-ui/core";
+import { Person } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: "flex",
     justifyContent: "flex-end",
+  },
+  profileTooltip: {
+    marginTop: theme.spacing(0.75),
   },
 }));
 
@@ -22,7 +29,6 @@ interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
   const classes = useStyles();
-  const firebaseInstance = useFirebase();
 
   return (
     <AppBar
@@ -32,14 +38,49 @@ const Header: FC<HeaderProps> = () => {
       variant="elevation"
     >
       <Toolbar className={classes.toolbar}>
-        <StyledFirebaseAuth
-          firebaseAuth={firebaseInstance.auth()}
-          uiConfig={{
-            signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
-          }}
-        />
+        <ProfileMenu />
       </Toolbar>
     </AppBar>
+  );
+};
+
+interface ProfileMenuProps {}
+
+const ProfileMenu: FC<ProfileMenuProps> = () => {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <Tooltip title="Profile" classes={{ tooltip: classes.profileTooltip }}>
+        <IconButton onClick={handleClick}>
+          <Person />
+        </IconButton>
+      </Tooltip>
+      <Menu
+        elevation={6}
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+      >
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
+    </>
   );
 };
 

@@ -2,18 +2,15 @@
 import React, { FC } from "react";
 
 // Redux Imports
-import { useFirebase } from "react-redux-firebase";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
-import {} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
     display: "flex",
     flexDirection: "row-reverse",
-    marginTop: theme.spacing(1),
     padding: theme.spacing(1),
   },
 }));
@@ -21,8 +18,6 @@ const useStyles = makeStyles((theme) => ({
 interface FooterProps {}
 
 const Footer: FC<FooterProps> = () => {
-  const firebase = useFirebase();
-  console.log(firebase);
   const classes = useStyles();
 
   return (

@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   clearTooltip: {
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(0.75),
   },
 }));
 
@@ -75,6 +75,7 @@ const Heading: FC<HeadingProps> = ({
         </Typography>
         <Tooltip
           title="Clear"
+          interactive
           classes={{
             tooltip: classes.clearTooltip,
           }}

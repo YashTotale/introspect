@@ -12,16 +12,9 @@ import {
 } from "../Redux";
 import { useSelector } from "react-redux";
 
-// Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
-import {} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({}));
-
 interface DescriptionProps {}
 
 const Description: FC<DescriptionProps> = () => {
-  const classes = useStyles();
   const dispatch = useAppDispatch();
 
   const description = useSelector(getDescription);

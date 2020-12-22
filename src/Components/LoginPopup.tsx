@@ -11,7 +11,6 @@ import { useFirebase } from "react-redux-firebase";
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import {} from "@material-ui/core";
-import {} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   // Styles
@@ -19,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface LoginPopupProps {}
 
-const LoginPopup: FC<LoginPopupProps> = ({}) => {
+const LoginPopup: FC<LoginPopupProps> = () => {
   const classes = useStyles();
   const firebaseInstance = useFirebase();
 

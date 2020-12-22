@@ -1,10 +1,9 @@
 // React Imports
 import React, { FC } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 
-import Rating from "./Sections/Rating";
-import Description from "./Sections/Description";
-import Reflection from "./Sections/Reflection";
+import Home from "./Pages/Home";
 
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
@@ -35,17 +34,24 @@ const App: FC = () => {
   return (
     <ReduxStore>
       <Theme>
-        <SnackbarProvider>
-          <Paper className={classes.container}>
-            <Header />
-            <div className={classes.sections}>
-              <Rating />
-              <Description />
-              <Reflection />
-            </div>
-            <Footer />
-          </Paper>
-        </SnackbarProvider>
+        <BrowserRouter>
+          <SnackbarProvider>
+            <Paper className={classes.container}>
+              <Header />
+              <div className={classes.sections}>
+                <Switch>
+                  <Route exact path="/popup.html">
+                    <Home />
+                  </Route>
+                  {/* <Route path="/">
+                    <Home />
+                  </Route> */}
+                </Switch>
+              </div>
+              <Footer />
+            </Paper>
+          </SnackbarProvider>
+        </BrowserRouter>
       </Theme>
     </ReduxStore>
   );

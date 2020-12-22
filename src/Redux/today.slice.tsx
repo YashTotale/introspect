@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { RootState } from "./Store";
 
@@ -68,6 +68,12 @@ export const {
 export const getRating = (state: RootState) => state.today.rating;
 export const getDescription = (state: RootState) => state.today.description;
 export const getReflection = (state: RootState) => state.today.reflection;
+export const getTodayData = createSelector(
+  getRating,
+  getDescription,
+  getReflection,
+  (rating, description, reflection) => ({ rating, description, reflection })
+);
 
 // Reducer
 export const todayReducer = todaySlice.reducer;

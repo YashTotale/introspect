@@ -9,7 +9,12 @@ export type { AppDispatch } from "./Store";
 export { default as todaySlice } from "./today.slice";
 
 // -> Selectors
-export { getRating, getDescription, getReflection } from "./today.slice";
+export {
+  getRating,
+  getDescription,
+  getReflection,
+  getTodayData,
+} from "./today.slice";
 
 // -> Actions
 export {

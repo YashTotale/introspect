@@ -1,8 +1,9 @@
 // React Imports
 import React, { FC } from "react";
+import moment from "moment";
 
 // Redux Imports
-import { getUser } from "../Redux";
+import { getTodayData, getUser, togglePopup, useAppDispatch } from "../Redux";
 import { useSelector } from "react-redux";
 
 // Firebase Imports
@@ -24,8 +25,11 @@ interface FooterProps {}
 
 const Footer: FC<FooterProps> = () => {
   const classes = useStyles();
-  const user = useSelector(getUser);
+  const dispatch = useAppDispatch();
   const firebaseInstance = useFirebase();
+
+  const user = useSelector(getUser);
+  const todayData = useSelector(getTodayData);
 
   return (
     <div className={classes.footer}>
@@ -34,10 +38,10 @@ const Footer: FC<FooterProps> = () => {
         color="primary"
         onClick={() =>
           user.isEmpty
-            ? null
+            ? dispatch(togglePopup({ open: true, type: "login" }))
             : firebaseInstance.updateProfile({
-                testing: {
-                  woo: "yay",
+                responses: {
+                  [moment().format("DD-MM-YYYY")]: todayData,
                 },
               })
         }

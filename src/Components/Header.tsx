@@ -4,10 +4,10 @@ import React, { FC, useState } from "react";
 // Redux Imports
 import { useSelector } from "react-redux";
 import { getUser, togglePopup } from "../Redux";
-import { useAppDispatch } from "../Redux/Store";
+import { AppDispatch, useAppDispatch } from "../Redux/Store";
 
 // Firebase Imports
-import { FirebaseReducer, useFirebase } from "react-redux-firebase";
+import { FirebaseReducer } from "react-redux-firebase";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -62,7 +62,7 @@ const Header: FC<HeaderProps> = () => {
             </IconButton>
           </Tooltip>
         ) : (
-          <ProfileMenu user={currentUser} />
+          <ProfileMenu dispatch={dispatch} user={currentUser} />
         )}
       </Toolbar>
     </AppBar>
@@ -71,11 +71,11 @@ const Header: FC<HeaderProps> = () => {
 
 interface ProfileMenuProps {
   user: FirebaseReducer.AuthState;
+  dispatch: AppDispatch;
 }
 
-const ProfileMenu: FC<ProfileMenuProps> = ({ user }) => {
+const ProfileMenu: FC<ProfileMenuProps> = ({ user, dispatch }) => {
   const classes = useStyles();
-  const firebaseInstance = useFirebase();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -116,7 +116,7 @@ const ProfileMenu: FC<ProfileMenuProps> = ({ user }) => {
         </MenuItem>
         <MenuItem
           onClick={() => {
-            firebaseInstance.logout();
+            dispatch(togglePopup({ type: "logout", open: true }));
             handleClose();
           }}
         >

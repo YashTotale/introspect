@@ -17,8 +17,13 @@ const popupSlice = createSlice({
   name: "popup",
   initialState,
   reducers: {
-    togglePopup: (state, action: PayloadAction<PopupState | undefined>) => {
-      if (!action) return { ...state, open: !state.open };
+    togglePopup: (
+      state,
+      action: PayloadAction<PopupState | boolean | undefined>
+    ) => {
+      if (action.payload === undefined) return { ...state, open: !state.open };
+      if (typeof action.payload === "boolean")
+        return { ...state, open: action.payload };
       return {
         ...state,
         ...action.payload,

@@ -9,6 +9,7 @@ export interface TodayState {
   lastDescription: string;
   reflection: string;
   lastReflection: string;
+  done: boolean;
 }
 
 const initialState: TodayState = {
@@ -18,6 +19,7 @@ const initialState: TodayState = {
   lastDescription: "",
   reflection: "",
   lastReflection: "",
+  done: false,
 };
 
 const todaySlice = createSlice({
@@ -89,6 +91,7 @@ export const {
 export const getRating = (state: RootState) => state.today.rating;
 export const getDescription = (state: RootState) => state.today.description;
 export const getReflection = (state: RootState) => state.today.reflection;
+export const getTodayDone = (state: RootState) => state.today.done;
 export const getTodayData = createSelector(
   getRating,
   getDescription,

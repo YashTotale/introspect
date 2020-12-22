@@ -6,6 +6,7 @@ import { SnackbarProvider } from "notistack";
 import Home from "./Pages/Home";
 
 import Header from "./Components/Header";
+import Popup from "./Components/Popup";
 import Footer from "./Components/Footer";
 
 // Redux Imports
@@ -38,15 +39,9 @@ const App: FC = () => {
           <SnackbarProvider>
             <Paper className={classes.container}>
               <Header />
+              <Popup />
               <div className={classes.page}>
-                <Switch>
-                  <Route exact path="/popup.html">
-                    <Home />
-                  </Route>
-                  <Route path="/">
-                    <Home />
-                  </Route>
-                </Switch>
+                <Routes />
               </div>
               <Footer />
             </Paper>
@@ -54,6 +49,19 @@ const App: FC = () => {
         </BrowserRouter>
       </Theme>
     </ReduxStore>
+  );
+};
+
+const Routes: FC = () => {
+  return (
+    <Switch>
+      <Route exact path="/popup.html">
+        <Home />
+      </Route>
+      <Route path="/">
+        <Home />
+      </Route>
+    </Switch>
   );
 };
 

@@ -1,13 +1,13 @@
 // React Imports
 import React, { FC, useState } from "react";
-import LoginPopup from "./LoginPopup";
-
-// Firebase Imports
-import { useFirebase } from "react-redux-firebase";
 
 // Redux Imports
 import { useSelector } from "react-redux";
-import { RootState } from "../Redux/Store";
+import { getUser, togglePopup } from "../Redux";
+import { useAppDispatch } from "../Redux/Store";
+
+// Firebase Imports
+import { FirebaseReducer, useFirebase } from "react-redux-firebase";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,7 +18,9 @@ import {
   Toolbar,
   Tooltip,
   MenuItem,
+  IconButton,
 } from "@material-ui/core";
+import { Person } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -30,8 +32,6 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     cursor: "pointer",
-    // width: theme.spacing() * 2,
-    // height: theme.spacing() * 2,
   },
 }));
 
@@ -39,10 +39,9 @@ interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
   const classes = useStyles();
+  const dispatch = useAppDispatch();
 
-  const currentUser = useSelector<RootState>(
-    (state) => state.firebase.auth
-  ) as any;
+  const currentUser = useSelector(getUser);
 
   return (
     <AppBar
@@ -53,7 +52,15 @@ const Header: FC<HeaderProps> = () => {
     >
       <Toolbar className={classes.toolbar}>
         {currentUser.isEmpty ? (
-          <LoginPopup />
+          <Tooltip title="Login" classes={{ tooltip: classes.profileTooltip }}>
+            <IconButton
+              onClick={() =>
+                dispatch(togglePopup({ open: true, type: "login" }))
+              }
+            >
+              <Person />
+            </IconButton>
+          </Tooltip>
         ) : (
           <ProfileMenu user={currentUser} />
         )}
@@ -63,7 +70,7 @@ const Header: FC<HeaderProps> = () => {
 };
 
 interface ProfileMenuProps {
-  user: any;
+  user: FirebaseReducer.AuthState;
 }
 
 const ProfileMenu: FC<ProfileMenuProps> = ({ user }) => {
@@ -81,8 +88,8 @@ const ProfileMenu: FC<ProfileMenuProps> = ({ user }) => {
     <>
       <Tooltip title="Profile" classes={{ tooltip: classes.profileTooltip }}>
         <Avatar
-          alt="Profile Picture"
-          src={user.photoURL}
+          alt={user.displayName ?? "Profile Picture"}
+          src={user.photoURL ?? undefined}
           variant="circular"
           className={classes.avatar}
           onClick={handleClick}

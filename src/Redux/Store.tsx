@@ -1,8 +1,9 @@
 // React Imports
-import React, { FC } from "react";
+import React, { FC, Reducer } from "react";
 
 // Redux Imports
 import {
+  AnyAction,
   combineReducers,
   configureStore,
   getDefaultMiddleware,
@@ -19,6 +20,8 @@ import {
   actionTypes as rrfActionTypes,
   firebaseReducer,
   ReactReduxFirebaseProvider,
+  FirebaseReducer,
+  FirestoreReducer,
 } from "react-redux-firebase";
 import {
   constants as rfConstants,
@@ -41,11 +44,25 @@ import { PersistGate } from "redux-persist/lib/integration/react";
 import storage from "redux-persist/lib/storage";
 
 // Reducer Imports
-import { todayReducer } from "./today.slice";
+import { todayReducer, TodayState } from "./today.slice";
+import { popupReducer, PopupState } from "./popup.slice";
 
-const reducers = combineReducers({
+interface Schema {}
+
+interface Profile {}
+
+interface State {
+  today: TodayState;
+  popup: PopupState;
+  firebase: FirebaseReducer.Reducer<Profile, Schema>;
+  firestore: FirestoreReducer.Reducer;
+}
+
+const reducers = combineReducers<State>({
   today: todayReducer,
+  popup: popupReducer,
   firebase: firebaseReducer,
+  //@ts-ignore
   firestore: firestoreReducer,
 });
 
@@ -72,7 +89,6 @@ const store = configureStore({
         PERSIST,
         PURGE,
         REGISTER,
-        // just ignore every redux-firebase and react-redux-firebase action type
         ...Object.keys(rfConstants.actionTypes).map(
           (type) => `${rfConstants.actionsPrefix}/${type}`
         ),
@@ -112,6 +128,8 @@ const ReduxStore: FC = ({ children }) => {
           logErrors: true,
           useFirestoreForProfile: true,
           userProfile: "users",
+          updateProfileOnLogin: true,
+          autoPopulateProfile: true,
         }}
         createFirestoreInstance={createFirestoreInstance}
       >

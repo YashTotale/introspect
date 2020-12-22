@@ -25,7 +25,6 @@ const popupSlice = createSlice({
       if (typeof action.payload === "boolean")
         return { ...state, open: action.payload };
       return {
-        ...state,
         ...action.payload,
       };
     },

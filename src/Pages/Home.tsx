@@ -1,16 +1,23 @@
 // React Imports
-import React, { FC } from "react";
+import React, { FC, lazy, Suspense } from "react";
+import Bar from "../Components/Loading/Bar";
 
-import Rating from "../Sections/Rating";
-import Description from "../Sections/Description";
-import Reflection from "../Sections/Reflection";
+const Rating = lazy(() => import("../Sections/Rating"));
+const Description = lazy(() => import("../Sections/Description"));
+const Reflection = lazy(() => import("../Sections/Reflection"));
 
 const Home: FC = () => {
   return (
     <>
-      <Rating />
-      <Description />
-      <Reflection />
+      <Suspense fallback={<Bar size="small" />}>
+        <Rating />
+      </Suspense>
+      <Suspense fallback={<Bar size="large" />}>
+        <Description />
+      </Suspense>
+      <Suspense fallback={<Bar size="large" />}>
+        <Reflection />
+      </Suspense>
     </>
   );
 };

@@ -1,9 +1,9 @@
 // React Imports
-import React, { FC, Reducer } from "react";
+import React, { FC } from "react";
+import Page from "../Components/Loading/Page";
 
 // Redux Imports
 import {
-  AnyAction,
   combineReducers,
   configureStore,
   getDefaultMiddleware,
@@ -133,7 +133,7 @@ const ReduxStore: FC = ({ children }) => {
         }}
         createFirestoreInstance={createFirestoreInstance}
       >
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={<Page />} persistor={persistor}>
           {children}
         </PersistGate>
       </ReactReduxFirebaseProvider>

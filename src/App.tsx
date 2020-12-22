@@ -1,13 +1,12 @@
 // React Imports
-import React, { FC } from "react";
+import React, { FC, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
-
-import Home from "./Pages/Home";
 
 import Header from "./Components/Header";
 import Popup from "./Components/Popup";
 import Footer from "./Components/Footer";
+import Page from "./Components/Loading/Page";
 
 // Redux Imports
 import ReduxStore from "./Redux/Store";
@@ -16,6 +15,9 @@ import ReduxStore from "./Redux/Store";
 import Theme from "./Theme";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+
+// Page Imports
+const Home = lazy(() => import("./Pages/Home"));
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -54,14 +56,16 @@ const App: FC = () => {
 
 const Routes: FC = () => {
   return (
-    <Switch>
-      <Route exact path="/popup.html">
-        <Home />
-      </Route>
-      <Route path="/">
-        <Home />
-      </Route>
-    </Switch>
+    <Suspense fallback={<Page />}>
+      <Switch>
+        <Route exact path="/popup.html">
+          <Home />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Suspense>
   );
 };
 

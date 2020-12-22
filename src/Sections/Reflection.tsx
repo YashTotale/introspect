@@ -5,6 +5,7 @@ import TextArea from "../Components/Reusable/TextArea";
 
 // Redux Imports
 import {
+  clearReflection,
   getReflection,
   setReflection,
   undoReflection,
@@ -23,7 +24,7 @@ const Reflection: FC<ReflectionProps> = () => {
     <>
       <Heading
         name="Reflections"
-        clear={() => dispatch(setReflection(""))}
+        clear={() => dispatch(clearReflection())}
         undo={() => dispatch(undoReflection())}
         clearable={!!reflection}
       >

@@ -18,11 +18,17 @@ export {
 
 // -> Actions
 export {
+  // Rating
   setRating,
+  clearRating,
   undoRating,
+  // Description
   setDescription,
+  clearDescription,
   undoDescription,
+  // Reflection
   setReflection,
+  clearReflection,
   undoReflection,
 } from "./today.slice";
 

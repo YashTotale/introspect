@@ -24,28 +24,43 @@ const todaySlice = createSlice({
   name: "today",
   initialState,
   reducers: {
+    // Rating
     setRating: (state, action: PayloadAction<number | null>) => ({
       ...state,
-      lastRating: state.rating,
       rating: action.payload,
+    }),
+    clearRating: (state) => ({
+      ...state,
+      lastRating: state.rating,
+      rating: null,
     }),
     undoRating: (state) => ({
       ...state,
       rating: state.lastRating,
     }),
+    // Description
     setDescription: (state, action: PayloadAction<string>) => ({
       ...state,
-      lastDescription: state.description,
       description: action.payload,
+    }),
+    clearDescription: (state) => ({
+      ...state,
+      lastDescription: state.description,
+      description: "",
     }),
     undoDescription: (state) => ({
       ...state,
       description: state.lastDescription,
     }),
+    // Reflection
     setReflection: (state, action: PayloadAction<string>) => ({
       ...state,
-      lastReflection: state.reflection,
       reflection: action.payload,
+    }),
+    clearReflection: (state) => ({
+      ...state,
+      lastReflection: state.reflection,
+      reflection: "",
     }),
     undoReflection: (state) => ({
       ...state,
@@ -56,11 +71,17 @@ const todaySlice = createSlice({
 
 // Actions
 export const {
+  // Ratinf
   setRating,
+  clearRating,
   undoRating,
+  // Description
   setDescription,
+  clearDescription,
   undoDescription,
+  // Reflection
   setReflection,
+  clearReflection,
   undoReflection,
 } = todaySlice.actions;
 

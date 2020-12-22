@@ -3,7 +3,13 @@ import React, { FC } from "react";
 import Heading from "../Components/Reusable/Heading";
 
 // Redux Imports
-import { getRating, setRating, undoRating, useAppDispatch } from "../Redux";
+import {
+  clearRating,
+  getRating,
+  setRating,
+  undoRating,
+  useAppDispatch,
+} from "../Redux";
 
 // Material UI Imports
 import { RadioGroup, Radio, FormControlLabel } from "@material-ui/core";
@@ -33,7 +39,7 @@ const Rating: FC<RatingProps> = () => {
     <>
       <Heading
         name="Rating"
-        clear={() => dispatch(setRating(null))}
+        clear={() => dispatch(clearRating())}
         undo={() => dispatch(undoRating())}
         clearable={rating !== null}
       >

@@ -5,6 +5,7 @@ import TextArea from "../Components/Reusable/TextArea";
 
 // Redux Imports
 import {
+  clearDescription,
   getDescription,
   setDescription,
   undoDescription,
@@ -23,7 +24,7 @@ const Description: FC<DescriptionProps> = () => {
     <>
       <Heading
         name="Description"
-        clear={() => dispatch(setDescription(""))}
+        clear={() => dispatch(clearDescription())}
         undo={() => dispatch(undoDescription())}
         clearable={!!description.length}
       >

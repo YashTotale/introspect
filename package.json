@@ -6,7 +6,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "watch": "npm-watch",
-    "lint": "./scripts/lint.sh"
+    "lint": "scripts/lint.sh",
+    "md": "markdownlint ."
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",

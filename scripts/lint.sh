@@ -3,6 +3,8 @@
 GREEN='\e[92m'
 NC='\033[0m'
 
+set -e
+
 lint() {
   eslinter
   printf "\n"
@@ -14,7 +16,7 @@ lint() {
 eslinter() {
   printf "Linting with ESLint...\n\n"
 
-  eslint --fix .
+  eslint .
 
   printf "${GREEN}ESLint Done${NC}\n"
 }
@@ -22,17 +24,17 @@ eslinter() {
 markdownlinter() {
   printf 'Linting with MarkdownLint...\n\n'
 
-  markdownlint --fix .
+  markdownlint .
 
   printf "${GREEN}MarkdownLint Done${NC}\n"
 }
 
 prettierlinter() {
-  printf 'Linting with Prettier...\n\n'
+  printf 'Linting with Prettier...\n'
 
-  prettier --write . >/dev/null
+  prettier --check .
 
-  printf "${GREEN}Prettier Done${NC}\n"
+  printf "\n${GREEN}Prettier Done${NC}\n"
 }
 
 lint

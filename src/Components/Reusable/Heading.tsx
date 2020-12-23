@@ -89,17 +89,20 @@ const Heading: FC<HeadingProps> = ({
                 enqueueSnackbar(`${name} cleared`, {
                   variant: "success",
                   autoHideDuration: 4000,
-                  action: (key) => (
-                    <Button
-                      onClick={() => {
-                        undo();
-                        closeSnackbar(key);
-                      }}
-                      variant="text"
-                    >
-                      Undo
-                    </Button>
-                  ),
+                  action: (key) => {
+                    const Undo = (
+                      <Button
+                        onClick={() => {
+                          undo();
+                          closeSnackbar(key);
+                        }}
+                        variant="text"
+                      >
+                        Undo
+                      </Button>
+                    );
+                    return Undo;
+                  },
                 });
               }}
               disabled={!clearable}

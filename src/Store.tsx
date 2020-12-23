@@ -62,7 +62,7 @@ const reducers = combineReducers<State>({
   today: todayReducer,
   popup: popupReducer,
   firebase: firebaseReducer,
-  //@ts-ignore
+  //@ts-expect-error firestoreReducer does not have correct typings
   firestore: firestoreReducer,
 });
 

@@ -1,6 +1,6 @@
 import { RootState } from "../../Redux";
 
-// @ts-expect-error
+// @ts-expect-error Not added firebase/firestore sample state
 export const sampleState: RootState = {
   today: {
     description: "Test description",

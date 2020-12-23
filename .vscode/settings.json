@@ -10,6 +10,8 @@
     ".prettierc": "json",
 
     ".eslintignore": "ignore",
-    ".eslintrc": "json"
+    ".eslintrc": "json",
+
+    ".huskyrc": "json"
   }
 }

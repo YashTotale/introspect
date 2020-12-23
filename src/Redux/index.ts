@@ -1,6 +1,12 @@
 import { RootState } from "../Store";
 
-export type { RootState, AppDispatch, Profile, StoreSchema } from "../Store";
+export type {
+  RootState,
+  AppDispatch,
+  AppThunk,
+  Profile,
+  StoreSchema,
+} from "../Store";
 export { useAppDispatch, getState } from "../Store";
 
 /**
@@ -14,20 +20,14 @@ export {
   getRating,
   getDescription,
   getReflection,
+  getTodaySaved,
   getTodayData,
   // -> Actions
-  // -> -> Rating
-  setRating,
-  clearRating,
-  undoRating,
-  // -> -> Description
-  setDescription,
-  clearDescription,
-  undoDescription,
-  // -> -> Reflection
-  setReflection,
-  clearReflection,
-  undoReflection,
+  setTodayData,
+  clearTodayData,
+  undoTodayData,
+  // -> Thunks
+  saveTodayData,
   // -> Reducer
   todayReducer,
   // -> State

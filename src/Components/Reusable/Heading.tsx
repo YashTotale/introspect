@@ -9,9 +9,16 @@ import {
   IconButton,
   Tooltip,
   Button,
+  capitalize,
 } from "@material-ui/core";
 import { Clear } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
+import {
+  clearTodayData,
+  TodayDataType,
+  undoTodayData,
+} from "../../Redux/today.slice";
+import { useAppDispatch } from "../../Store";
 
 const useStyles = makeStyles((theme) => ({
   divider: {
@@ -37,9 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 interface HeadingProps {
-  name: string;
-  clear: () => void;
-  undo: () => void;
+  name: TodayDataType;
   clearable: boolean;
   dividerClassName?: string;
   headingClassName?: string;
@@ -49,8 +54,6 @@ interface HeadingProps {
 
 const Heading: FC<HeadingProps> = ({
   name,
-  clear,
-  undo,
   clearable,
   children,
   dividerClassName,
@@ -58,6 +61,7 @@ const Heading: FC<HeadingProps> = ({
   titleClassName,
   clearClassName,
 }) => {
+  const dispatch = useAppDispatch();
   const classes = useStyles();
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
@@ -85,15 +89,15 @@ const Heading: FC<HeadingProps> = ({
               size="small"
               className={classes.clearButton}
               onClick={() => {
-                clear();
-                enqueueSnackbar(`${name} cleared`, {
+                dispatch(clearTodayData(name));
+                enqueueSnackbar(`${capitalize(name)} cleared`, {
                   variant: "success",
                   autoHideDuration: 4000,
                   action: (key) => {
                     const Undo = (
                       <Button
                         onClick={() => {
-                          undo();
+                          dispatch(undoTodayData(name));
                           closeSnackbar(key);
                         }}
                         variant="text"

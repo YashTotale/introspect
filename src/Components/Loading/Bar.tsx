@@ -3,7 +3,6 @@ import React, { FC } from "react";
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import {} from "@material-ui/core";
 import { Skeleton } from "@material-ui/lab";
 
 type Size = "small" | "medium" | "large";

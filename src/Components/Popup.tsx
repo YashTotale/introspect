@@ -16,11 +16,7 @@ import { useSelector } from "react-redux";
 // Firebase Imports
 import firebase from "firebase/app";
 import { StyledFirebaseAuth } from "react-firebaseui";
-import {
-  ExtendedFirebaseInstance,
-  FirebaseReducer,
-  useFirebase,
-} from "react-redux-firebase";
+import { ExtendedFirebaseInstance, useFirebase } from "react-redux-firebase";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -58,7 +54,6 @@ const Popup: FC = () => {
 
       return (
         <LoginPopup
-          user={user}
           open={open}
           dispatch={dispatch}
           firebaseInstance={firebaseInstance}
@@ -72,7 +67,6 @@ const Popup: FC = () => {
 
       return (
         <LogoutPopup
-          user={user}
           open={open}
           dispatch={dispatch}
           firebaseInstance={firebaseInstance}
@@ -85,7 +79,6 @@ const Popup: FC = () => {
 };
 
 interface PopupProps {
-  user: FirebaseReducer.AuthState;
   open: boolean;
   dispatch: AppDispatch;
   firebaseInstance: ExtendedFirebaseInstance;
@@ -94,7 +87,6 @@ interface PopupProps {
 }
 
 const LoginPopup: FC<PopupProps> = ({
-  user,
   open,
   dispatch,
   firebaseInstance,
@@ -127,15 +119,10 @@ const LoginPopup: FC<PopupProps> = ({
               return true;
             },
             async signInFailure(err) {
-              snackbar.enqueueSnackbar(
-                typeof err.message === "string"
-                  ? err.message
-                  : "Error signing in",
-                {
-                  variant: "error",
-                  autoHideDuration: 4000,
-                }
-              );
+              snackbar.enqueueSnackbar(err.toString(), {
+                variant: "error",
+                autoHideDuration: 4000,
+              });
             },
           },
         }}
@@ -145,7 +132,6 @@ const LoginPopup: FC<PopupProps> = ({
 );
 
 const LogoutPopup: FC<PopupProps> = ({
-  user,
   open,
   dispatch,
   firebaseInstance,
@@ -175,10 +161,8 @@ const LogoutPopup: FC<PopupProps> = ({
             )
             .catch((err) => {
               snackbar.enqueueSnackbar(
-                typeof err === "string"
-                  ? err
-                  : typeof err.message === "string"
-                  ? err.message
+                typeof err.toString() === "string"
+                  ? err.toString()
                   : "Error logging out",
                 {
                   variant: "error",

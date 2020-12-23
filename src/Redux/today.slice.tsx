@@ -1,103 +1,148 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import moment from "moment";
 
-import { RootState } from "./index";
+import { RootState, AppThunk } from "./index";
+
+export type TodayDataType = "rating" | "description" | "reflection";
 
 export interface TodayState {
-  rating: number | null;
-  lastRating: number | null;
-  description: string;
-  lastDescription: string;
-  reflection: string;
-  lastReflection: string;
-  done: boolean;
+  current: {
+    rating: number | null; // Null for no rating
+    description: string;
+    reflection: string;
+  };
+  last: {
+    rating: number | null;
+    description: string;
+    reflection: string;
+  };
+  saved: {
+    rating: number | null;
+    description: string;
+    reflection: string;
+  };
+  isSaved: boolean | null | string; // Null for loading state & String for error
 }
 
 export const initialTodayState: TodayState = {
-  rating: null,
-  lastRating: null,
-  description: "",
-  lastDescription: "",
-  reflection: "",
-  lastReflection: "",
-  done: false,
+  current: {
+    rating: null,
+    description: "",
+    reflection: "",
+  },
+  last: {
+    rating: null,
+    description: "",
+    reflection: "",
+  },
+  saved: {
+    rating: null,
+    description: "",
+    reflection: "",
+  },
+  isSaved: false,
 };
 
 const todaySlice = createSlice({
   name: "today",
   initialState: initialTodayState,
   reducers: {
-    // Rating
-    setRating: (state, action: PayloadAction<number | null>) => ({
+    setTodayData: (
+      state,
+      action: PayloadAction<Partial<typeof initialTodayState["current"]>>
+    ) => ({
       ...state,
-      rating: action.payload,
+      current: {
+        ...state.current,
+        ...action.payload,
+      },
     }),
-    clearRating: (state) => ({
+    clearTodayData: (state, action: PayloadAction<TodayDataType>) => {
+      const { payload } = action;
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          [payload]: initialTodayState.current[payload],
+        },
+        last: {
+          ...state.last,
+          [payload]: state.current[payload],
+        },
+      };
+    },
+    undoTodayData: (state, action: PayloadAction<TodayDataType>) => {
+      const { payload } = action;
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          [payload]: state.last[payload],
+        },
+      };
+    },
+    // Save
+    saveDataInProgress: (state) => ({
       ...state,
-      lastRating: state.rating,
-      rating: null,
+      isSaved: null,
     }),
-    undoRating: (state) => ({
+    saveDataSuccess: (state) => ({
       ...state,
-      rating: state.lastRating,
+      saved: state.current,
+      isSaved: true,
     }),
-    // Description
-    setDescription: (state, action: PayloadAction<string>) => ({
+    saveDataFailure: (state, action: PayloadAction<string>) => ({
       ...state,
-      description: action.payload,
+      isSaved: action.payload,
     }),
-    clearDescription: (state) => ({
+    resetSave: (state) => ({
       ...state,
-      lastDescription: state.description,
-      description: "",
-    }),
-    undoDescription: (state) => ({
-      ...state,
-      description: state.lastDescription,
-    }),
-    // Reflection
-    setReflection: (state, action: PayloadAction<string>) => ({
-      ...state,
-      reflection: action.payload,
-    }),
-    clearReflection: (state) => ({
-      ...state,
-      lastReflection: state.reflection,
-      reflection: "",
-    }),
-    undoReflection: (state) => ({
-      ...state,
-      reflection: state.lastReflection,
+      isSaved: null,
     }),
   },
 });
 
+// Thunks
+
+export const saveTodayData = (): AppThunk => async (
+  dispatch,
+  getState,
+  { getFirebase }
+) => {
+  try {
+    dispatch(saveDataInProgress());
+    const firebase = getFirebase();
+    await firebase.updateProfile({
+      responses: {
+        [moment().format("DD-MM-YYYY")]: getTodayData(getState()),
+      },
+    });
+    dispatch(saveDataSuccess());
+  } catch (err) {
+    dispatch(saveDataFailure(err.toString()));
+  }
+};
+
 // Actions
 export const {
-  // Ratinf
-  setRating,
-  clearRating,
-  undoRating,
-  // Description
-  setDescription,
-  clearDescription,
-  undoDescription,
-  // Reflection
-  setReflection,
-  clearReflection,
-  undoReflection,
+  setTodayData,
+  clearTodayData,
+  undoTodayData,
+  // Save
+  saveDataInProgress,
+  saveDataSuccess,
+  saveDataFailure,
+  resetSave,
 } = todaySlice.actions;
 
 // Selectors
-export const getRating = (state: RootState) => state.today.rating;
-export const getDescription = (state: RootState) => state.today.description;
-export const getReflection = (state: RootState) => state.today.reflection;
-export const getTodayDone = (state: RootState) => state.today.done;
-export const getTodayData = createSelector(
-  getRating,
-  getDescription,
-  getReflection,
-  (rating, description, reflection) => ({ rating, description, reflection })
-);
+export const getRating = (state: RootState) => state.today.current.rating;
+export const getDescription = (state: RootState) =>
+  state.today.current.description;
+export const getReflection = (state: RootState) =>
+  state.today.current.reflection;
+export const getTodaySaved = (state: RootState) => state.today.isSaved;
+export const getTodayData = (state: RootState) => state.today.current;
 
 // Reducer
 export const todayReducer = todaySlice.reducer;

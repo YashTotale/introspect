@@ -4,13 +4,7 @@ import Heading from "../Components/Reusable/Heading";
 import TextArea from "../Components/Reusable/TextArea";
 
 // Redux Imports
-import {
-  clearReflection,
-  getReflection,
-  setReflection,
-  undoReflection,
-  useAppDispatch,
-} from "../Redux";
+import { getReflection, setTodayData, useAppDispatch } from "../Redux";
 import { useSelector } from "react-redux";
 
 interface ReflectionProps {}
@@ -22,19 +16,14 @@ const Reflection: FC<ReflectionProps> = () => {
 
   return (
     <>
-      <Heading
-        name="Reflections"
-        clear={() => dispatch(clearReflection())}
-        undo={() => dispatch(undoReflection())}
-        clearable={!!reflection}
-      >
+      <Heading name="reflection" clearable={!!reflection}>
         Reflect on your day
       </Heading>
       <TextArea
         value={reflection}
-        setValue={(value) => dispatch(setReflection(value))}
-        label="Reflections"
-        placeholder="Reflections: "
+        setValue={(value) => dispatch(setTodayData({ reflection: value }))}
+        label="Reflection"
+        placeholder="Reflection: "
       />
     </>
   );

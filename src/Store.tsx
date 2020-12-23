@@ -7,6 +7,8 @@ import {
   combineReducers,
   configureStore,
   getDefaultMiddleware,
+  ThunkAction,
+  Action,
 } from "@reduxjs/toolkit";
 import { Provider, useDispatch } from "react-redux";
 
@@ -24,6 +26,7 @@ import {
   FirestoreReducer,
 } from "react-redux-firebase";
 import {
+  getFirestore,
   constants as rfConstants,
   createFirestoreInstance,
   firestoreReducer,
@@ -76,6 +79,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 
 const extraArgument = {
   getFirebase,
+  getFirestore,
 };
 
 const store = configureStore({
@@ -105,12 +109,19 @@ const store = configureStore({
   devTools: true,
 });
 
+export type RootState = ReturnType<typeof store.getState>;
+
 export type AppDispatch = typeof store.dispatch;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
 
-export const getState = store.getState;
+export type AppThunk = ThunkAction<
+  void,
+  RootState,
+  typeof extraArgument,
+  Action<string>
+>;
 
-export type RootState = ReturnType<typeof store.getState>;
+export const getState = store.getState;
 
 const persistor = persistStore(store);
 

@@ -4,13 +4,7 @@ import Heading from "../Components/Reusable/Heading";
 import TextArea from "../Components/Reusable/TextArea";
 
 // Redux Imports
-import {
-  clearDescription,
-  getDescription,
-  setDescription,
-  undoDescription,
-  useAppDispatch,
-} from "../Redux";
+import { getDescription, setTodayData, useAppDispatch } from "../Redux";
 import { useSelector } from "react-redux";
 
 interface DescriptionProps {}
@@ -22,17 +16,12 @@ const Description: FC<DescriptionProps> = () => {
 
   return (
     <>
-      <Heading
-        name="Description"
-        clear={() => dispatch(clearDescription())}
-        undo={() => dispatch(undoDescription())}
-        clearable={!!description.length}
-      >
+      <Heading name="description" clearable={!!description.length}>
         Describe your day
       </Heading>
       <TextArea
         value={description}
-        setValue={(value) => dispatch(setDescription(value))}
+        setValue={(value) => dispatch(setTodayData({ description: value }))}
         label="Description"
         placeholder="Today was ..."
       />

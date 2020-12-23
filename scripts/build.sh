@@ -1,14 +1,14 @@
 #!/bin/bash
 
 build() {
-    echo 'Building Introspect...'
+  echo 'Building Introspect...'
 
-    export INLINE_RUNTIME_CHUNK=false
-    export GENERATE_SOURCEMAP=false
+  export INLINE_RUNTIME_CHUNK=false
+  export GENERATE_SOURCEMAP=false
 
-    react-scripts build
+  react-scripts build
 
-    mv build/index.html build/popup.html
+  mv build/index.html build/popup.html
 }
 
 build

@@ -1,10 +1,16 @@
 // React Imports
 import React, { FC } from "react";
+import { useSnackbar } from "notistack";
 
 // Redux Imports
 import { useSelector } from "react-redux";
 import { getUser, togglePopup, useAppDispatch, getTodaySaved } from "../Redux";
-import { saveTodayData } from "../Redux/today.slice";
+import {
+  getIsSaveNotified,
+  resetSave,
+  saveTodayData,
+  saveNotified,
+} from "../Redux/today.slice";
 
 // Firebase Imports
 
@@ -55,15 +61,33 @@ interface FooterProps {}
 
 const Footer: FC<FooterProps> = () => {
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const user = useSelector(getUser);
   const saved = useSelector(getTodaySaved);
+  const isSaveNotified = useSelector(getIsSaveNotified);
 
   const loading = saved === null;
   const isSaved = typeof saved === "boolean" && saved;
   const isError = typeof saved === "string" && saved;
 
   const classes = useStyles({ isSaved, isError });
+
+  if (!isSaveNotified) {
+    enqueueSnackbar("Successfully saved", {
+      variant: "success",
+      autoHideDuration: 4000,
+    });
+    dispatch(saveNotified());
+  }
+
+  if (isError !== false) {
+    enqueueSnackbar(isError, {
+      variant: "error",
+      autoHideDuration: 4000,
+    });
+    dispatch(resetSave());
+  }
 
   return (
     <div className={classes.footer}>

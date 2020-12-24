@@ -3,13 +3,23 @@ import { RootState } from "../../Redux";
 // @ts-expect-error Not added firebase/firestore sample state
 export const sampleState: RootState = {
   today: {
-    description: "Test description",
-    lastDescription: "Last description",
-    rating: 4,
-    lastRating: null,
-    reflection: "Test reflection",
-    lastReflection: "Last reflection",
-    done: false,
+    current: {
+      rating: 4,
+      description: "Test description",
+      reflection: "Test reflection",
+    },
+    last: {
+      rating: 4,
+      description: "Last description",
+      reflection: "Last reflection",
+    },
+    saved: {
+      rating: 4,
+      description: "Saved description",
+      reflection: "Saved reflection",
+    },
+    isSaved: null,
+    isSaveNotified: false,
   },
   popup: {
     open: false,

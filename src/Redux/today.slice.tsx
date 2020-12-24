@@ -23,6 +23,7 @@ export interface TodayState {
     reflection: string;
   };
   isSaved: boolean | null | string; // Null for loading state & String for error
+  isSaveNotified: boolean;
 }
 
 export const initialTodayState: TodayState = {
@@ -42,6 +43,7 @@ export const initialTodayState: TodayState = {
     reflection: "",
   },
   isSaved: true,
+  isSaveNotified: true,
 };
 
 const todaySlice = createSlice({
@@ -99,6 +101,7 @@ const todaySlice = createSlice({
       ...state,
       saved: state.current,
       isSaved: true,
+      isSaveNotified: false,
     }),
     saveDataFailure: (state, action: PayloadAction<string>) => ({
       ...state,
@@ -106,7 +109,11 @@ const todaySlice = createSlice({
     }),
     resetSave: (state) => ({
       ...state,
-      isSaved: null,
+      isSaved: false,
+    }),
+    saveNotified: (state) => ({
+      ...state,
+      isSaveNotified: true,
     }),
   },
 });
@@ -142,6 +149,7 @@ export const {
   saveDataSuccess,
   saveDataFailure,
   resetSave,
+  saveNotified,
 } = todaySlice.actions;
 
 // Selectors
@@ -152,6 +160,8 @@ export const getReflection = (state: RootState) =>
   state.today.current.reflection;
 export const getTodaySaved = (state: RootState) => state.today.isSaved;
 export const getTodayData = (state: RootState) => state.today.current;
+export const getIsSaveNotified = (state: RootState) =>
+  state.today.isSaveNotified;
 
 // Reducer
 export const todayReducer = todaySlice.reducer;

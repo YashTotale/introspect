@@ -1,6 +1,6 @@
 // React Imports
 import React, { FC } from "react";
-import { useSnackbar } from "notistack";
+import useClosableSnackbar from "../Hooks/useClosableSnackbar";
 
 // Redux Imports
 import { useSelector } from "react-redux";
@@ -61,7 +61,7 @@ interface FooterProps {}
 
 const Footer: FC<FooterProps> = () => {
   const dispatch = useAppDispatch();
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useClosableSnackbar();
 
   const user = useSelector(getUser);
   const saved = useSelector(getTodaySaved);

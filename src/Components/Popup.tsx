@@ -1,6 +1,7 @@
 // React Imports
 import React, { FC } from "react";
-import { ProviderContext, useSnackbar } from "notistack";
+import useClosableSnackbar from "../Hooks/useClosableSnackbar";
+import { ProviderContext } from "notistack";
 
 // Redux Imports
 import {
@@ -42,7 +43,7 @@ const Popup: FC = () => {
   const classes = useStyles();
   const dispatch = useAppDispatch();
   const firebaseInstance = useFirebase();
-  const snackbar = useSnackbar();
+  const snackbar = useClosableSnackbar();
 
   const user = useSelector(getUser);
   const open = useSelector(getPopupOpen);

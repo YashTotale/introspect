@@ -1,6 +1,6 @@
 // React Imports
 import React, { FC } from "react";
-import { useSnackbar } from "notistack";
+import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 
 // Material UI Imports
 import {
@@ -64,7 +64,7 @@ const Heading: FC<HeadingProps> = ({
   const dispatch = useAppDispatch();
   const classes = useStyles();
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useClosableSnackbar();
 
   return (
     <>

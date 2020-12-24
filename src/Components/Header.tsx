@@ -19,13 +19,16 @@ import {
   IconButton,
   CircularProgress,
 } from "@material-ui/core";
-import { Assessment, Person } from "@material-ui/icons";
+import { Assessment, Home, Person } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: "flex",
     justifyContent: "flex-end",
+    padding: theme.spacing(0, 1),
+    height: theme.spacing(7),
   },
   button: {
     padding: theme.spacing(0.75),
@@ -33,8 +36,14 @@ const useStyles = makeStyles((theme) => ({
   icon: {
     fontSize: "1.75rem",
   },
+  navButton: {
+    margin: theme.spacing(0, 0.75),
+  },
+  home: {
+    marginLeft: 0,
+  },
   statistics: {
-    marginRight: theme.spacing(1.25),
+    marginRight: "auto",
   },
   avatar: {
     cursor: "pointer",
@@ -45,6 +54,7 @@ interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
   const dispatch = useAppDispatch();
+  const history = useHistory();
   const user = useSelector(getUser);
 
   const classes = useStyles({ loggedIn: !user.isEmpty });
@@ -57,14 +67,26 @@ const Header: FC<HeaderProps> = () => {
       variant="elevation"
     >
       <Toolbar className={classes.toolbar}>
+        <NearTooltip title="Home" spacing={1}>
+          <IconButton
+            onClick={() => {
+              user.isEmpty
+                ? dispatch(togglePopup({ open: true, type: "login" }))
+                : history.push("");
+            }}
+            className={`${classes.button} ${classes.home} ${classes.navButton}`}
+          >
+            <Home className={classes.icon} />
+          </IconButton>
+        </NearTooltip>
         <NearTooltip title="Statistics" spacing={1}>
           <IconButton
             onClick={() => {
               user.isEmpty
                 ? dispatch(togglePopup({ open: true, type: "login" }))
-                : console.log("Stat");
+                : history.push("statistics");
             }}
-            className={`${classes.button} ${classes.statistics}`}
+            className={`${classes.button} ${classes.navButton} ${classes.statistics}`}
           >
             <Assessment className={classes.icon} />
           </IconButton>
@@ -74,7 +96,12 @@ const Header: FC<HeaderProps> = () => {
         ) : user.isEmpty ? (
           <LoginButton dispatch={dispatch} classes={classes} />
         ) : (
-          <ProfileMenu dispatch={dispatch} user={user} classes={classes} />
+          <ProfileMenu
+            dispatch={dispatch}
+            history={history}
+            user={user}
+            classes={classes}
+          />
         )}
       </Toolbar>
     </AppBar>
@@ -103,9 +130,15 @@ interface ProfileMenuProps {
   user: FirebaseReducer.AuthState;
   dispatch: AppDispatch;
   classes: ReturnType<typeof useStyles>;
+  history: ReturnType<typeof useHistory>;
 }
 
-const ProfileMenu: FC<ProfileMenuProps> = ({ user, dispatch, classes }) => {
+const ProfileMenu: FC<ProfileMenuProps> = ({
+  user,
+  dispatch,
+  classes,
+  history,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) =>
@@ -139,9 +172,10 @@ const ProfileMenu: FC<ProfileMenuProps> = ({ user, dispatch, classes }) => {
         <MenuItem
           onClick={() => {
             handleClose();
+            history.push("settings");
           }}
         >
-          Profile
+          Settings
         </MenuItem>
         <MenuItem
           onClick={() => {

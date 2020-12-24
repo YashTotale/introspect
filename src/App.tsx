@@ -5,7 +5,6 @@ import { SnackbarProvider } from "notistack";
 
 import Header from "./Components/Header";
 import Popup from "./Components/Popup";
-import Footer from "./Pages/Home/Footer";
 import Page from "./Components/Loading/Page";
 
 // Redux Imports
@@ -18,11 +17,15 @@ import { makeStyles } from "@material-ui/core/styles";
 
 // Page Imports
 const Home = lazy(() => import("./Pages/Home"));
+const Statistics = lazy(() => import("./Pages/Statistics"));
+const Settings = lazy(() => import("./Pages/Settings"));
 
 const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     flexDirection: "column",
+    width: 372,
+    margin: "auto",
   },
   page: {
     display: "flex",
@@ -39,7 +42,7 @@ const App: FC = () => {
       <Theme>
         <BrowserRouter>
           <SnackbarProvider>
-            <Paper className={classes.container}>
+            <Paper elevation={24} className={classes.container}>
               <Header />
               <Popup />
               <div className={classes.page}>
@@ -57,6 +60,18 @@ const Routes: FC = () => {
   return (
     <Suspense fallback={<Page />}>
       <Switch>
+        <Route exact path="/popup.html/settings">
+          <Settings />
+        </Route>
+        <Route exact path="/settings">
+          <Settings />
+        </Route>
+        <Route exact path="/popup.html/statistics">
+          <Statistics />
+        </Route>
+        <Route exact path="/statistics">
+          <Statistics />
+        </Route>
         <Route exact path="/popup.html">
           <Home />
         </Route>

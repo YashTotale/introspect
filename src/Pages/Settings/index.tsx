@@ -12,11 +12,11 @@ const useStyles = makeStyles((theme) => ({
   // Styles
 }));
 
-interface StatisticsProps {}
+interface SettingsProps {}
 
-const Statistics: FC<StatisticsProps> = () => {
+const Settings: FC<SettingsProps> = () => {
   const classes = useStyles();
-  return <h1>Statistics</h1>;
+  return <h1>Settings</h1>;
 };
 
-export default Statistics;
+export default Settings;

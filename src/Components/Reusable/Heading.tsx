@@ -43,21 +43,9 @@ const useStyles = makeStyles((theme) => ({
 interface HeadingProps {
   name: TodayDataType;
   clearable: boolean;
-  dividerClassName?: string;
-  headingClassName?: string;
-  titleClassName?: string;
-  clearClassName?: string;
 }
 
-const Heading: FC<HeadingProps> = ({
-  name,
-  clearable,
-  children,
-  dividerClassName,
-  headingClassName,
-  titleClassName,
-  clearClassName,
-}) => {
+const Heading: FC<HeadingProps> = ({ name, clearable, children }) => {
   const dispatch = useAppDispatch();
   const classes = useStyles();
 
@@ -65,17 +53,13 @@ const Heading: FC<HeadingProps> = ({
 
   return (
     <>
-      <Divider className={`${classes.divider} ${dividerClassName}`} />
-      <div className={`${classes.heading} ${headingClassName}`}>
-        <Typography
-          className={`${classes.title} ${titleClassName}`}
-          variant="h5"
-          align="center"
-        >
+      <Divider className={classes.divider} />
+      <div className={classes.heading}>
+        <Typography className={classes.title} variant="h5" align="center">
           {children}
         </Typography>
         <NearTooltip title="Clear" spacing={0.75}>
-          <span className={`${classes.clear} ${clearClassName}`}>
+          <span className={classes.clear}>
             <IconButton
               size="small"
               className={classes.clearButton}

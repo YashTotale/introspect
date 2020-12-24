@@ -5,7 +5,7 @@ import React, { FC } from "react";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Skeleton } from "@material-ui/lab";
 
-type Size = "small" | "medium" | "large";
+type Size = "xs" | "small" | "medium" | "large";
 
 interface StyleProps {
   size: Size;
@@ -14,7 +14,9 @@ interface StyleProps {
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   skeleton: ({ size }) => ({
     height:
-      size === "small"
+      size === "xs"
+        ? 50
+        : size === "small"
         ? 100
         : size === "medium"
         ? 125

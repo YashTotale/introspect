@@ -10,7 +10,6 @@ import { getUser, togglePopup, useAppDispatch, AppDispatch } from "../Redux";
 import { FirebaseReducer } from "react-redux-firebase";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
   Avatar,
@@ -20,12 +19,22 @@ import {
   IconButton,
   CircularProgress,
 } from "@material-ui/core";
-import { Person } from "@material-ui/icons";
+import { Assessment, Person } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: "flex",
     justifyContent: "flex-end",
+  },
+  button: {
+    padding: theme.spacing(0.75),
+  },
+  icon: {
+    fontSize: "1.75rem",
+  },
+  statistics: {
+    marginRight: theme.spacing(1.25),
   },
   avatar: {
     cursor: "pointer",
@@ -35,10 +44,10 @@ const useStyles = makeStyles((theme) => ({
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
-  const classes = useStyles();
   const dispatch = useAppDispatch();
-
   const user = useSelector(getUser);
+
+  const classes = useStyles({ loggedIn: !user.isEmpty });
 
   return (
     <AppBar
@@ -48,34 +57,55 @@ const Header: FC<HeaderProps> = () => {
       variant="elevation"
     >
       <Toolbar className={classes.toolbar}>
+        <NearTooltip title="Statistics" spacing={1}>
+          <IconButton
+            onClick={() => {
+              user.isEmpty
+                ? dispatch(togglePopup({ open: true, type: "login" }))
+                : console.log("Stat");
+            }}
+            className={`${classes.button} ${classes.statistics}`}
+          >
+            <Assessment className={classes.icon} />
+          </IconButton>
+        </NearTooltip>
         {!user.isLoaded ? (
           <CircularProgress />
         ) : user.isEmpty ? (
-          <NearTooltip title="Login" spacing={0.75}>
-            <IconButton
-              onClick={() =>
-                dispatch(togglePopup({ open: true, type: "login" }))
-              }
-            >
-              <Person />
-            </IconButton>
-          </NearTooltip>
+          <LoginButton dispatch={dispatch} classes={classes} />
         ) : (
-          <ProfileMenu dispatch={dispatch} user={user} />
+          <ProfileMenu dispatch={dispatch} user={user} classes={classes} />
         )}
       </Toolbar>
     </AppBar>
   );
 };
 
+interface LoginButtonProps {
+  dispatch: AppDispatch;
+  classes: ReturnType<typeof useStyles>;
+}
+
+const LoginButton: FC<LoginButtonProps> = ({ dispatch, classes }) => {
+  return (
+    <NearTooltip title="Login" spacing={1}>
+      <IconButton
+        onClick={() => dispatch(togglePopup({ open: true, type: "login" }))}
+        className={classes.button}
+      >
+        <Person className={classes.icon} />
+      </IconButton>
+    </NearTooltip>
+  );
+};
+
 interface ProfileMenuProps {
   user: FirebaseReducer.AuthState;
   dispatch: AppDispatch;
+  classes: ReturnType<typeof useStyles>;
 }
 
-const ProfileMenu: FC<ProfileMenuProps> = ({ user, dispatch }) => {
-  const classes = useStyles();
-
+const ProfileMenu: FC<ProfileMenuProps> = ({ user, dispatch, classes }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) =>
@@ -85,7 +115,7 @@ const ProfileMenu: FC<ProfileMenuProps> = ({ user, dispatch }) => {
 
   return (
     <>
-      <NearTooltip title="Profile" spacing={0.75}>
+      <NearTooltip title="Profile" spacing={1}>
         <Avatar
           alt={user.displayName ?? "Profile Picture"}
           src={user.photoURL ?? undefined}

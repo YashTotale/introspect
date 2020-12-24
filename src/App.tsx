@@ -5,7 +5,7 @@ import { SnackbarProvider } from "notistack";
 
 import Header from "./Components/Header";
 import Popup from "./Components/Popup";
-import Footer from "./Components/Footer";
+import Footer from "./Pages/Home/Footer";
 import Page from "./Components/Loading/Page";
 
 // Redux Imports
@@ -45,7 +45,6 @@ const App: FC = () => {
               <div className={classes.page}>
                 <Routes />
               </div>
-              <Footer />
             </Paper>
           </SnackbarProvider>
         </BrowserRouter>

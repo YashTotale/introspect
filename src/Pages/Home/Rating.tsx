@@ -1,9 +1,9 @@
 // React Imports
 import React, { FC } from "react";
-import Heading from "../Components/Reusable/Heading";
+import Heading from "../../Components/Reusable/Heading";
 
 // Redux Imports
-import { getRating, setTodayData, useAppDispatch } from "../Redux";
+import { getRating, setTodayData, useAppDispatch } from "../../Redux";
 
 // Material UI Imports
 import { RadioGroup, Radio, FormControlLabel } from "@material-ui/core";

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
+import isEqual from "lodash.isequal";
 
 import { RootState, AppThunk } from "./index";
 
@@ -40,7 +41,7 @@ export const initialTodayState: TodayState = {
     description: "",
     reflection: "",
   },
-  isSaved: false,
+  isSaved: true,
 };
 
 const todaySlice = createSlice({
@@ -50,35 +51,43 @@ const todaySlice = createSlice({
     setTodayData: (
       state,
       action: PayloadAction<Partial<typeof initialTodayState["current"]>>
-    ) => ({
-      ...state,
-      current: {
+    ) => {
+      const newCurrent = {
         ...state.current,
         ...action.payload,
-      },
-    }),
-    clearTodayData: (state, action: PayloadAction<TodayDataType>) => {
-      const { payload } = action;
+      };
       return {
         ...state,
-        current: {
-          ...state.current,
-          [payload]: initialTodayState.current[payload],
-        },
+        current: newCurrent,
+        isSaved: isEqual(state.saved, newCurrent),
+      };
+    },
+    clearTodayData: (state, action: PayloadAction<TodayDataType>) => {
+      const { payload } = action;
+      const newCurrent = {
+        ...state.current,
+        [payload]: initialTodayState.current[payload],
+      };
+      return {
+        ...state,
+        current: newCurrent,
         last: {
           ...state.last,
           [payload]: state.current[payload],
         },
+        isSaved: isEqual(state.saved, newCurrent),
       };
     },
     undoTodayData: (state, action: PayloadAction<TodayDataType>) => {
       const { payload } = action;
+      const newCurrent = {
+        ...state.current,
+        [payload]: state.last[payload],
+      };
       return {
         ...state,
-        current: {
-          ...state.current,
-          [payload]: state.last[payload],
-        },
+        current: newCurrent,
+        isSaved: isEqual(state.saved, newCurrent),
       };
     },
     // Save

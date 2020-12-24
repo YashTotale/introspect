@@ -11,6 +11,7 @@
 
     ".eslintignore": "ignore",
     ".eslintrc": "json",
+    ".eslintcache": "json",
 
     ".huskyrc": "json"
   }

@@ -11,7 +11,6 @@ import { saveTodayData } from "../Redux/today.slice";
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Button, CircularProgress } from "@material-ui/core";
-import { green, red } from "@material-ui/core/colors";
 
 interface StyleProps {
   isSaved: boolean;
@@ -31,20 +30,19 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   doneBtn: ({ isSaved, isError }) => ({
     pointerEvents: isSaved ? "none" : undefined,
     backgroundColor: isSaved
-      ? green[500]
+      ? theme.palette.success.main
       : isError !== false
-      ? red[500]
-      : undefined,
+      ? theme.palette.error.main
+      : theme.palette.primary.main,
     "&:hover": {
-      backgroundColor: isSaved
-        ? green[700]
-        : isError !== false
-        ? red[700]
-        : undefined,
+      backgroundColor:
+        isError !== false
+          ? theme.palette.error.dark
+          : theme.palette.primary.dark,
     },
   }),
   doneBtnSpinner: {
-    color: green[500],
+    color: theme.palette.success.main,
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -74,10 +72,11 @@ const Footer: FC<FooterProps> = () => {
           variant="contained"
           color="primary"
           disabled={loading}
+          tabIndex={(isSaved && -1) || undefined}
           onClick={() =>
             user.isEmpty
               ? dispatch(togglePopup({ open: true, type: "login" }))
-              : dispatch(saveTodayData())
+              : !isSaved && dispatch(saveTodayData())
           }
           className={classes.doneBtn}
         >

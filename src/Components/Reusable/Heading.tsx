@@ -1,5 +1,6 @@
 // React Imports
 import React, { FC } from "react";
+import NearTooltip from "./NearTooltip";
 import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 
 // Material UI Imports
@@ -7,7 +8,6 @@ import {
   Typography,
   Divider,
   IconButton,
-  Tooltip,
   Button,
   capitalize,
 } from "@material-ui/core";
@@ -37,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
   },
   clearButton: {
     padding: theme.spacing(1),
-  },
-  clearTooltip: {
-    marginTop: theme.spacing(0.75),
   },
 }));
 
@@ -77,13 +74,7 @@ const Heading: FC<HeadingProps> = ({
         >
           {children}
         </Typography>
-        <Tooltip
-          title="Clear"
-          interactive
-          classes={{
-            tooltip: classes.clearTooltip,
-          }}
-        >
+        <NearTooltip title="Clear" spacing={0.75}>
           <span className={`${classes.clear} ${clearClassName}`}>
             <IconButton
               size="small"
@@ -114,7 +105,7 @@ const Heading: FC<HeadingProps> = ({
               <Clear fontSize="small" />
             </IconButton>
           </span>
-        </Tooltip>
+        </NearTooltip>
       </div>
     </>
   );

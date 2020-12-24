@@ -1,5 +1,6 @@
 // React Imports
 import React, { FC, useState } from "react";
+import NearTooltip from "./Reusable/NearTooltip";
 
 // Redux Imports
 import { useSelector } from "react-redux";
@@ -15,7 +16,6 @@ import {
   Avatar,
   Menu,
   Toolbar,
-  Tooltip,
   MenuItem,
   IconButton,
   CircularProgress,
@@ -26,9 +26,6 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     display: "flex",
     justifyContent: "flex-end",
-  },
-  profileTooltip: {
-    marginTop: theme.spacing(0.75),
   },
   avatar: {
     cursor: "pointer",
@@ -54,7 +51,7 @@ const Header: FC<HeaderProps> = () => {
         {!user.isLoaded ? (
           <CircularProgress />
         ) : user.isEmpty ? (
-          <Tooltip title="Login" classes={{ tooltip: classes.profileTooltip }}>
+          <NearTooltip title="Login" spacing={0.75}>
             <IconButton
               onClick={() =>
                 dispatch(togglePopup({ open: true, type: "login" }))
@@ -62,7 +59,7 @@ const Header: FC<HeaderProps> = () => {
             >
               <Person />
             </IconButton>
-          </Tooltip>
+          </NearTooltip>
         ) : (
           <ProfileMenu dispatch={dispatch} user={user} />
         )}
@@ -88,7 +85,7 @@ const ProfileMenu: FC<ProfileMenuProps> = ({ user, dispatch }) => {
 
   return (
     <>
-      <Tooltip title="Profile" classes={{ tooltip: classes.profileTooltip }}>
+      <NearTooltip title="Profile" spacing={0.75}>
         <Avatar
           alt={user.displayName ?? "Profile Picture"}
           src={user.photoURL ?? undefined}
@@ -96,7 +93,7 @@ const ProfileMenu: FC<ProfileMenuProps> = ({ user, dispatch }) => {
           className={classes.avatar}
           onClick={handleClick}
         />
-      </Tooltip>
+      </NearTooltip>
       <Menu
         elevation={6}
         anchorEl={anchorEl}

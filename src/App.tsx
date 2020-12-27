@@ -14,6 +14,7 @@ import ReduxStore from "./Store";
 import Theme from "./Theme";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useFirestoreConnect } from "react-redux-firebase";
 
 // Page Imports
 const Home = lazy(() => import("./Pages/Home"));

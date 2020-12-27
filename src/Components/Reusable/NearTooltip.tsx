@@ -11,7 +11,7 @@ interface StyleProps {
 
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   tooltip: {
-    marginTop: ({ spacing }) => theme.spacing(spacing),
+    margin: ({ spacing }) => theme.spacing(spacing, 0),
   },
 }));
 

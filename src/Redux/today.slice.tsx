@@ -6,22 +6,15 @@ import { RootState, AppThunk } from "./index";
 
 export type TodayDataType = "rating" | "description" | "reflection";
 
+export interface TodayData {
+  rating: number | null; // Null for no rating
+  description: string;
+  reflection: string;
+}
 export interface TodayState {
-  current: {
-    rating: number | null; // Null for no rating
-    description: string;
-    reflection: string;
-  };
-  last: {
-    rating: number | null;
-    description: string;
-    reflection: string;
-  };
-  saved: {
-    rating: number | null;
-    description: string;
-    reflection: string;
-  };
+  current: TodayData;
+  last: TodayData;
+  saved: TodayData;
   isSaved: boolean | null | string; // Null for loading state & String for error
   isSaveNotified: boolean;
 }

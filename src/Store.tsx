@@ -47,12 +47,16 @@ import { PersistGate } from "redux-persist/lib/integration/react";
 import storage from "redux-persist/lib/storage";
 
 // Reducer Imports
-import { todayReducer, TodayState } from "./Redux/today.slice";
+import { todayReducer, TodayState, TodayData } from "./Redux/today.slice";
 import { popupReducer, PopupState } from "./Redux/popup.slice";
 
 export interface StoreSchema {}
 
-export interface Profile {}
+export type Responses = Record<string, TodayData>;
+
+export interface Profile {
+  responses: Responses;
+}
 
 interface State {
   today: TodayState;

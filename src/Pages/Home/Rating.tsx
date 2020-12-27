@@ -1,6 +1,6 @@
 // React Imports
 import React, { FC } from "react";
-import Heading from "../../Components/Reusable/Heading";
+import Heading from "./Heading";
 
 // Redux Imports
 import { getRating, setTodayData, useAppDispatch } from "../../Redux";

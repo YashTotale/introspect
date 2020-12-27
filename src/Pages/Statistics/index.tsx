@@ -1,11 +1,12 @@
 // React Imports
 import React, { FC } from "react";
+import Heading from "./Heading";
 
 // Redux Imports
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import {} from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import {} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +17,16 @@ interface StatisticsProps {}
 
 const Statistics: FC<StatisticsProps> = () => {
   const classes = useStyles();
-  return <h1>Statistics</h1>;
+  return (
+    <>
+      <Typography variant="h4" align="center">
+        Statistics
+      </Typography>
+      <Heading>Ratings</Heading>
+      <Heading>Descriptions</Heading>
+      <Heading>Reflections</Heading>
+    </>
+  );
 };
 
 export default Statistics;

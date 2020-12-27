@@ -1,4 +1,5 @@
 // React Imports
+import { Typography } from "@material-ui/core";
 import React, { FC, lazy, Suspense } from "react";
 import Bar from "../../Components/Loading/Bar";
 
@@ -10,6 +11,9 @@ const Footer = lazy(() => import("./Footer"));
 const Home: FC = () => {
   return (
     <>
+      <Typography variant="h4" align="center">
+        Home
+      </Typography>
       <Suspense fallback={<Bar size="small" />}>
         <Rating />
       </Suspense>

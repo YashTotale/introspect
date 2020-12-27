@@ -6,26 +6,27 @@ import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 import { useSelector } from "react-redux";
 import {
   getUser,
+  getTodayData,
   togglePopup,
   useAppDispatch,
-  getTodaySaved,
-} from "../../Redux";
-import {
-  getIsSaveNotified,
-  resetSave,
   saveTodayData,
   saveNotified,
-} from "../../Redux/today.slice";
+  getSavedTodayData,
+  getSavedError,
+  getSavedNotified,
+  getSavedLoading,
+} from "../../Redux";
 
 // Firebase Imports
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Button, CircularProgress } from "@material-ui/core";
+import isEqual from "lodash.isequal";
 
 interface StyleProps {
   isSaved: boolean;
-  isError: string | false;
+  isError: string | null;
 }
 
 const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
@@ -42,12 +43,12 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     pointerEvents: isSaved ? "none" : undefined,
     backgroundColor: isSaved
       ? theme.palette.success.main
-      : isError !== false
+      : isError !== null
       ? theme.palette.error.main
       : theme.palette.primary.main,
     "&:hover": {
       backgroundColor:
-        isError !== false
+        isError !== null
           ? theme.palette.error.dark
           : theme.palette.primary.dark,
     },
@@ -68,30 +69,32 @@ const Footer: FC<FooterProps> = () => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useClosableSnackbar();
 
-  const user = useSelector(getUser);
-  const saved = useSelector(getTodaySaved);
-  const isSaveNotified = useSelector(getIsSaveNotified);
+  const savedTodayData = useSelector(getSavedTodayData);
+  const todayData = useSelector(getTodayData);
 
-  const loading = saved === null;
-  const isSaved = typeof saved === "boolean" && saved;
-  const isError = typeof saved === "string" && saved;
+  const isError = useSelector(getSavedError);
+  const isLoading = useSelector(getSavedLoading);
+  const isSaveNotified = useSelector(getSavedNotified);
+
+  const isSaved = isEqual(savedTodayData, todayData);
+
+  const user = useSelector(getUser);
 
   const classes = useStyles({ isSaved, isError });
 
   if (!isSaveNotified) {
-    enqueueSnackbar("Successfully saved", {
-      variant: "success",
-      autoHideDuration: 4000,
-    });
+    if (isError !== null) {
+      enqueueSnackbar(isError, {
+        variant: "error",
+        autoHideDuration: 4000,
+      });
+    } else {
+      enqueueSnackbar("Successfully saved", {
+        variant: "success",
+        autoHideDuration: 4000,
+      });
+    }
     dispatch(saveNotified());
-  }
-
-  if (isError !== false) {
-    enqueueSnackbar(isError, {
-      variant: "error",
-      autoHideDuration: 4000,
-    });
-    dispatch(resetSave());
   }
 
   return (
@@ -100,7 +103,7 @@ const Footer: FC<FooterProps> = () => {
         <Button
           variant="contained"
           color="primary"
-          disabled={loading}
+          disabled={isLoading}
           tabIndex={(isSaved && -1) || undefined}
           onClick={() =>
             user.isEmpty
@@ -111,7 +114,7 @@ const Footer: FC<FooterProps> = () => {
         >
           {isSaved ? "Saved" : "Save"}
         </Button>
-        {loading && (
+        {isLoading && (
           <CircularProgress size={24} className={classes.doneBtnSpinner} />
         )}
       </div>

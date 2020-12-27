@@ -22,12 +22,15 @@ export {
   getRating,
   getDescription,
   getReflection,
-  getTodaySaved,
   getTodayData,
+  getSavedError,
+  getSavedLoading,
+  getSavedNotified,
   // -> Actions
   setTodayData,
   clearTodayData,
   undoTodayData,
+  saveNotified,
   // -> Thunks
   saveTodayData,
   // -> Reducer
@@ -70,6 +73,10 @@ export const getResponses = (state: RootState) =>
 export const getProfileLoaded = (state: RootState) =>
   state.firebase.profile.isLoaded;
 
+export const getSavedTodayData = createSelector(getResponses, (responses) => {
+  if (responses) return responses[moment().format("DD-MM-YYYY")];
+  return null;
+});
 export const getSortedResponses = createSelector(getResponses, (responses) => {
   if (!responses) return responses;
   return Object.keys(responses)

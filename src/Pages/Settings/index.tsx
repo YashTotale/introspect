@@ -5,7 +5,7 @@ import React, { FC } from "react";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import {} from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import {} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +16,11 @@ interface SettingsProps {}
 
 const Settings: FC<SettingsProps> = () => {
   const classes = useStyles();
-  return <h1>Settings</h1>;
+  return (
+    <Typography variant="h4" align="center">
+      Settings
+    </Typography>
+  );
 };
 
 export default Settings;

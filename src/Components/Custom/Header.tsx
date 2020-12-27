@@ -69,11 +69,7 @@ const Header: FC<HeaderProps> = () => {
       <Toolbar className={classes.toolbar}>
         <NearTooltip title="Home" spacing={1}>
           <IconButton
-            onClick={() => {
-              user.isEmpty
-                ? dispatch(togglePopup({ open: true, type: "login" }))
-                : history.push("");
-            }}
+            onClick={() => history.push("")}
             className={`${classes.button} ${classes.home} ${classes.navButton}`}
           >
             <Home className={classes.icon} />

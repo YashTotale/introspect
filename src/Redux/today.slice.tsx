@@ -14,29 +14,27 @@ export interface TodayData {
 export interface TodayState {
   current: TodayData;
   last: TodayData;
-  saved: TodayData;
-  isSaved: boolean | null | string; // Null for loading state & String for error
-  isSaveNotified: boolean;
+  saved: {
+    loading: boolean;
+    error: string | null;
+    notified: boolean;
+  };
 }
 
+export const initialData = {
+  rating: null,
+  description: "",
+  reflection: "",
+};
+
 export const initialTodayState: TodayState = {
-  current: {
-    rating: null,
-    description: "",
-    reflection: "",
-  },
-  last: {
-    rating: null,
-    description: "",
-    reflection: "",
-  },
+  current: initialData,
+  last: initialData,
   saved: {
-    rating: null,
-    description: "",
-    reflection: "",
+    loading: false,
+    error: null,
+    notified: true,
   },
-  isSaved: true,
-  isSaveNotified: true,
 };
 
 const todaySlice = createSlice({
@@ -88,25 +86,31 @@ const todaySlice = createSlice({
     // Save
     saveDataInProgress: (state) => ({
       ...state,
-      isSaved: null,
+      saved: {
+        ...state.saved,
+        loading: true,
+      },
     }),
     saveDataSuccess: (state) => ({
       ...state,
-      saved: state.current,
-      isSaved: true,
-      isSaveNotified: false,
+      saved: {
+        ...state.saved,
+        notified: false,
+        loading: false,
+      },
     }),
     saveDataFailure: (state, action: PayloadAction<string>) => ({
       ...state,
-      isSaved: action.payload,
-    }),
-    resetSave: (state) => ({
-      ...state,
-      isSaved: false,
+      saved: {
+        ...state.saved,
+        error: action.payload,
+        notified: false,
+        loading: false,
+      },
     }),
     saveNotified: (state) => ({
       ...state,
-      isSaveNotified: true,
+      saved: initialTodayState.saved,
     }),
   },
 });
@@ -141,7 +145,6 @@ export const {
   saveDataInProgress,
   saveDataSuccess,
   saveDataFailure,
-  resetSave,
   saveNotified,
 } = todaySlice.actions;
 
@@ -151,10 +154,11 @@ export const getDescription = (state: RootState) =>
   state.today.current.description;
 export const getReflection = (state: RootState) =>
   state.today.current.reflection;
-export const getTodaySaved = (state: RootState) => state.today.isSaved;
 export const getTodayData = (state: RootState) => state.today.current;
-export const getIsSaveNotified = (state: RootState) =>
-  state.today.isSaveNotified;
+export const getSavedLoading = (state: RootState) => state.today.saved.loading;
+export const getSavedNotified = (state: RootState) =>
+  state.today.saved.notified;
+export const getSavedError = (state: RootState) => state.today.saved.error;
 
 // Reducer
 export const todayReducer = todaySlice.reducer;

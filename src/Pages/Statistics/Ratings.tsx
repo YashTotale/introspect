@@ -27,6 +27,8 @@ const Ratings: FC<RatingsProps> = ({ responses }) => {
     <>
       <Heading>Ratings</Heading>
       <LineChart
+        title="Rating over time"
+        y="Rating"
         data={Object.values(responses).map(({ rating }) => rating)}
         categories={Object.keys(responses).map((day) => {
           const date = moment(day, "DD-MM-YYYY").format("x");

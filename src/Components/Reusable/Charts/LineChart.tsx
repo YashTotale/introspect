@@ -8,35 +8,31 @@ import { useTheme } from "@material-ui/core";
 interface LineChartProps {
   data: (string | number | null)[];
   categories: (string | number)[];
+  title: string;
+  y: string;
 }
 
-const LineChart: FC<LineChartProps> = ({ data, categories }) => {
+const LineChart: FC<LineChartProps> = ({ data, categories, title, y }) => {
   const theme = useTheme();
 
   return (
     <ApexChart
       series={[
         {
-          name: "Rating",
+          name: y,
           data,
         },
       ]}
       options={{
+        title: {
+          text: title,
+          align: "left",
+          style: {
+            color: theme.palette.text.primary,
+          },
+        },
         theme: {
           mode: theme.palette.type,
-        },
-        chart: {
-          height: 350,
-          type: "area",
-          foreColor: "#ccc",
-          zoom: {
-            type: "x",
-            enabled: true,
-            autoScaleYaxis: true,
-          },
-          toolbar: {
-            autoSelected: "pan",
-          },
         },
         colors: [theme.palette.primary[theme.palette.type]],
         stroke: {
@@ -45,11 +41,6 @@ const LineChart: FC<LineChartProps> = ({ data, categories }) => {
         grid: {
           borderColor: "#555",
           clipMarkers: false,
-          yaxis: {
-            lines: {
-              show: false,
-            },
-          },
         },
         dataLabels: {
           enabled: false,
@@ -67,19 +58,12 @@ const LineChart: FC<LineChartProps> = ({ data, categories }) => {
           strokeColor: theme.palette.primary[theme.palette.type],
           strokeWidth: 3,
         },
-        title: {
-          text: "Rating over time",
-          align: "left",
-          style: {
-            color: theme.palette.text.primary,
-          },
-        },
         yaxis: {
           min: 0,
           max: 5,
           tickAmount: 5,
           title: {
-            text: "Rating",
+            text: y,
             style: {
               color: theme.palette.text.primary,
             },

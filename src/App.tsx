@@ -3,9 +3,8 @@ import React, { FC, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 
-import Header from "./Components/Header";
-import Popup from "./Components/Popup";
-import Page from "./Components/Loading/Page";
+import { Header, Popup } from "./Components/Custom";
+import { Page } from "./Components/Loading";
 
 // Redux Imports
 import ReduxStore from "./Store";
@@ -14,7 +13,6 @@ import ReduxStore from "./Store";
 import Theme from "./Theme";
 import { Paper } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useFirestoreConnect } from "react-redux-firebase";
 
 // Page Imports
 const Home = lazy(() => import("./Pages/Home"));

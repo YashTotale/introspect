@@ -1,7 +1,7 @@
 // React Imports
 import { Typography } from "@material-ui/core";
 import React, { FC, lazy, Suspense } from "react";
-import Bar from "../../Components/Loading/Bar";
+import { Bar } from "../../Components/Loading";
 
 const Rating = lazy(() => import("./Rating"));
 const Description = lazy(() => import("./Description"));

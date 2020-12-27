@@ -1,6 +1,6 @@
 // React Imports
 import React, { FC } from "react";
-import Page from "./Components/Loading/Page";
+import { Page } from "./Components/Loading";
 
 // Redux Imports
 import {

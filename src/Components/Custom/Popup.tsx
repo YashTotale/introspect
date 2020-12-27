@@ -1,6 +1,6 @@
 // React Imports
 import React, { FC } from "react";
-import useClosableSnackbar from "../Hooks/useClosableSnackbar";
+import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 import { ProviderContext } from "notistack";
 
 // Redux Imports
@@ -11,7 +11,7 @@ import {
   getUser,
   togglePopup,
   useAppDispatch,
-} from "../Redux";
+} from "../../Redux";
 import { useSelector } from "react-redux";
 
 // Firebase Imports

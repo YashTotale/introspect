@@ -1,10 +1,11 @@
 // React Imports
 import React, { FC, useState } from "react";
-import NearTooltip from "./Reusable/NearTooltip";
+import { useHistory } from "react-router-dom";
+import NearTooltip from "../Reusable/NearTooltip";
 
 // Redux Imports
 import { useSelector } from "react-redux";
-import { getUser, togglePopup, useAppDispatch, AppDispatch } from "../Redux";
+import { getUser, togglePopup, useAppDispatch, AppDispatch } from "../../Redux";
 
 // Firebase Imports
 import { FirebaseReducer } from "react-redux-firebase";
@@ -21,7 +22,6 @@ import {
 } from "@material-ui/core";
 import { Assessment, Home, Person } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {

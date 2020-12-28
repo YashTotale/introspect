@@ -14,6 +14,7 @@ import {
   togglePopup,
   useAppDispatch,
   setHomeDate,
+  getResponses,
 } from "../../Redux";
 import { useSelector } from "react-redux";
 
@@ -25,6 +26,7 @@ import { ExtendedFirebaseInstance, useFirebase } from "react-redux-firebase";
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  Badge,
   Button,
   Dialog,
   DialogActions,
@@ -33,6 +35,7 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 import { DatePicker } from "@material-ui/pickers";
+import { Check } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   redButton: {
@@ -40,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
     "&:hover": {
       backgroundColor: theme.palette.error.dark,
     },
+  },
+  check: {
+    fontSize: "1rem",
   },
 }));
 
@@ -180,19 +186,36 @@ const LogoutPopup: FC<PopupProps> = ({
 
 const DatePopup: FC<PopupProps> = ({ open, dispatch, classes }) => {
   const date = useSelector(getHomeDate);
+  const responses = useSelector(getResponses);
+
+  const responseDates = responses ? Object.keys(responses) : [];
 
   return (
     <Dialog open={open} onClose={() => dispatch(togglePopup(false))}>
       <DatePicker
         value={new Date(parseInt(moment(date, "DD-MM-YYYY").format("x")))}
-        orientation="portrait"
-        variant="static"
-        openTo="date"
         onChange={(date) =>
           dispatch(setHomeDate(moment(date).format("DD-MM-YYYY")))
         }
+        orientation="portrait"
+        variant="static"
+        openTo="date"
         disableFuture={true}
-        autoOk={false}
+        renderDay={(day, selectedDate, inCurrentMonth, dayComponent) => {
+          const date = moment(day).format("DD-MM-YYYY");
+
+          return (
+            <Badge
+              badgeContent={
+                responseDates.includes(date) ? (
+                  <Check className={classes.check} fontSize="small" />
+                ) : undefined
+              }
+            >
+              {dayComponent}
+            </Badge>
+          );
+        }}
       />
     </Dialog>
   );

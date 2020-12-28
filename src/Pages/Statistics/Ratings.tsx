@@ -1,5 +1,6 @@
 // React Imports
 import React, { FC } from "react";
+import { Link as RouterLink } from "react-router-dom";
 import moment from "moment";
 import Heading from "./Heading";
 import { LineChart } from "../../Components/Reusable/Charts";
@@ -9,7 +10,7 @@ import { Responses } from "../../Store";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import {} from "@material-ui/core";
+import { Link, Typography } from "@material-ui/core";
 import {} from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,19 +23,32 @@ interface RatingsProps {
 
 const Ratings: FC<RatingsProps> = ({ responses }) => {
   const classes = useStyles();
+  const responseDates = Object.keys(responses);
+  const responseAnswers = Object.values(responses)
+    .map(({ rating }) => rating)
+    .filter((rating) => rating !== null);
 
   return (
     <>
       <Heading>Ratings</Heading>
-      <LineChart
-        title="Rating over time"
-        y="Rating"
-        data={Object.values(responses).map(({ rating }) => rating)}
-        categories={Object.keys(responses).map((day) => {
-          const date = moment(day, "DD-MM-YYYY").format("x");
-          return parseInt(date);
-        })}
-      />
+      {!responseAnswers.length ? (
+        <Typography>
+          You have no ratings. To view rating statistics, rate a day in the{" "}
+          <Link component={RouterLink} to="">
+            Home
+          </Link>{" "}
+          page.
+        </Typography>
+      ) : (
+        <LineChart
+          title="Rating over time"
+          y="Rating"
+          data={responseAnswers}
+          categories={responseDates.map((date) =>
+            parseInt(moment(date, "DD-MM-YYYY").format("x"))
+          )}
+        />
+      )}
     </>
   );
 };

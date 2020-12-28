@@ -117,7 +117,7 @@ const LoginPopup: FC<PopupProps> = ({
               const isNew = result.additionalUserInfo.isNewUser;
               if (isNew) {
                 const name = result.additionalUserInfo.profile.name;
-                snackbar.enqueueSnackbar(`Welcome to Introspection, ${name}!`, {
+                snackbar.enqueueSnackbar(`Welcome to Introspect, ${name}!`, {
                   variant: "default",
                   autoHideDuration: 6000,
                 });
@@ -149,7 +149,7 @@ const LogoutPopup: FC<PopupProps> = ({
     <DialogContent>
       <DialogContentText>
         Your data will be preserved, but you will not be able to save any new
-        Introspections.
+        responses.
       </DialogContentText>
     </DialogContent>
     <DialogActions>

@@ -16,6 +16,7 @@ import {
   getSavedLoading,
   getIsHomeDataSaved,
   getHomeDate,
+  getProfileLoaded,
 } from "../../Redux";
 
 // Material UI Imports
@@ -72,16 +73,17 @@ const Footer: FC<FooterProps> = () => {
   const { enqueueSnackbar } = useClosableSnackbar();
 
   const date = useSelector(getHomeDate);
+  const user = useSelector(getUser);
 
   const isError = useSelector(getSavedError);
-  const isLoading = useSelector(getSavedLoading);
+  const isSaveLoading = useSelector(getSavedLoading);
+  const isProfileLoading = !useSelector(getProfileLoaded);
   const isSaveNotified = useSelector(getSavedNotified);
 
   const isSaved = useSelector(getIsHomeDataSaved);
-
-  const user = useSelector(getUser);
-
   const classes = useStyles({ isSaved, isError });
+
+  const isLoading = isSaveLoading || isProfileLoading;
 
   if (!isSaveNotified) {
     if (isError !== null) {

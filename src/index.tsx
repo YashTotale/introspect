@@ -1,11 +1,33 @@
+// React Imports
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
 import App from "./App";
+
+// Redux Imports
+import ReduxStore from "./Store";
+
+// Material UI Imports
+import Theme from "./Theme";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import MomentUtils from "@date-io/moment";
+
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ReduxStore>
+      <Theme>
+        <BrowserRouter>
+          <SnackbarProvider>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <App />
+            </MuiPickersUtilsProvider>
+          </SnackbarProvider>
+        </BrowserRouter>
+      </Theme>
+    </ReduxStore>
   </React.StrictMode>,
   document.getElementById("root")
 );

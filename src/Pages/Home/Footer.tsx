@@ -1,6 +1,5 @@
 // React Imports
 import React, { FC } from "react";
-import moment from "moment";
 import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 
 // Redux Imports
@@ -15,13 +14,12 @@ import {
   getSavedNotified,
   getSavedLoading,
   getIsHomeDataSaved,
-  getHomeDate,
   getProfileLoaded,
 } from "../../Redux";
 
 // Material UI Imports
+import { Button, CircularProgress } from "@material-ui/core";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Button, CircularProgress, Typography } from "@material-ui/core";
 
 interface StyleProps {
   isSaved: boolean;
@@ -61,9 +59,6 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
     marginTop: -12,
     marginLeft: -12,
   },
-  date: {
-    margin: theme.spacing("auto", "auto", 0, 0),
-  },
 }));
 
 interface FooterProps {}
@@ -72,7 +67,6 @@ const Footer: FC<FooterProps> = () => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useClosableSnackbar();
 
-  const date = useSelector(getHomeDate);
   const user = useSelector(getUser);
 
   const isError = useSelector(getSavedError);
@@ -121,9 +115,6 @@ const Footer: FC<FooterProps> = () => {
           <CircularProgress size={24} className={classes.doneBtnSpinner} />
         )}
       </div>
-      <Typography className={classes.date}>
-        {moment(date, "DD-MM-YYYY").format("MMMM Do, YYYY")}
-      </Typography>
     </div>
   );
 };

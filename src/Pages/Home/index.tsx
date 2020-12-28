@@ -1,10 +1,14 @@
 // React Imports
 import React, { FC, lazy, Suspense } from "react";
+import moment from "moment";
 import { Bar } from "../../Components/Loading";
+import SmallIcon from "../../Components/Reusable/SmallIcon";
+import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 
 // Redux Imports
 import { useSelector } from "react-redux";
 import {
+  getHomeDate,
   getIsHomeDataSaved,
   getUser,
   resetHomeData,
@@ -15,9 +19,7 @@ import {
 
 // Material UI Imports
 import { Button, makeStyles, Typography } from "@material-ui/core";
-import { Cached, Event } from "@material-ui/icons";
-import SmallIcon from "../../Components/Reusable/SmallIcon";
-import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
+import { Cached, Event, KeyboardArrowLeft } from "@material-ui/icons";
 
 const Rating = lazy(() => import("./Rating"));
 const Description = lazy(() => import("./Description"));
@@ -32,6 +34,14 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 140,
     marginLeft: "auto",
   },
+  dateWrapper: {
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: theme.spacing(1, 0, 0),
+  },
+  date: {},
 }));
 
 const Home: FC = () => {
@@ -40,6 +50,7 @@ const Home: FC = () => {
   const { enqueueSnackbar, closeSnackbar } = useClosableSnackbar();
 
   const user = useSelector(getUser);
+  const date = useSelector(getHomeDate);
   const isSaved = useSelector(getIsHomeDataSaved);
 
   return (
@@ -76,10 +87,14 @@ const Home: FC = () => {
             disabled: isSaved,
           }}
         />
+      </div>
+      <div className={classes.dateWrapper}>
+        <Typography variant="subtitle1" className={classes.date}>
+          {moment(date, "DD-MM-YYYY").format("MMMM Do, YYYY")}
+        </Typography>
         <SmallIcon
           icon={<Event fontSize="small" />}
           title="Choose date"
-          offset={6}
           IconButtonProps={{
             onClick: () =>
               dispatch(
@@ -94,10 +109,10 @@ const Home: FC = () => {
       <Suspense fallback={<Bar size="small" />}>
         <Rating />
       </Suspense>
-      <Suspense fallback={<Bar size="large" />}>
+      <Suspense fallback={<Bar size="small" />}>
         <Description />
       </Suspense>
-      <Suspense fallback={<Bar size="large" />}>
+      <Suspense fallback={<Bar size="small" />}>
         <Reflection />
       </Suspense>
       <Suspense fallback={<Bar size="xs" />}>

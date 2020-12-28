@@ -43,7 +43,7 @@ const TextArea: FC<TextAreaProps> = ({
       onChange={(e) => setValue(e.target.value)}
       onKeyDown={checkForAutoFill}
       variant="outlined"
-      rows={3}
+      rows={2}
       rowsMax={11}
       placeholder={placeholder}
       label={label}

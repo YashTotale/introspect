@@ -3,7 +3,7 @@ import React, { FC } from "react";
 import Heading from "./Heading";
 
 // Redux Imports
-import { getRating, setTodayData, useAppDispatch } from "../../Redux";
+import { getRating, setHomeData, useAppDispatch } from "../../Redux";
 
 // Material UI Imports
 import { RadioGroup, Radio, FormControlLabel } from "@material-ui/core";
@@ -39,7 +39,7 @@ const Rating: FC<RatingProps> = () => {
         name="rating"
         value={rating}
         onChange={(e, value) =>
-          dispatch(setTodayData({ rating: parseInt(value) }))
+          dispatch(setHomeData({ rating: parseInt(value) }))
         }
         className={classes.ratings}
       >

@@ -4,7 +4,7 @@ import Heading from "./Heading";
 import TextArea from "../../Components/Reusable/TextArea";
 
 // Redux Imports
-import { getReflection, setTodayData, useAppDispatch } from "../../Redux";
+import { getReflection, setHomeData, useAppDispatch } from "../../Redux";
 import { useSelector } from "react-redux";
 
 interface ReflectionProps {}
@@ -21,7 +21,7 @@ const Reflection: FC<ReflectionProps> = () => {
       </Heading>
       <TextArea
         value={reflection}
-        setValue={(value) => dispatch(setTodayData({ reflection: value }))}
+        setValue={(value) => dispatch(setHomeData({ reflection: value }))}
         label="Reflection"
         placeholder="Reflection: "
       />

@@ -4,7 +4,7 @@ import Heading from "./Heading";
 import TextArea from "../../Components/Reusable/TextArea";
 
 // Redux Imports
-import { getDescription, setTodayData, useAppDispatch } from "../../Redux";
+import { getDescription, setHomeData, useAppDispatch } from "../../Redux";
 import { useSelector } from "react-redux";
 
 interface DescriptionProps {}
@@ -21,7 +21,7 @@ const Description: FC<DescriptionProps> = () => {
       </Heading>
       <TextArea
         value={description}
-        setValue={(value) => dispatch(setTodayData({ description: value }))}
+        setValue={(value) => dispatch(setHomeData({ description: value }))}
         label="Description"
         placeholder="Today was ..."
       />

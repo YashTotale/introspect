@@ -12,34 +12,34 @@ export type {
 export { useAppDispatch, getState } from "../Store";
 
 /**
- * Today Slice
+ * Home Slice
  */
 
 export {
   // -> Slice
-  default as todaySlice,
+  default as homeSlice,
   // -> Selectors
   getRating,
   getDescription,
   getReflection,
-  getTodayData,
+  getHomeData,
   getSavedError,
   getSavedLoading,
   getSavedNotified,
   // -> Actions
-  setTodayData,
-  clearTodayData,
-  undoTodayData,
+  setHomeData,
+  clearHomeData,
+  undoHomeData,
   saveNotified,
   // -> Thunks
-  saveTodayData,
+  saveHomeData,
   // -> Reducer
-  todayReducer,
+  homeReducer,
   // -> State
-  initialTodayState,
-} from "./today.slice";
+  initialHomeState,
+} from "./home.slice";
 
-export type { TodayState } from "./today.slice";
+export type { HomeState, HomeDataType, HomeData } from "./home.slice";
 
 /**
  * Popup Slice
@@ -73,7 +73,7 @@ export const getResponses = (state: RootState) =>
 export const getProfileLoaded = (state: RootState) =>
   state.firebase.profile.isLoaded;
 
-export const getSavedTodayData = createSelector(getResponses, (responses) => {
+export const getSavedHomeData = createSelector(getResponses, (responses) => {
   if (responses) return responses[moment().format("DD-MM-YYYY")];
   return null;
 });

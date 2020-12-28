@@ -1,19 +1,19 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
-import isEqual from "lodash.isequal";
 
 import { RootState, AppThunk } from "./index";
 
-export type TodayDataType = "rating" | "description" | "reflection";
+export type HomeDataType = "rating" | "description" | "reflection";
 
-export interface TodayData {
+export interface HomeData {
   rating: number | null; // Null for no rating
   description: string;
   reflection: string;
 }
-export interface TodayState {
-  current: TodayData;
-  last: TodayData;
+export interface HomeState {
+  date: string;
+  current: HomeData;
+  last: HomeData;
   saved: {
     loading: boolean;
     error: string | null;
@@ -27,7 +27,8 @@ export const initialData = {
   reflection: "",
 };
 
-export const initialTodayState: TodayState = {
+export const initialHomeState: HomeState = {
+  date: moment().format("DD-MM-YYYY"),
   current: initialData,
   last: initialData,
   saved: {
@@ -37,50 +38,42 @@ export const initialTodayState: TodayState = {
   },
 };
 
-const todaySlice = createSlice({
-  name: "today",
-  initialState: initialTodayState,
+const homeSlice = createSlice({
+  name: "home",
+  initialState: initialHomeState,
   reducers: {
-    setTodayData: (
+    setHomeData: (
       state,
-      action: PayloadAction<Partial<typeof initialTodayState["current"]>>
-    ) => {
-      const newCurrent = {
+      action: PayloadAction<Partial<typeof initialHomeState["current"]>>
+    ) => ({
+      ...state,
+      current: {
         ...state.current,
         ...action.payload,
-      };
-      return {
-        ...state,
-        current: newCurrent,
-        isSaved: isEqual(state.saved, newCurrent),
-      };
-    },
-    clearTodayData: (state, action: PayloadAction<TodayDataType>) => {
+      },
+    }),
+    clearHomeData: (state, action: PayloadAction<HomeDataType>) => {
       const { payload } = action;
-      const newCurrent = {
-        ...state.current,
-        [payload]: initialTodayState.current[payload],
-      };
       return {
         ...state,
-        current: newCurrent,
+        current: {
+          ...state.current,
+          [payload]: initialHomeState.current[payload],
+        },
         last: {
           ...state.last,
           [payload]: state.current[payload],
         },
-        isSaved: isEqual(state.saved, newCurrent),
       };
     },
-    undoTodayData: (state, action: PayloadAction<TodayDataType>) => {
+    undoHomeData: (state, action: PayloadAction<HomeDataType>) => {
       const { payload } = action;
-      const newCurrent = {
-        ...state.current,
-        [payload]: state.last[payload],
-      };
       return {
         ...state,
-        current: newCurrent,
-        isSaved: isEqual(state.saved, newCurrent),
+        current: {
+          ...state.current,
+          [payload]: state.last[payload],
+        },
       };
     },
     // Save
@@ -110,14 +103,14 @@ const todaySlice = createSlice({
     }),
     saveNotified: (state) => ({
       ...state,
-      saved: initialTodayState.saved,
+      saved: initialHomeState.saved,
     }),
   },
 });
 
 // Thunks
 
-export const saveTodayData = (): AppThunk => async (
+export const saveHomeData = (): AppThunk => async (
   dispatch,
   getState,
   { getFirebase }
@@ -127,7 +120,7 @@ export const saveTodayData = (): AppThunk => async (
     const firebase = getFirebase();
     await firebase.updateProfile({
       responses: {
-        [moment().format("DD-MM-YYYY")]: getTodayData(getState()),
+        [moment().format("DD-MM-YYYY")]: getHomeData(getState()),
       },
     });
     dispatch(saveDataSuccess());
@@ -138,29 +131,28 @@ export const saveTodayData = (): AppThunk => async (
 
 // Actions
 export const {
-  setTodayData,
-  clearTodayData,
-  undoTodayData,
+  setHomeData,
+  clearHomeData,
+  undoHomeData,
   // Save
   saveDataInProgress,
   saveDataSuccess,
   saveDataFailure,
   saveNotified,
-} = todaySlice.actions;
+} = homeSlice.actions;
 
 // Selectors
-export const getRating = (state: RootState) => state.today.current.rating;
+export const getRating = (state: RootState) => state.home.current.rating;
 export const getDescription = (state: RootState) =>
-  state.today.current.description;
+  state.home.current.description;
 export const getReflection = (state: RootState) =>
-  state.today.current.reflection;
-export const getTodayData = (state: RootState) => state.today.current;
-export const getSavedLoading = (state: RootState) => state.today.saved.loading;
-export const getSavedNotified = (state: RootState) =>
-  state.today.saved.notified;
-export const getSavedError = (state: RootState) => state.today.saved.error;
+  state.home.current.reflection;
+export const getHomeData = (state: RootState) => state.home.current;
+export const getSavedLoading = (state: RootState) => state.home.saved.loading;
+export const getSavedNotified = (state: RootState) => state.home.saved.notified;
+export const getSavedError = (state: RootState) => state.home.saved.error;
 
 // Reducer
-export const todayReducer = todaySlice.reducer;
+export const homeReducer = homeSlice.reducer;
 
-export default todaySlice;
+export default homeSlice;

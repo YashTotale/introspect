@@ -5,18 +5,18 @@ import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 
 // Redux Imports
 import {
-  clearTodayData,
-  TodayDataType,
-  undoTodayData,
-} from "../../Redux/today.slice";
-import { useAppDispatch } from "../../Store";
+  clearHomeData,
+  HomeDataType,
+  undoHomeData,
+  useAppDispatch,
+} from "../../Redux";
 
 // Material UI Imports
 import { Button, capitalize } from "@material-ui/core";
 import { Clear } from "@material-ui/icons";
 
 interface HeadingProps {
-  name: TodayDataType;
+  name: HomeDataType;
   clearable: boolean;
 }
 
@@ -30,7 +30,7 @@ const Heading: FC<HeadingProps> = ({ name, clearable, children }) => {
       icon={<Clear fontSize="small" />}
       IconButtonProps={{
         onClick: () => {
-          dispatch(clearTodayData(name));
+          dispatch(clearHomeData(name));
           enqueueSnackbar(`${capitalize(name)} cleared`, {
             variant: "success",
             autoHideDuration: 4000,
@@ -38,7 +38,7 @@ const Heading: FC<HeadingProps> = ({ name, clearable, children }) => {
               const Undo = (
                 <Button
                   onClick={() => {
-                    dispatch(undoTodayData(name));
+                    dispatch(undoHomeData(name));
                     closeSnackbar(key);
                   }}
                   variant="text"

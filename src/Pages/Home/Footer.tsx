@@ -6,12 +6,12 @@ import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 import { useSelector } from "react-redux";
 import {
   getUser,
-  getTodayData,
+  getHomeData,
   togglePopup,
   useAppDispatch,
-  saveTodayData,
+  saveHomeData,
   saveNotified,
-  getSavedTodayData,
+  getSavedHomeData,
   getSavedError,
   getSavedNotified,
   getSavedLoading,
@@ -69,14 +69,14 @@ const Footer: FC<FooterProps> = () => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useClosableSnackbar();
 
-  const savedTodayData = useSelector(getSavedTodayData);
-  const todayData = useSelector(getTodayData);
+  const savedHomeData = useSelector(getSavedHomeData);
+  const homeData = useSelector(getHomeData);
 
   const isError = useSelector(getSavedError);
   const isLoading = useSelector(getSavedLoading);
   const isSaveNotified = useSelector(getSavedNotified);
 
-  const isSaved = isEqual(savedTodayData, todayData);
+  const isSaved = isEqual(savedHomeData, homeData);
 
   const user = useSelector(getUser);
 
@@ -108,7 +108,7 @@ const Footer: FC<FooterProps> = () => {
           onClick={() =>
             user.isEmpty
               ? dispatch(togglePopup({ open: true, type: "login" }))
-              : !isSaved && dispatch(saveTodayData())
+              : !isSaved && dispatch(saveHomeData())
           }
           className={classes.doneBtn}
         >

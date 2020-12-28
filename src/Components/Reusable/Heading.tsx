@@ -1,31 +1,22 @@
 // React Imports
 import React, { FC } from "react";
 import Line from "../../Components/Reusable/Line";
-import NearTooltip from "../../Components/Reusable/NearTooltip";
 
 // Material UI Imports
-import { Typography, IconButton, IconButtonProps } from "@material-ui/core";
+import { Typography, IconButtonProps } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import SmallIcon from "./SmallIcon";
 
 const useStyles = makeStyles((theme) => ({
   heading: {
     position: "relative",
   },
-  span: {
-    position: "absolute",
-    top: "50%",
-    right: theme.spacing(1),
-    transform: "translate(0%,-50%)",
-  },
-  button: {
-    padding: theme.spacing(1),
-  },
 }));
 
 interface HeadingProps {
-  IconButtonProps: IconButtonProps;
   icon: JSX.Element;
   iconTitle: string;
+  IconButtonProps: IconButtonProps;
 }
 
 const Heading: FC<HeadingProps> = ({
@@ -43,17 +34,11 @@ const Heading: FC<HeadingProps> = ({
         <Typography variant="h5" align="center">
           {children}
         </Typography>
-        <NearTooltip title={iconTitle} spacing={0.75}>
-          <span className={classes.span}>
-            <IconButton
-              size="small"
-              className={classes.button}
-              {...IconButtonProps}
-            >
-              {icon}
-            </IconButton>
-          </span>
-        </NearTooltip>
+        <SmallIcon
+          IconButtonProps={IconButtonProps}
+          icon={icon}
+          title={iconTitle}
+        />
       </div>
     </>
   );

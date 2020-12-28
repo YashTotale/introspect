@@ -2,7 +2,7 @@ import moment from "moment";
 import isEqual from "lodash.isequal";
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState, Responses } from "../Store";
-import { getHomeDate, getHomeData } from "./home.slice";
+import { getHomeDate, getHomeData, initialData } from "./home.slice";
 
 export type {
   RootState,
@@ -34,7 +34,8 @@ export {
   clearHomeData,
   undoHomeData,
   saveNotified,
-  setDate,
+  setHomeDate,
+  resetHomeData,
   // -> Thunks
   saveHomeData,
   // -> Reducer
@@ -81,8 +82,8 @@ export const getSavedHomeData = createSelector(
   getResponses,
   getHomeDate,
   (responses, date) => {
-    if (responses) return responses[date];
-    return null;
+    if (responses && responses[date]) return responses[date];
+    return initialData;
   }
 );
 export const getIsHomeDataSaved = createSelector(

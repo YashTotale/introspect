@@ -1,8 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 
-import { RootState, AppThunk, getIsHomeDataSaved } from "./index";
-import { togglePopup } from "./popup.slice";
+import {
+  RootState,
+  AppThunk,
+  getIsHomeDataSaved,
+  getSavedHomeData,
+} from "./index";
 
 export type HomeDataType = "rating" | "description" | "reflection";
 
@@ -115,30 +119,37 @@ const homeSlice = createSlice({
 
 // Thunks
 
-export const setDate = (date: string): AppThunk => async (
+export const setHomeDate = (date: string): AppThunk => async (
   dispatch,
   getState
 ) => {
   const isSaved = getIsHomeDataSaved(getState());
+  const currentDate = getHomeDate(getState());
 
-  if (!isSaved) dispatch(togglePopup({ type: "save", open: true }));
-  else {
-    dispatch(changeHomeDate(date));
-  }
+  if (!isSaved) dispatch(saveHomeData(currentDate));
+
+  dispatch(changeHomeDate(date));
+  dispatch(resetHomeData());
 };
 
-export const saveHomeData = (): AppThunk => async (
+export const resetHomeData = (): AppThunk => (dispatch, getState) => {
+  const saved = getSavedHomeData(getState());
+
+  dispatch(setHomeData(saved));
+};
+
+export const saveHomeData = (date?: string): AppThunk => async (
   dispatch,
   getState,
   { getFirebase }
 ) => {
   try {
     dispatch(saveDataInProgress());
-    const date = getHomeDate(getState());
+    const saveDate = date || getHomeDate(getState());
     const firebase = getFirebase();
     await firebase.updateProfile({
       responses: {
-        [date]: getHomeData(getState()),
+        [saveDate]: getHomeData(getState()),
       },
     });
     dispatch(saveDataSuccess());

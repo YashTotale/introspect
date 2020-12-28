@@ -1,16 +1,19 @@
 // React Imports
 import React, { FC } from "react";
-import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
+import moment from "moment";
 import { ProviderContext } from "notistack";
+import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 
 // Redux Imports
 import {
   AppDispatch,
+  getHomeDate,
   getPopupOpen,
   getPopupType,
   getUser,
   togglePopup,
   useAppDispatch,
+  setHomeDate,
 } from "../../Redux";
 import { useSelector } from "react-redux";
 
@@ -29,6 +32,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@material-ui/core";
+import { DatePicker } from "@material-ui/pickers";
 
 const useStyles = makeStyles((theme) => ({
   redButton: {
@@ -49,43 +53,27 @@ const Popup: FC = () => {
   const open = useSelector(getPopupOpen);
   const type = useSelector(getPopupType);
 
+  const props = {
+    open,
+    dispatch,
+    firebaseInstance,
+    snackbar,
+    classes,
+  };
+
   switch (type) {
     case "login": {
       if (!user.isEmpty && open) dispatch(togglePopup(false));
 
-      return (
-        <LoginPopup
-          open={open}
-          dispatch={dispatch}
-          firebaseInstance={firebaseInstance}
-          snackbar={snackbar}
-          classes={classes}
-        />
-      );
+      return <LoginPopup {...props} />;
     }
     case "logout": {
       if (user.isEmpty && open) dispatch(togglePopup(false));
 
-      return (
-        <LogoutPopup
-          open={open}
-          dispatch={dispatch}
-          firebaseInstance={firebaseInstance}
-          snackbar={snackbar}
-          classes={classes}
-        />
-      );
+      return <LogoutPopup {...props} />;
     }
-    case "save": {
-      return (
-        <SavePopup
-          open={open}
-          dispatch={dispatch}
-          firebaseInstance={firebaseInstance}
-          snackbar={snackbar}
-          classes={classes}
-        />
-      );
+    case "date": {
+      return <DatePopup {...props} />;
     }
   }
 };
@@ -190,23 +178,22 @@ const LogoutPopup: FC<PopupProps> = ({
   </Dialog>
 );
 
-const SavePopup: FC<PopupProps> = ({ open, dispatch, classes }) => {
+const DatePopup: FC<PopupProps> = ({ open, dispatch, classes }) => {
+  const date = useSelector(getHomeDate);
+
   return (
     <Dialog open={open} onClose={() => dispatch(togglePopup(false))}>
-      <DialogTitle>Save Responses?</DialogTitle>
-      <DialogContent>
-        <DialogContentText>
-          Your responses for this date are not saved. Do you want to save them?
-        </DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button variant="contained" className={classes.redButton}>
-          Don&apos;t Save
-        </Button>
-        <Button variant="contained" color="primary">
-          Save
-        </Button>
-      </DialogActions>
+      <DatePicker
+        value={new Date(parseInt(moment(date, "DD-MM-YYYY").format("x")))}
+        orientation="portrait"
+        variant="static"
+        openTo="date"
+        onChange={(date) =>
+          dispatch(setHomeDate(moment(date).format("DD-MM-YYYY")))
+        }
+        disableFuture={true}
+        autoOk={false}
+      />
     </Dialog>
   );
 };

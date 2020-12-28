@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import isEqual from "lodash.isequal";
 import moment from "moment";
+import { firebaseReducer } from "react-redux-firebase";
 
 import {
   RootState,
   AppThunk,
   getIsHomeDataSaved,
   getSavedHomeData,
+  getResponses,
 } from "./index";
 
 export type HomeDataType = "rating" | "description" | "reflection";
@@ -146,12 +149,22 @@ export const saveHomeData = (date?: string): AppThunk => async (
   try {
     dispatch(saveDataInProgress());
     const saveDate = date || getHomeDate(getState());
+    const responses = getResponses(getState());
     const firebase = getFirebase();
-    await firebase.updateProfile({
-      responses: {
-        [saveDate]: getHomeData(getState()),
+    const data = getHomeData(getState());
+
+    const newResponses = { ...responses, [saveDate]: data };
+
+    if (isEqual(data, initialData)) delete newResponses[saveDate];
+
+    await firebase.updateProfile(
+      {
+        responses: newResponses,
       },
-    });
+      {
+        merge: false,
+      }
+    );
     dispatch(saveDataSuccess());
   } catch (err) {
     dispatch(saveDataFailure(err.toString()));

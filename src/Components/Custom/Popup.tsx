@@ -31,7 +31,7 @@ import {
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  logoutButton: {
+  redButton: {
     backgroundColor: theme.palette.error.main,
     "&:hover": {
       backgroundColor: theme.palette.error.dark,
@@ -68,6 +68,17 @@ const Popup: FC = () => {
 
       return (
         <LogoutPopup
+          open={open}
+          dispatch={dispatch}
+          firebaseInstance={firebaseInstance}
+          snackbar={snackbar}
+          classes={classes}
+        />
+      );
+    }
+    case "save": {
+      return (
+        <SavePopup
           open={open}
           dispatch={dispatch}
           firebaseInstance={firebaseInstance}
@@ -150,7 +161,7 @@ const LogoutPopup: FC<PopupProps> = ({
     <DialogActions>
       <Button
         variant="contained"
-        className={classes.logoutButton}
+        className={classes.redButton}
         onClick={() =>
           firebaseInstance
             .logout()
@@ -178,5 +189,26 @@ const LogoutPopup: FC<PopupProps> = ({
     </DialogActions>
   </Dialog>
 );
+
+const SavePopup: FC<PopupProps> = ({ open, dispatch, classes }) => {
+  return (
+    <Dialog open={open} onClose={() => dispatch(togglePopup(false))}>
+      <DialogTitle>Save Responses?</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Your responses for this date are not saved. Do you want to save them?
+        </DialogContentText>
+      </DialogContent>
+      <DialogActions>
+        <Button variant="contained" className={classes.redButton}>
+          Don&apos;t Save
+        </Button>
+        <Button variant="contained" color="primary">
+          Save
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
 export default Popup;

@@ -79,7 +79,7 @@ const persistConfig = {
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer<State>(persistConfig, reducers);
 
 const extraArgument = {
   getFirebase,

@@ -1,7 +1,8 @@
 import moment from "moment";
+import isEqual from "lodash.isequal";
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState, Responses } from "../Store";
-import { getHomeDate } from "./home.slice";
+import { getHomeDate, getHomeData } from "./home.slice";
 
 export type {
   RootState,
@@ -84,6 +85,12 @@ export const getSavedHomeData = createSelector(
     return null;
   }
 );
+export const getIsHomeDataSaved = createSelector(
+  getSavedHomeData,
+  getHomeData,
+  (saved, current) => isEqual(saved, current)
+);
+
 export const getSortedResponses = createSelector(getResponses, (responses) => {
   if (!responses) return responses;
   return Object.keys(responses)

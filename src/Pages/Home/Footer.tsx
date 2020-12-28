@@ -6,23 +6,19 @@ import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 import { useSelector } from "react-redux";
 import {
   getUser,
-  getHomeData,
   togglePopup,
   useAppDispatch,
   saveHomeData,
   saveNotified,
-  getSavedHomeData,
   getSavedError,
   getSavedNotified,
   getSavedLoading,
+  getIsHomeDataSaved,
 } from "../../Redux";
-
-// Firebase Imports
 
 // Material UI Imports
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Button, CircularProgress } from "@material-ui/core";
-import isEqual from "lodash.isequal";
 
 interface StyleProps {
   isSaved: boolean;
@@ -69,14 +65,11 @@ const Footer: FC<FooterProps> = () => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useClosableSnackbar();
 
-  const savedHomeData = useSelector(getSavedHomeData);
-  const homeData = useSelector(getHomeData);
-
   const isError = useSelector(getSavedError);
   const isLoading = useSelector(getSavedLoading);
   const isSaveNotified = useSelector(getSavedNotified);
 
-  const isSaved = isEqual(savedHomeData, homeData);
+  const isSaved = useSelector(getIsHomeDataSaved);
 
   const user = useSelector(getUser);
 

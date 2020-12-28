@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import moment from "moment";
 
-import { RootState, AppThunk } from "./index";
+import { RootState, AppThunk, getIsHomeDataSaved } from "./index";
+import { togglePopup } from "./popup.slice";
 
 export type HomeDataType = "rating" | "description" | "reflection";
 
@@ -76,8 +77,7 @@ const homeSlice = createSlice({
         },
       };
     },
-    // Date
-    setDate: (state, action: PayloadAction<string>) => ({
+    changeHomeDate: (state, action: PayloadAction<string>) => ({
       ...state,
       date: action.payload,
     }),
@@ -115,6 +115,18 @@ const homeSlice = createSlice({
 
 // Thunks
 
+export const setDate = (date: string): AppThunk => async (
+  dispatch,
+  getState
+) => {
+  const isSaved = getIsHomeDataSaved(getState());
+
+  if (!isSaved) dispatch(togglePopup({ type: "save", open: true }));
+  else {
+    dispatch(changeHomeDate(date));
+  }
+};
+
 export const saveHomeData = (): AppThunk => async (
   dispatch,
   getState,
@@ -140,8 +152,7 @@ export const {
   setHomeData,
   clearHomeData,
   undoHomeData,
-  // Date
-  setDate,
+  changeHomeDate,
   // Save
   saveDataInProgress,
   saveDataSuccess,

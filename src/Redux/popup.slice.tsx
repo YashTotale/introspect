@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./index";
 
-export type PopupType = "login" | "logout";
+export type PopupType = "login" | "logout" | "save";
 
 export interface PopupState {
   open: boolean;

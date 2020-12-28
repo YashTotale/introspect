@@ -39,6 +39,7 @@ const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   }),
   doneBtn: ({ isSaved, isError }) => ({
     pointerEvents: isSaved ? "none" : undefined,
+    opacity: isSaved ? 0.6 : undefined,
     backgroundColor: isSaved
       ? theme.palette.success.main
       : isError !== null

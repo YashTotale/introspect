@@ -1,6 +1,7 @@
 import moment from "moment";
 import { createSelector } from "@reduxjs/toolkit";
 import { RootState, Responses } from "../Store";
+import { getHomeDate } from "./home.slice";
 
 export type {
   RootState,
@@ -22,6 +23,7 @@ export {
   getRating,
   getDescription,
   getReflection,
+  getHomeDate,
   getHomeData,
   getSavedError,
   getSavedLoading,
@@ -31,6 +33,7 @@ export {
   clearHomeData,
   undoHomeData,
   saveNotified,
+  setDate,
   // -> Thunks
   saveHomeData,
   // -> Reducer
@@ -73,10 +76,14 @@ export const getResponses = (state: RootState) =>
 export const getProfileLoaded = (state: RootState) =>
   state.firebase.profile.isLoaded;
 
-export const getSavedHomeData = createSelector(getResponses, (responses) => {
-  if (responses) return responses[moment().format("DD-MM-YYYY")];
-  return null;
-});
+export const getSavedHomeData = createSelector(
+  getResponses,
+  getHomeDate,
+  (responses, date) => {
+    if (responses) return responses[date];
+    return null;
+  }
+);
 export const getSortedResponses = createSelector(getResponses, (responses) => {
   if (!responses) return responses;
   return Object.keys(responses)

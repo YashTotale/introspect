@@ -76,6 +76,11 @@ const homeSlice = createSlice({
         },
       };
     },
+    // Date
+    setDate: (state, action: PayloadAction<string>) => ({
+      ...state,
+      date: action.payload,
+    }),
     // Save
     saveDataInProgress: (state) => ({
       ...state,
@@ -117,10 +122,11 @@ export const saveHomeData = (): AppThunk => async (
 ) => {
   try {
     dispatch(saveDataInProgress());
+    const date = getHomeDate(getState());
     const firebase = getFirebase();
     await firebase.updateProfile({
       responses: {
-        [moment().format("DD-MM-YYYY")]: getHomeData(getState()),
+        [date]: getHomeData(getState()),
       },
     });
     dispatch(saveDataSuccess());
@@ -134,6 +140,8 @@ export const {
   setHomeData,
   clearHomeData,
   undoHomeData,
+  // Date
+  setDate,
   // Save
   saveDataInProgress,
   saveDataSuccess,
@@ -148,6 +156,7 @@ export const getDescription = (state: RootState) =>
 export const getReflection = (state: RootState) =>
   state.home.current.reflection;
 export const getHomeData = (state: RootState) => state.home.current;
+export const getHomeDate = (state: RootState) => state.home.date;
 export const getSavedLoading = (state: RootState) => state.home.saved.loading;
 export const getSavedNotified = (state: RootState) => state.home.saved.notified;
 export const getSavedError = (state: RootState) => state.home.saved.error;

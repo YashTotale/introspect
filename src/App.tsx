@@ -2,6 +2,7 @@
 import React, { FC, lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
+import MomentUtils from "@date-io/moment";
 
 import { Header, Popup } from "./Components/Custom";
 import { Page } from "./Components/Loading";
@@ -12,6 +13,7 @@ import ReduxStore from "./Store";
 // Material UI Imports
 import Theme from "./Theme";
 import { Paper } from "@material-ui/core";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import { makeStyles } from "@material-ui/core/styles";
 
 // Page Imports
@@ -41,13 +43,15 @@ const App: FC = () => {
       <Theme>
         <BrowserRouter>
           <SnackbarProvider>
-            <Paper elevation={24} className={classes.container}>
-              <Header />
-              <Popup />
-              <div className={classes.page}>
-                <Routes />
-              </div>
-            </Paper>
+            <MuiPickersUtilsProvider utils={MomentUtils}>
+              <Paper elevation={24} className={classes.container}>
+                <Header />
+                <Popup />
+                <div className={classes.page}>
+                  <Routes />
+                </div>
+              </Paper>
+            </MuiPickersUtilsProvider>
           </SnackbarProvider>
         </BrowserRouter>
       </Theme>

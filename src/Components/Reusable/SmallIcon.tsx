@@ -4,14 +4,17 @@ import NearTooltip from "./NearTooltip";
 
 // Material UI Imports
 import { IconButton, IconButtonProps } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import {} from "@material-ui/icons";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+interface StyleProps {
+  offset?: number;
+}
+
+const useStyles = makeStyles<Theme, StyleProps>((theme) => ({
   span: {
     position: "absolute",
     top: "50%",
-    right: theme.spacing(1),
+    right: ({ offset }) => theme.spacing(offset ?? 1),
     transform: "translate(0%,-50%)",
   },
   button: {
@@ -23,10 +26,16 @@ interface SmallIconProps {
   title: string;
   icon: JSX.Element;
   IconButtonProps?: IconButtonProps;
+  offset?: number;
 }
 
-const SmallIcon: FC<SmallIconProps> = ({ title, IconButtonProps, icon }) => {
-  const classes = useStyles();
+const SmallIcon: FC<SmallIconProps> = ({
+  title,
+  IconButtonProps,
+  icon,
+  offset,
+}) => {
+  const classes = useStyles({ offset });
   return (
     <NearTooltip title={title} spacing={0.75}>
       <span className={classes.span}>

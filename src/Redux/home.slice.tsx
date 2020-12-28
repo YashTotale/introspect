@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import isEqual from "lodash.isequal";
 import moment from "moment";
-import { firebaseReducer } from "react-redux-firebase";
 
 import {
   RootState,
@@ -50,10 +49,7 @@ const homeSlice = createSlice({
   name: "home",
   initialState: initialHomeState,
   reducers: {
-    setHomeData: (
-      state,
-      action: PayloadAction<Partial<typeof initialHomeState["current"]>>
-    ) => ({
+    setHomeData: (state, action: PayloadAction<Partial<HomeData>>) => ({
       ...state,
       current: {
         ...state.current,
@@ -74,16 +70,25 @@ const homeSlice = createSlice({
         },
       };
     },
-    undoHomeData: (state, action: PayloadAction<HomeDataType>) => {
+    undoHomeData: (state, action: PayloadAction<HomeDataType | undefined>) => {
       const { payload } = action;
       return {
         ...state,
-        current: {
-          ...state.current,
-          [payload]: state.last[payload],
-        },
+        current: payload
+          ? {
+              ...state.current,
+              [payload]: state.last[payload],
+            }
+          : state.last,
       };
     },
+    setHomeLast: (state, action: PayloadAction<Partial<HomeData>>) => ({
+      ...state,
+      last: {
+        ...state.last,
+        ...action.payload,
+      },
+    }),
     changeHomeDate: (state, action: PayloadAction<string>) => ({
       ...state,
       date: action.payload,
@@ -137,7 +142,9 @@ export const setHomeDate = (date: string): AppThunk => async (
 
 export const resetHomeData = (): AppThunk => (dispatch, getState) => {
   const saved = getSavedHomeData(getState());
+  const current = getHomeData(getState());
 
+  dispatch(setHomeLast(current));
   dispatch(setHomeData(saved));
 };
 
@@ -177,6 +184,7 @@ export const {
   clearHomeData,
   undoHomeData,
   changeHomeDate,
+  setHomeLast,
   // Save
   saveDataInProgress,
   saveDataSuccess,

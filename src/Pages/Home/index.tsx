@@ -4,12 +4,20 @@ import { Bar } from "../../Components/Loading";
 
 // Redux Imports
 import { useSelector } from "react-redux";
-import { getUser, togglePopup, useAppDispatch } from "../../Redux";
+import {
+  getIsHomeDataSaved,
+  getUser,
+  resetHomeData,
+  togglePopup,
+  undoHomeData,
+  useAppDispatch,
+} from "../../Redux";
 
 // Material UI Imports
-import { makeStyles, Typography } from "@material-ui/core";
-import { Event } from "@material-ui/icons";
+import { Button, makeStyles, Typography } from "@material-ui/core";
+import { Cached, Event } from "@material-ui/icons";
 import SmallIcon from "../../Components/Reusable/SmallIcon";
+import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
 
 const Rating = lazy(() => import("./Rating"));
 const Description = lazy(() => import("./Description"));
@@ -29,7 +37,10 @@ const useStyles = makeStyles((theme) => ({
 const Home: FC = () => {
   const dispatch = useAppDispatch();
   const classes = useStyles();
+  const { enqueueSnackbar, closeSnackbar } = useClosableSnackbar();
+
   const user = useSelector(getUser);
+  const isSaved = useSelector(getIsHomeDataSaved);
 
   return (
     <>
@@ -38,8 +49,37 @@ const Home: FC = () => {
           Home
         </Typography>
         <SmallIcon
+          icon={<Cached fontSize="small" />}
+          title="Reset changes"
+          IconButtonProps={{
+            onClick: () => {
+              dispatch(resetHomeData());
+              enqueueSnackbar("Reset changes", {
+                variant: "success",
+                autoHideDuration: 4000,
+                action: (key) => {
+                  const Undo = (
+                    <Button
+                      onClick={() => {
+                        dispatch(undoHomeData());
+                        closeSnackbar(key);
+                      }}
+                      variant="text"
+                    >
+                      Undo
+                    </Button>
+                  );
+                  return Undo;
+                },
+              });
+            },
+            disabled: isSaved,
+          }}
+        />
+        <SmallIcon
           icon={<Event fontSize="small" />}
           title="Choose date"
+          offset={6}
           IconButtonProps={{
             onClick: () =>
               dispatch(

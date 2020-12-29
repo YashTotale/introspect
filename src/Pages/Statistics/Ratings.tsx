@@ -2,7 +2,7 @@
 import React, { FC } from "react";
 import moment from "moment";
 import { Heading, NoResponses } from "./Components";
-import { LineChart } from "../../Components/Reusable/Charts";
+import { LineChart, BarChart } from "../../Components/Reusable/Charts";
 
 // Redux Imports
 import { Responses } from "../../Redux";
@@ -15,25 +15,41 @@ interface RatingsProps {
 }
 
 const Ratings: FC<RatingsProps> = ({ responses }) => {
-  const responseDates = Object.keys(responses);
-  const responseAnswers = Object.values(responses)
+  const dates = Object.keys(responses);
+  const ratings = Object.values(responses)
     .map(({ rating }) => rating)
-    .filter((rating) => rating !== null);
+    .filter((rating) => rating !== null) as number[];
+
+  const counts = ratings.reduce(
+    (counts, rating) => {
+      counts[rating]++;
+      return counts;
+    },
+    [...Array(6).fill(0)]
+  );
 
   return (
     <>
       <Heading>Ratings</Heading>
-      {!responseAnswers.length ? (
+      {!ratings.length ? (
         <NoResponses name="ratings" verb="rate" />
       ) : (
-        <LineChart
-          title="Rating over time"
-          y="Rating"
-          data={responseAnswers}
-          categories={responseDates.map((date) =>
-            parseInt(moment(date, "DD-MM-YYYY").format("x"))
-          )}
-        />
+        <>
+          <LineChart
+            title="Rating over time"
+            y="Rating"
+            data={ratings}
+            categories={dates.map((date) =>
+              parseInt(moment(date, "DD-MM-YYYY").format("x"))
+            )}
+          />
+          <BarChart
+            categories={[0, 1, 2, 3, 4, 5]}
+            data={counts}
+            y="Count"
+            title="Rating count"
+          />
+        </>
       )}
     </>
   );

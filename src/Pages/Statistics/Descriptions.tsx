@@ -8,7 +8,7 @@ import { sortOccurence } from "../../Utils/funcs";
 import { Responses } from "../../Redux";
 
 // Material UI Imports
-import { Typography } from "@material-ui/core";
+import {} from "@material-ui/core";
 
 interface DescriptionsProps {
   responses: Responses;

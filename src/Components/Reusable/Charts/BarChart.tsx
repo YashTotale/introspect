@@ -5,19 +5,19 @@ import ApexChart from "react-apexcharts";
 // Material UI Imports
 import { useTheme } from "@material-ui/core";
 
-interface LineChartProps {
-  data: (string | number | null)[];
-  categories: (string | number)[];
+interface BarChartProps {
   title: string;
   y: string;
+  categories: (string | number)[];
+  data: number[];
 }
 
-const LineChart: FC<LineChartProps> = ({ data, categories, title, y }) => {
+const BarChart: FC<BarChartProps> = ({ title, y, categories, data }) => {
   const theme = useTheme();
 
   return (
     <ApexChart
-      type="line"
+      type="bar"
       series={[
         {
           name: y,
@@ -36,34 +36,14 @@ const LineChart: FC<LineChartProps> = ({ data, categories, title, y }) => {
         theme: {
           mode: theme.palette.type,
         },
-        colors: [theme.palette.primary[theme.palette.type]],
-        stroke: {
-          width: 3,
-        },
+        colors: [theme.palette.primary.dark],
         grid: {
           borderColor: "#555",
-          clipMarkers: false,
         },
         dataLabels: {
           enabled: false,
         },
-        fill: {
-          gradient: {
-            enabled: true,
-            opacityFrom: 0.55,
-            opacityTo: 0,
-          },
-        },
-        markers: {
-          size: 5,
-          colors: ["#000524"],
-          strokeColor: theme.palette.primary[theme.palette.type],
-          strokeWidth: 3,
-        },
         yaxis: {
-          min: 0,
-          max: 5,
-          tickAmount: 5,
           title: {
             text: y,
             style: {
@@ -79,7 +59,6 @@ const LineChart: FC<LineChartProps> = ({ data, categories, title, y }) => {
           },
         },
         xaxis: {
-          type: "datetime",
           categories,
           labels: {
             show: true,
@@ -89,16 +68,8 @@ const LineChart: FC<LineChartProps> = ({ data, categories, title, y }) => {
               colors: theme.palette.text.primary,
             },
           },
-          axisBorder: {
-            show: true,
-            color: theme.palette.text.primary,
-          },
           axisTicks: {
-            show: true,
-            color: theme.palette.text.primary,
-          },
-          tooltip: {
-            enabled: true,
+            show: false,
           },
         },
       }}
@@ -106,4 +77,4 @@ const LineChart: FC<LineChartProps> = ({ data, categories, title, y }) => {
   );
 };
 
-export default LineChart;
+export default BarChart;

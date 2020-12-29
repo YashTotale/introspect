@@ -10,19 +10,13 @@ import { LineChart } from "../../Components/Reusable/Charts";
 import { Responses } from "../../Store";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
 import {} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  // Styles
-}));
 
 interface RatingsProps {
   responses: Responses;
 }
 
 const Ratings: FC<RatingsProps> = ({ responses }) => {
-  const classes = useStyles();
   const responseDates = Object.keys(responses);
   const responseAnswers = Object.values(responses)
     .map(({ rating }) => rating)

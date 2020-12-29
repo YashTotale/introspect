@@ -4,28 +4,24 @@ import Heading from "./Heading";
 import NoResponses from "./NoResponses";
 
 // Redux Imports
-import { useSelector } from "react-redux";
 import { Responses } from "../../Redux";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
 import {} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  // Styles
-}));
+import { sortOccurence } from "../../Utils/funcs";
+import TableChart from "../../Components/Reusable/Charts/TableChart";
 
 interface ReflectionsProps {
   responses: Responses;
 }
 
 const Reflections: FC<ReflectionsProps> = ({ responses }) => {
-  const classes = useStyles();
-
-  const responseDates = Object.keys(responses);
+  // const responseDates = Object.keys(responses);
   const responseAnswers = Object.values(responses)
     .map(({ reflection }) => reflection)
     .filter((reflection) => reflection.length);
+
+  const words = sortOccurence(responseAnswers);
 
   return (
     <>
@@ -33,7 +29,7 @@ const Reflections: FC<ReflectionsProps> = ({ responses }) => {
       {!responseAnswers.length ? (
         <NoResponses name="reflections" verb="reflect on" />
       ) : (
-        <></>
+        <TableChart data={words} header={["Word", "Count"]} />
       )}
     </>
   );

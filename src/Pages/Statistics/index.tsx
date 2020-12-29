@@ -12,17 +12,11 @@ import { useSelector } from "react-redux";
 import { getProfileLoaded, getSortedResponses } from "../../Redux";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  // Styles
-}));
 
 interface StatisticsProps {}
 
 const Statistics: FC<StatisticsProps> = () => {
-  const classes = useStyles();
   const isLoaded = useSelector(getProfileLoaded);
   const responses = useSelector(getSortedResponses);
 

@@ -19,7 +19,7 @@ import {
 
 // Material UI Imports
 import { Button, makeStyles, Typography } from "@material-ui/core";
-import { Cached, Event, KeyboardArrowLeft } from "@material-ui/icons";
+import { Cached, Event } from "@material-ui/icons";
 
 const Rating = lazy(() => import("./Rating"));
 const Description = lazy(() => import("./Description"));
@@ -61,7 +61,7 @@ const Home: FC = () => {
         </Typography>
         <SmallIcon
           icon={<Cached fontSize="small" />}
-          title="Reset changes"
+          title="Reset Changes"
           IconButtonProps={{
             onClick: () => {
               dispatch(resetHomeData());
@@ -94,7 +94,7 @@ const Home: FC = () => {
         </Typography>
         <SmallIcon
           icon={<Event fontSize="small" />}
-          title="Choose date"
+          title="Choose Date"
           IconButtonProps={{
             onClick: () =>
               dispatch(

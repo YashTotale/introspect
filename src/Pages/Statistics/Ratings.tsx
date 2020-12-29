@@ -1,8 +1,9 @@
 // React Imports
 import React, { FC } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import moment from "moment";
 import Heading from "./Heading";
+import NoResponses from "./NoResponses";
+
 import { LineChart } from "../../Components/Reusable/Charts";
 
 // Redux Imports
@@ -10,8 +11,7 @@ import { Responses } from "../../Store";
 
 // Material UI Imports
 import { makeStyles } from "@material-ui/core/styles";
-import { Link, Typography } from "@material-ui/core";
-import {} from "@material-ui/icons";
+import {} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   // Styles
@@ -32,13 +32,7 @@ const Ratings: FC<RatingsProps> = ({ responses }) => {
     <>
       <Heading>Ratings</Heading>
       {!responseAnswers.length ? (
-        <Typography>
-          You have no ratings. To view rating statistics, rate a day in the{" "}
-          <Link component={RouterLink} to="">
-            Home
-          </Link>{" "}
-          page.
-        </Typography>
+        <NoResponses name="ratings" verb="rate" />
       ) : (
         <LineChart
           title="Rating over time"

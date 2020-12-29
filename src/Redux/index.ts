@@ -6,6 +6,7 @@ import { getHomeDate, getHomeData, initialData } from "./home.slice";
 
 export type {
   RootState,
+  Responses,
   AppDispatch,
   AppThunk,
   Profile,

@@ -18,15 +18,15 @@ import reportWebVitals from "./reportWebVitals";
 ReactDOM.render(
   <React.StrictMode>
     <ReduxStore>
-      <Theme>
-        <BrowserRouter>
+      <BrowserRouter>
+        <Theme>
           <SnackbarProvider>
             <MuiPickersUtilsProvider utils={MomentUtils}>
               <App />
             </MuiPickersUtilsProvider>
           </SnackbarProvider>
-        </BrowserRouter>
-      </Theme>
+        </Theme>
+      </BrowserRouter>
     </ReduxStore>
   </React.StrictMode>,
   document.getElementById("root")

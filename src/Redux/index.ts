@@ -69,6 +69,21 @@ export {
 export type { PopupState } from "./popup.slice";
 
 /**
+ * Settings Slice
+ */
+
+export {
+  // -> Slice
+  default as settingsSlice,
+  // -> Selectors
+  getDarkMode,
+  // -> Actions
+  toggleDarkMode,
+} from "./settings.slice";
+
+export type {} from "./settings.slice";
+
+/**
  * Firebase
  */
 

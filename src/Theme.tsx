@@ -1,6 +1,10 @@
 //React Imports
 import React from "react";
 
+// Redux Imports
+import { useSelector } from "react-redux";
+import { getDarkMode, toggleDarkMode, useAppDispatch } from "./Redux";
+
 //Material UI Imports
 import {
   useMediaQuery,
@@ -13,7 +17,13 @@ import { amber, lightBlue } from "@material-ui/core/colors";
 export const alternativeFont = "Arial, sans-serif";
 
 const Theme: React.FC = ({ children }) => {
+  const dispatch = useAppDispatch();
+  const darkMode = useSelector(getDarkMode);
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+
+  if (darkMode === null && prefersDarkMode) {
+    dispatch(toggleDarkMode(prefersDarkMode));
+  }
 
   const theme = createMuiTheme({
     overrides: {
@@ -40,13 +50,19 @@ const Theme: React.FC = ({ children }) => {
           fontWeight: 600,
         },
       },
+      MuiTablePagination: {
+        spacer: {
+          flexBasis: 25,
+          flexGrow: 0,
+        },
+      },
     },
     typography: {
       fontFamily: "Palatino, Georgia, Serif",
       fontWeightBold: 600,
     },
     palette: {
-      type: prefersDarkMode ? "dark" : "light",
+      type: darkMode ? "dark" : "light",
       primary: amber,
       secondary: lightBlue,
     },

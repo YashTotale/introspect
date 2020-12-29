@@ -49,6 +49,7 @@ import storage from "redux-persist/lib/storage";
 // Reducer Imports
 import { homeReducer, HomeState, HomeData } from "./Redux/home.slice";
 import { popupReducer, PopupState } from "./Redux/popup.slice";
+import { settingsReducer, SettingsState } from "./Redux/settings.slice";
 
 export interface StoreSchema {}
 
@@ -61,6 +62,7 @@ export interface Profile {
 interface State {
   home: HomeState;
   popup: PopupState;
+  settings: SettingsState;
   firebase: FirebaseReducer.Reducer<Profile, StoreSchema>;
   firestore: FirestoreReducer.Reducer;
 }
@@ -68,6 +70,7 @@ interface State {
 const reducers = combineReducers<State>({
   home: homeReducer,
   popup: popupReducer,
+  settings: settingsReducer,
   firebase: firebaseReducer,
   //@ts-expect-error firestoreReducer does not have correct typings
   firestore: firestoreReducer,

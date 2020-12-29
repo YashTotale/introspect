@@ -15,6 +15,7 @@ interface SettingsProps {}
 
 const Settings: FC<SettingsProps> = () => {
   const classes = useStyles();
+
   return (
     <>
       <Typography variant="h4" align="center">

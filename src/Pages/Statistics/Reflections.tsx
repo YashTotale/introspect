@@ -28,7 +28,11 @@ const Reflections: FC<ReflectionsProps> = ({ responses }) => {
       {!responseAnswers.length ? (
         <NoResponses name="reflections" verb="reflect on" />
       ) : (
-        <TableChart data={words} header={["Word", "Count"]} />
+        <TableChart
+          title="Most Frequent Words"
+          data={words}
+          header={["Word", "Count"]}
+        />
       )}
     </>
   );

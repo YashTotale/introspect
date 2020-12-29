@@ -29,6 +29,7 @@ const LineChart: FC<LineChartProps> = ({ data, categories, title, y }) => {
           align: "left",
           style: {
             color: theme.palette.text.primary,
+            fontFamily: theme.typography.fontFamily,
           },
         },
         theme: {
@@ -66,6 +67,7 @@ const LineChart: FC<LineChartProps> = ({ data, categories, title, y }) => {
             text: y,
             style: {
               color: theme.palette.text.primary,
+              fontFamily: theme.typography.fontFamily,
             },
           },
           labels: {

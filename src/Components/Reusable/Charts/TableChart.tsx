@@ -10,19 +10,22 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Typography,
 } from "@material-ui/core";
 
 interface TableChartProps {
+  title: string;
   header: any[];
   data: any[][];
 }
 
-const TableChart: FC<TableChartProps> = ({ header, data }) => {
+const TableChart: FC<TableChartProps> = ({ title, header, data }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   return (
     <>
+      <Typography variant="subtitle1">{title}</Typography>
       <TableContainer>
         <Table size="small" stickyHeader>
           <TableHead>

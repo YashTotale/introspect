@@ -17,6 +17,7 @@ interface HeadingProps {
   icon: JSX.Element;
   iconTitle: string;
   IconButtonProps: IconButtonProps;
+  className?: string;
 }
 
 const Heading: FC<HeadingProps> = ({
@@ -24,13 +25,14 @@ const Heading: FC<HeadingProps> = ({
   icon,
   iconTitle,
   IconButtonProps,
+  className,
 }) => {
   const classes = useStyles();
 
   return (
     <>
       <Line />
-      <div className={classes.heading}>
+      <div className={`${classes.heading} ${className}`}>
         <Typography variant="h5" align="center">
           {children}
         </Typography>

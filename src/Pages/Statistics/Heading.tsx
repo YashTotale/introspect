@@ -10,7 +10,9 @@ import {} from "@material-ui/core";
 import { Refresh } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
-  // Styles
+  heading: {
+    marginBottom: theme.spacing(1),
+  },
 }));
 
 interface HeadingProps {}
@@ -23,6 +25,7 @@ const Heading: FC<HeadingProps> = ({ children }) => {
       icon={<Refresh fontSize="small" />}
       iconTitle="Reload"
       IconButtonProps={{}}
+      className={classes.heading}
     >
       {children}
     </BaseHeading>

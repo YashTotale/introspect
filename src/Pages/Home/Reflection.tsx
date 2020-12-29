@@ -1,11 +1,10 @@
 // React Imports
 import React, { FC } from "react";
-import Heading from "./Heading";
-import TextArea from "../../Components/Reusable/TextArea";
+import { Heading, TextArea } from "./Components";
 
 // Redux Imports
-import { getReflection, setHomeData, useAppDispatch } from "../../Redux";
 import { useSelector } from "react-redux";
+import { getReflection, setHomeData, useAppDispatch } from "../../Redux";
 
 interface ReflectionProps {}
 

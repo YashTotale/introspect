@@ -2,8 +2,8 @@
 import React, { FC } from "react";
 
 // Material UI Imports
-import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Skeleton } from "@material-ui/lab";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
 type Size = "xs" | "small" | "medium" | "large";
 

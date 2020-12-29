@@ -1,6 +1,6 @@
 // React Imports
 import React, { FC } from "react";
-import NearTooltip from "./NearTooltip";
+import { NearTooltip } from "./index";
 
 // Material UI Imports
 import { IconButton, IconButtonProps } from "@material-ui/core";

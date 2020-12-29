@@ -1,7 +1,7 @@
 // React Imports
 import React, { FC, useState } from "react";
 import { useHistory } from "react-router-dom";
-import NearTooltip from "../Reusable/NearTooltip";
+import { NearTooltip } from "../Reusable";
 
 // Redux Imports
 import { useSelector } from "react-redux";

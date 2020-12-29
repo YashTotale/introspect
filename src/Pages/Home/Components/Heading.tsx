@@ -1,7 +1,7 @@
 // React Imports
 import React, { FC } from "react";
-import BaseHeading from "../../Components/Reusable/Heading";
-import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
+import { BaseHeading } from "../../../Components/Reusable";
+import { useClosableSnackbar } from "../../../Hooks";
 
 // Redux Imports
 import {
@@ -9,7 +9,7 @@ import {
   HomeDataType,
   undoHomeData,
   useAppDispatch,
-} from "../../Redux";
+} from "../../../Redux";
 
 // Material UI Imports
 import { Button, capitalize } from "@material-ui/core";

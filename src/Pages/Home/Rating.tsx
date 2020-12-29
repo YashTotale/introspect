@@ -1,14 +1,14 @@
 // React Imports
 import React, { FC } from "react";
-import Heading from "./Heading";
+import { Heading } from "./Components";
 
 // Redux Imports
+import { useSelector } from "react-redux";
 import { getRating, setHomeData, useAppDispatch } from "../../Redux";
 
 // Material UI Imports
 import { RadioGroup, Radio, FormControlLabel } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   divider: {},

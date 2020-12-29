@@ -1,8 +1,8 @@
 // React Imports
 import React, { FC } from "react";
 import { Page } from "../../Components/Loading";
+import { NoResponses } from "./Components";
 
-import NoResponses from "./NoResponses";
 import Ratings from "./Ratings";
 import Descriptions from "./Descriptions";
 import Reflections from "./Reflections";

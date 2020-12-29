@@ -1,6 +1,6 @@
 // React Imports
 import React, { FC } from "react";
-import BaseHeading from "../../Components/Reusable/Heading";
+import { BaseHeading } from "../../../Components/Reusable";
 
 // Redux Imports
 

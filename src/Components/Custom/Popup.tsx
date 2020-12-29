@@ -2,7 +2,7 @@
 import React, { FC } from "react";
 import moment from "moment";
 import { ProviderContext } from "notistack";
-import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
+import { useClosableSnackbar } from "../../Hooks";
 
 // Redux Imports
 import {
@@ -24,7 +24,6 @@ import { StyledFirebaseAuth } from "react-firebaseui";
 import { ExtendedFirebaseInstance, useFirebase } from "react-redux-firebase";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Badge,
   Button,
@@ -36,6 +35,7 @@ import {
 } from "@material-ui/core";
 import { DatePicker } from "@material-ui/pickers";
 import { Check } from "@material-ui/icons";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   redButton: {

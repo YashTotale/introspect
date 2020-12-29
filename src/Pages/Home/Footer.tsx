@@ -1,6 +1,6 @@
 // React Imports
 import React, { FC } from "react";
-import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
+import { useClosableSnackbar } from "../../Hooks";
 
 // Redux Imports
 import { useSelector } from "react-redux";

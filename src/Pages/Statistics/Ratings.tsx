@@ -1,13 +1,11 @@
 // React Imports
 import React, { FC } from "react";
 import moment from "moment";
-import Heading from "./Heading";
-import NoResponses from "./NoResponses";
-
+import { Heading, NoResponses } from "./Components";
 import { LineChart } from "../../Components/Reusable/Charts";
 
 // Redux Imports
-import { Responses } from "../../Store";
+import { Responses } from "../../Redux";
 
 // Material UI Imports
 import {} from "@material-ui/core";

@@ -1,15 +1,14 @@
 // React Imports
 import React, { FC } from "react";
-import Heading from "./Heading";
-import NoResponses from "./NoResponses";
+import { Heading, NoResponses } from "./Components";
+import { TableChart } from "../../Components/Reusable/Charts";
+import { sortOccurence } from "../../Utils/funcs";
 
 // Redux Imports
 import { Responses } from "../../Redux";
 
 // Material UI Imports
 import {} from "@material-ui/core";
-import { sortOccurence } from "../../Utils/funcs";
-import TableChart from "../../Components/Reusable/Charts/TableChart";
 
 interface ReflectionsProps {
   responses: Responses;

@@ -2,8 +2,8 @@
 import React, { FC, lazy, Suspense } from "react";
 import moment from "moment";
 import { Bar } from "../../Components/Loading";
-import SmallIcon from "../../Components/Reusable/SmallIcon";
-import useClosableSnackbar from "../../Hooks/useClosableSnackbar";
+import { SmallIcon } from "../../Components/Reusable";
+import { useClosableSnackbar } from "../../Hooks";
 
 // Redux Imports
 import { useSelector } from "react-redux";

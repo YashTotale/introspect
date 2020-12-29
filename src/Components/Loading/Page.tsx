@@ -2,8 +2,8 @@
 import React, { FC } from "react";
 
 // Material UI Imports
-import { makeStyles } from "@material-ui/core/styles";
 import { CircularProgress } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   skeleton: {

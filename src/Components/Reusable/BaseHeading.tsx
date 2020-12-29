@@ -1,26 +1,25 @@
 // React Imports
 import React, { FC } from "react";
-import Line from "../../Components/Reusable/Line";
+import { Line, SmallIcon } from "./index";
 
 // Material UI Imports
 import { Typography, IconButtonProps } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import SmallIcon from "./SmallIcon";
 
 const useStyles = makeStyles((theme) => ({
-  heading: {
+  baseHeading: {
     position: "relative",
   },
 }));
 
-interface HeadingProps {
+interface BaseHeadingProps {
   icon: JSX.Element;
   iconTitle: string;
   IconButtonProps: IconButtonProps;
   className?: string;
 }
 
-const Heading: FC<HeadingProps> = ({
+const BaseHeading: FC<BaseHeadingProps> = ({
   children,
   icon,
   iconTitle,
@@ -32,7 +31,7 @@ const Heading: FC<HeadingProps> = ({
   return (
     <>
       <Line />
-      <div className={`${classes.heading} ${className}`}>
+      <div className={`${classes.baseHeading} ${className}`}>
         <Typography variant="h5" align="center">
           {children}
         </Typography>
@@ -46,4 +45,4 @@ const Heading: FC<HeadingProps> = ({
   );
 };
 
-export default Heading;
+export default BaseHeading;

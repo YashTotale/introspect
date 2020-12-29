@@ -2,8 +2,8 @@
 import React, { FC } from "react";
 
 // Material UI Imports
-import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Tooltip, TooltipProps } from "@material-ui/core";
+import { makeStyles, Theme } from "@material-ui/core/styles";
 
 interface StyleProps {
   spacing: number;

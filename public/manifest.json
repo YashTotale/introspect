@@ -2,9 +2,12 @@
   "name": "Introspect",
   "version": "1.0.0",
   "manifest_version": 2,
-  "description": "Rate, Describe, & Reflect on your day, everyday",
+  "author": "Yash Totale",
+  "description": "Rate, Describe, & Reflect on your day, everyday.",
   "icons": {
-    "512": "logo512.png"
+    "512": "logo512.png",
+    "192": "logo192.png",
+    "128": "logo128.png"
   },
   "browser_action": {
     "default_icon": "logo512.png",

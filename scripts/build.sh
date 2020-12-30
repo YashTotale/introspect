@@ -9,6 +9,8 @@ build() {
   react-scripts build
 
   mv build/index.html build/popup.html
+
+  zip -r introspect.zip build
 }
 
 build

@@ -9,6 +9,7 @@ coverage/
 # production
 build/
 dist/
+introspect.zip
 
 # misc
 .DS_Store

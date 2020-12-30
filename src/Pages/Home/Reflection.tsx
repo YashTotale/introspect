@@ -4,12 +4,18 @@ import { Heading, TextArea } from "./Components";
 
 // Redux Imports
 import { useSelector } from "react-redux";
-import { getReflection, setHomeData, useAppDispatch } from "../../Redux";
+import {
+  getReflection,
+  getSavedPrefix,
+  setHomeData,
+  useAppDispatch,
+} from "../../Redux";
 
 interface ReflectionProps {}
 
 const Reflection: FC<ReflectionProps> = () => {
   const reflection = useSelector(getReflection);
+  const reflectionPrefix = useSelector(getSavedPrefix("reflection"));
 
   const dispatch = useAppDispatch();
 
@@ -22,7 +28,7 @@ const Reflection: FC<ReflectionProps> = () => {
         value={reflection}
         setValue={(value) => dispatch(setHomeData({ reflection: value }))}
         label="Reflection"
-        placeholder="Reflection: "
+        placeholder={reflectionPrefix}
       />
     </>
   );

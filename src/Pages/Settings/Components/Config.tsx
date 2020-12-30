@@ -12,7 +12,11 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  icon: {
+    minWidth: 40,
+  },
+}));
 
 interface ConfigItem {
   name: string;
@@ -33,7 +37,7 @@ const Config: FC<ConfigProps> = ({ title, items }) => {
     <List subheader={<ListSubheader>{title}</ListSubheader>}>
       {items.map(({ name, description, icon, action }, i) => (
         <ListItem key={i}>
-          <ListItemIcon>{icon}</ListItemIcon>
+          <ListItemIcon className={classes.icon}>{icon}</ListItemIcon>
           <ListItemText primary={name} secondary={description} />
           <ListItemSecondaryAction>{action}</ListItemSecondaryAction>
         </ListItem>

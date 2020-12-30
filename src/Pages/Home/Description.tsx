@@ -4,7 +4,12 @@ import { Heading, TextArea } from "./Components";
 
 // Redux Imports
 import { useSelector } from "react-redux";
-import { getDescription, setHomeData, useAppDispatch } from "../../Redux";
+import {
+  getDescription,
+  getSavedPrefix,
+  setHomeData,
+  useAppDispatch,
+} from "../../Redux";
 
 interface DescriptionProps {}
 
@@ -12,6 +17,7 @@ const Description: FC<DescriptionProps> = () => {
   const dispatch = useAppDispatch();
 
   const description = useSelector(getDescription);
+  const descriptionPrefix = useSelector(getSavedPrefix("description"));
 
   return (
     <>
@@ -22,7 +28,7 @@ const Description: FC<DescriptionProps> = () => {
         value={description}
         setValue={(value) => dispatch(setHomeData({ description: value }))}
         label="Description"
-        placeholder="Today was ..."
+        placeholder={descriptionPrefix}
       />
     </>
   );

@@ -1,7 +1,7 @@
 import moment from "moment";
 import isEqual from "lodash.isequal";
 import { createSelector } from "@reduxjs/toolkit";
-import { RootState, Responses } from "../Store";
+import { RootState, Responses, Profile } from "../Store";
 import { getHomeDate, getHomeData, initialData } from "./home.slice";
 
 export type {
@@ -121,3 +121,13 @@ export const getSortedResponses = createSelector(getResponses, (responses) => {
       return obj;
     }, {} as Responses);
 });
+
+export const getSavedSettings = (state: RootState) =>
+  state.firebase.profile.settings;
+export const getSavedPrefix = (type: keyof Profile["settings"]["prefix"]) =>
+  createSelector(getSavedSettings, (settings) => {
+    if (settings?.prefix) {
+      return settings.prefix[type];
+    }
+    return type === "description" ? "Today was..." : "Reflections: ";
+  });

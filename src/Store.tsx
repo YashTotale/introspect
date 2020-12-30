@@ -58,12 +58,6 @@ export type Responses = Record<string, HomeData>;
 
 export interface Profile {
   responses: Responses;
-  settings: {
-    prefix: {
-      description: string;
-      reflection: string;
-    };
-  };
 }
 
 interface State {

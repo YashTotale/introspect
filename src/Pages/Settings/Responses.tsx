@@ -4,7 +4,12 @@ import Config from "./Components/Config";
 
 // Redux Imports
 import { useSelector } from "react-redux";
-import { getSavedPrefix } from "../../Redux";
+import {
+  getPrefix,
+  initialSettingsState,
+  setPrefix,
+  useAppDispatch,
+} from "../../Redux";
 
 // Material UI Imports
 import { TextField } from "@material-ui/core";
@@ -22,8 +27,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Responses: FC = () => {
   const classes = useStyles();
-  const descriptionPrefix = useSelector(getSavedPrefix("description"));
-  const reflectionPrefix = useSelector(getSavedPrefix("reflection"));
+  const dispatch = useAppDispatch();
+
+  const descriptionPrefix = useSelector(getPrefix("description"));
+  const reflectionPrefix = useSelector(getPrefix("reflection"));
 
   return (
     <Config
@@ -34,11 +41,15 @@ const Responses: FC = () => {
           icon: <EditOutlined />,
           action: (
             <TextField
-              placeholder={descriptionPrefix}
+              placeholder={initialSettingsState.prefix.description}
               inputProps={{
                 className: classes.prefixInput,
               }}
+              value={descriptionPrefix}
               className={classes.prefix}
+              onChange={(e) =>
+                dispatch(setPrefix({ description: e.target.value }))
+              }
             />
           ),
         },
@@ -47,11 +58,15 @@ const Responses: FC = () => {
           icon: <EditOutlined />,
           action: (
             <TextField
-              placeholder={reflectionPrefix}
+              placeholder={initialSettingsState.prefix.reflection}
               inputProps={{
                 className: classes.prefixInput,
               }}
+              value={reflectionPrefix}
               className={classes.prefix}
+              onChange={(e) =>
+                dispatch(setPrefix({ reflection: e.target.value }))
+              }
             />
           ),
         },

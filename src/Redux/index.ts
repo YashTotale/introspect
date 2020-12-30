@@ -77,11 +77,17 @@ export {
   default as settingsSlice,
   // -> Selectors
   getDarkMode,
+  getPrefix,
   // -> Actions
   toggleDarkMode,
+  setPrefix,
+  // -> Reducer
+  settingsReducer,
+  // -> State
+  initialSettingsState,
 } from "./settings.slice";
 
-export type {} from "./settings.slice";
+export type { SettingsState } from "./settings.slice";
 
 /**
  * Firebase
@@ -121,13 +127,3 @@ export const getSortedResponses = createSelector(getResponses, (responses) => {
       return obj;
     }, {} as Responses);
 });
-
-export const getSavedSettings = (state: RootState) =>
-  state.firebase.profile.settings;
-export const getSavedPrefix = (type: keyof Profile["settings"]["prefix"]) =>
-  createSelector(getSavedSettings, (settings) => {
-    if (settings?.prefix) {
-      return settings.prefix[type];
-    }
-    return type === "description" ? "Today was..." : "Reflections: ";
-  });

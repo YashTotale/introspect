@@ -6,7 +6,7 @@ import { Heading, TextArea } from "./Components";
 import { useSelector } from "react-redux";
 import {
   getReflection,
-  getSavedPrefix,
+  getPrefix,
   setHomeData,
   useAppDispatch,
 } from "../../Redux";
@@ -15,7 +15,7 @@ interface ReflectionProps {}
 
 const Reflection: FC<ReflectionProps> = () => {
   const reflection = useSelector(getReflection);
-  const reflectionPrefix = useSelector(getSavedPrefix("reflection"));
+  const reflectionPrefix = useSelector(getPrefix("reflection"));
 
   const dispatch = useAppDispatch();
 

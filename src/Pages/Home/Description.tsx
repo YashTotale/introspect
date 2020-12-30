@@ -6,7 +6,7 @@ import { Heading, TextArea } from "./Components";
 import { useSelector } from "react-redux";
 import {
   getDescription,
-  getSavedPrefix,
+  getPrefix,
   setHomeData,
   useAppDispatch,
 } from "../../Redux";
@@ -17,7 +17,7 @@ const Description: FC<DescriptionProps> = () => {
   const dispatch = useAppDispatch();
 
   const description = useSelector(getDescription);
-  const descriptionPrefix = useSelector(getSavedPrefix("description"));
+  const descriptionPrefix = useSelector(getPrefix("description"));
 
   return (
     <>

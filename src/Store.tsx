@@ -43,7 +43,6 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import { PersistPartial } from "redux-persist/es/persistReducer";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import storage from "redux-persist/lib/storage";
 
@@ -61,7 +60,7 @@ export interface Profile {
 }
 
 interface State {
-  home: HomeState & PersistPartial;
+  home: HomeState;
   popup: PopupState;
   settings: SettingsState;
   firebase: FirebaseReducer.Reducer<Profile, StoreSchema>;
@@ -74,10 +73,7 @@ const rootPersistConfig = {
 };
 
 const reducers = combineReducers<State>({
-  home: persistReducer<HomeState>(
-    { ...rootPersistConfig, key: "home", blacklist: ["date"] },
-    homeReducer
-  ),
+  home: homeReducer,
   popup: popupReducer,
   settings: settingsReducer,
   firebase: firebaseReducer,
@@ -86,7 +82,7 @@ const reducers = combineReducers<State>({
 });
 
 const persistedReducer = persistReducer<State>(
-  { ...rootPersistConfig, key: "root", blacklist: ["home"] },
+  { ...rootPersistConfig, key: "root" },
   reducers
 );
 

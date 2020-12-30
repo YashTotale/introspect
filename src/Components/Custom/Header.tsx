@@ -20,7 +20,7 @@ import {
   IconButton,
   CircularProgress,
 } from "@material-ui/core";
-import { Assessment, Home, Person } from "@material-ui/icons";
+import { Assessment, Home, Person, Settings } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   home: {
     marginLeft: 0,
   },
-  statistics: {
+  settings: {
     marginRight: "auto",
   },
   avatar: {
@@ -77,14 +77,18 @@ const Header: FC<HeaderProps> = () => {
         </NearTooltip>
         <NearTooltip title="Statistics" spacing={1}>
           <IconButton
-            onClick={() => {
-              user.isEmpty
-                ? dispatch(togglePopup({ open: true, type: "login" }))
-                : history.push("statistics");
-            }}
-            className={`${classes.button} ${classes.navButton} ${classes.statistics}`}
+            onClick={() => history.push("statistics")}
+            className={`${classes.button} ${classes.navButton}`}
           >
             <Assessment className={classes.icon} />
+          </IconButton>
+        </NearTooltip>
+        <NearTooltip title="Settings" spacing={1}>
+          <IconButton
+            onClick={() => history.push("settings")}
+            className={`${classes.button} ${classes.navButton} ${classes.settings}`}
+          >
+            <Settings className={classes.icon} />
           </IconButton>
         </NearTooltip>
         {!user.isLoaded ? (
@@ -165,14 +169,6 @@ const ProfileMenu: FC<ProfileMenuProps> = ({
           horizontal: "left",
         }}
       >
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            history.push("settings");
-          }}
-        >
-          Settings
-        </MenuItem>
         <MenuItem
           onClick={() => {
             dispatch(togglePopup({ type: "logout", open: true }));

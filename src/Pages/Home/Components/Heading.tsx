@@ -33,7 +33,7 @@ const Heading: FC<HeadingProps> = ({ name, clearable, children }) => {
           dispatch(clearHomeData(name));
           enqueueSnackbar(`${capitalize(name)} cleared`, {
             variant: "success",
-            autoHideDuration: 4000,
+            autoHideDuration: 6000,
             action: (key) => {
               const Undo = (
                 <Button

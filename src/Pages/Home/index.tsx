@@ -67,7 +67,7 @@ const Home: FC = () => {
               dispatch(resetHomeData());
               enqueueSnackbar("Reset changes", {
                 variant: "success",
-                autoHideDuration: 4000,
+                autoHideDuration: 6000,
                 action: (key) => {
                   const Undo = (
                     <Button

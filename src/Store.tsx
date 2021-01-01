@@ -16,6 +16,7 @@ import { Provider, useDispatch } from "react-redux";
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/analytics";
+import "firebase/performance";
 import "firebase/firestore";
 import { firebaseConfig } from "./Utils/config";
 import {
@@ -141,6 +142,7 @@ const persistor = persistStore(store);
 firebase.initializeApp(firebaseConfig);
 
 firebase.firestore();
+firebase.performance();
 firebase.analytics.isSupported().then((supported) => {
   if (supported) firebase.analytics();
 });

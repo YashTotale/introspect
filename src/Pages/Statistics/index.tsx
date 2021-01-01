@@ -1,7 +1,11 @@
 // React Imports
 import React, { FC, useState } from "react";
-import { Page } from "../../Components/Loading";
+import moment from "moment";
+//@ts-expect-error Does not have types
+import csvDownload from "json-to-csv-export";
 import { NoResponses } from "./Components";
+import { SmallIcon } from "../../Components/Reusable";
+import { Page } from "../../Components/Loading";
 import { createUnixDate } from "../../Utils/funcs";
 
 import Ratings from "./Ratings";
@@ -23,10 +27,14 @@ import {
 // Material UI Imports
 import { Typography } from "@material-ui/core";
 import { KeyboardDatePicker } from "@material-ui/pickers";
+import { GetApp } from "@material-ui/icons";
 import { ParsableDate } from "@material-ui/pickers/constants/prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  heading: {
+    position: "relative",
+  },
   dateWrapper: {
     display: "flex",
     justifyContent: "center",
@@ -64,9 +72,29 @@ const Statistics: FC<StatisticsProps> = () => {
 
   return (
     <>
-      <Typography variant="h4" align="center">
-        Statistics
-      </Typography>
+      <div className={classes.heading}>
+        <Typography variant="h4" align="center">
+          Statistics
+        </Typography>
+        <SmallIcon
+          icon={<GetApp fontSize="small" />}
+          title="Export as CSV"
+          IconButtonProps={{
+            onClick: () => {
+              csvDownload(
+                Object.entries(responses).map(([date, response]) => ({
+                  date: moment(date, "DD-MM-YYYY").format("MM/DD/YYYY"),
+                  ...response,
+                })),
+                `introspect_${moment(realStartDate).format(
+                  "MM-DD-YYYY"
+                )}_to_${moment(realEndDate).format("MM-DD-YYYY")}.csv`
+              );
+            },
+            disabled: !responseLength,
+          }}
+        />
+      </div>
       <div className={classes.dateWrapper}>
         <KeyboardDatePicker
           placeholder="11/26/2008"

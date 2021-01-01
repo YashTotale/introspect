@@ -8,8 +8,6 @@ coverage/
 
 # production
 build/
-dist/
-introspect.zip
 
 # misc
 .DS_Store
@@ -18,8 +16,6 @@ introspect.zip
 .env.test.local
 .env.production.local
 .eslintcache
-
-CONFIDENTIAL.*
 
 npm-debug.log*
 yarn-debug.log*

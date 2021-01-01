@@ -2,18 +2,25 @@
 
 set -e
 
-build() {
-  printf 'Building Introspect...\n\n'
+printf 'Building Introspect...\n\n'
 
-  export INLINE_RUNTIME_CHUNK=false
-  export GENERATE_SOURCEMAP=false
+export INLINE_RUNTIME_CHUNK=false
+export GENERATE_SOURCEMAP=false
 
-  react-scripts build
+react-scripts build
 
-  mv build/index.html build/popup.html
+cd build
 
-  printf 'Zipping Build Folder...\n'
-  zip -r introspect.zip build
-}
+mv index.html popup.html
 
-build
+printf '\nZipping build folder...\n'
+web-ext build --overwrite-dest
+
+printf '\nCreating Chrome Directory...\n'
+cp -r web-ext-artifacts chrome
+
+printf '\nCreating Firefox Directory...\n'
+cp -r web-ext-artifacts firefox
+
+printf '\nCleaning up...\n'
+rm -rf web-ext-artifacts

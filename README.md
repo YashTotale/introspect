@@ -22,6 +22,16 @@ Do you feel that your life is cluttered or wasting away with no purpose or direc
 - Ability to view and edit any previous response
 - Dark & Light Themes
 
+### Contributing
+
+Contributions of any kind are welcome!
+
+You can contribute in two ways:
+
+- Go to the [GitHub repository](https://github.com/YashTotale/introspect) and open a new [issue](https://github.com/YashTotale/introspect/issues) for a [bug report](https://github.com/YashTotale/introspect/issues/new?labels=bug&template=bug_report.md) or [feature request](https://github.com/YashTotale/introspect/issues/new?labels=enhancement&template=feature_request.md)
+- Create a [Pull Request](https://github.com/YashTotale/introspect/pulls) that fixes/enhances some part of the extension
+  - Check out [first contributions](https://github.com/firstcontributions/first-contributions) if you are new to contributing
+
 ### Useful Links
 
 - [Source Code](https://github.com/YashTotale/introspect)

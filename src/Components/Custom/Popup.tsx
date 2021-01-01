@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import moment from "moment";
 import { ProviderContext } from "notistack";
 import { useClosableSnackbar } from "../../Hooks";
+import { createUnixDate } from "../../Utils/funcs";
 
 // Redux Imports
 import {
@@ -193,7 +194,7 @@ const DatePopup: FC<PopupProps> = ({ open, dispatch, classes }) => {
   return (
     <Dialog open={open} onClose={() => dispatch(togglePopup(false))}>
       <DatePicker
-        value={new Date(parseInt(moment(date, "DD-MM-YYYY").format("x")))}
+        value={new Date(createUnixDate(date))}
         onChange={(date) =>
           dispatch(setHomeDate(moment(date).format("DD-MM-YYYY")))
         }

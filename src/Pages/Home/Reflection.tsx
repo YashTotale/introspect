@@ -24,7 +24,7 @@ const Reflection: FC<ReflectionProps> = () => {
       <Heading
         name="reflection"
         clearable={!!reflection}
-        info="Press the Right Arrow when the reflection is empty to fill in with the placeholder"
+        info="Press the Right Arrow when the reflection is empty to fill it with the placeholder"
       >
         Reflect on your day
       </Heading>

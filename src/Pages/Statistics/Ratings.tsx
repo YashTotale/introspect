@@ -1,8 +1,8 @@
 // React Imports
 import React, { FC } from "react";
-import moment from "moment";
 import { Heading, NoResponses } from "./Components";
 import { LineChart, BarChart } from "../../Components/Reusable/Charts";
+import { createUnixDate } from "../../Utils/funcs";
 
 // Redux Imports
 import { Responses } from "../../Redux";
@@ -39,9 +39,7 @@ const Ratings: FC<RatingsProps> = ({ responses }) => {
             title="Rating over time"
             y="Rating"
             data={ratings}
-            categories={dates.map((date) =>
-              parseInt(moment(date, "DD-MM-YYYY").format("x"))
-            )}
+            categories={dates.map((date) => createUnixDate(date))}
           />
           <BarChart
             categories={[0, 1, 2, 3, 4, 5]}

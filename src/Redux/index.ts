@@ -1,8 +1,11 @@
-import moment from "moment";
 import isEqual from "lodash.isequal";
+import moment from "moment";
 import { createSelector } from "@reduxjs/toolkit";
-import { RootState, Responses, Profile } from "../Store";
+
+import { RootState, Responses } from "../Store";
 import { getHomeDate, getHomeData, initialData } from "./home.slice";
+import { getStartDate, getEndDate } from "./statistics.slice";
+import { createUnixDate } from "../Utils/funcs";
 
 export type {
   RootState,
@@ -90,6 +93,27 @@ export {
 export type { SettingsState } from "./settings.slice";
 
 /**
+ * Statistics Slice
+ */
+
+export {
+  // -> Slice
+  default as statisticsSlice,
+  // -> Selectors
+  getStartDate,
+  getEndDate,
+  // -> Actions
+  setStartDate,
+  setEndDate,
+  // -> Reducer
+  statisticsReducer,
+  // -> State
+  initialStatisticsState,
+} from "./statistics.slice";
+
+export type { StatisticsState } from "./statistics.slice";
+
+/**
  * Firebase
  */
 
@@ -114,16 +138,27 @@ export const getIsHomeDataSaved = createSelector(
   (saved, current) => isEqual(saved, current)
 );
 
-export const getSortedResponses = createSelector(getResponses, (responses) => {
-  if (!responses) return responses;
-  return Object.keys(responses)
-    .sort(
-      (a, b) =>
-        parseInt(moment(a, "DD-MM-YYYY").format("x")) -
-        parseInt(moment(b, "DD-MM-YYYY").format("x"))
-    )
-    .reduce((obj, key) => {
-      obj[key] = responses[key];
-      return obj;
-    }, {} as Responses);
-});
+export const getSortedResponses = createSelector(
+  getResponses,
+  getStartDate,
+  getEndDate,
+  (responses, startDate, endDate) => {
+    if (!responses) return responses;
+    return Object.keys(responses)
+      .filter((date) => {
+        const d = moment(date, "DD-MM-YYYY");
+        if (
+          d.isBefore(moment(startDate, "DD-MM-YYYY")) ||
+          d.isAfter(moment(endDate, "DD-MM-YYYY"))
+        ) {
+          return false;
+        }
+        return true;
+      })
+      .sort((a, b) => createUnixDate(a) - createUnixDate(b))
+      .reduce((obj, key) => {
+        obj[key] = responses[key];
+        return obj;
+      }, {} as Responses);
+  }
+);

@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export const sortOccurence = (arr: string[]) => {
   return Object.entries(
     arr.reduce((obj, description) => {
@@ -8,4 +10,8 @@ export const sortOccurence = (arr: string[]) => {
       return obj;
     }, {} as Record<string, number>)
   ).sort((one, two) => two[1] - one[1]);
+};
+
+export const createUnixDate = (date: string) => {
+  return parseInt(moment(date, "DD-MM-YYYY").format("x"));
 };

@@ -24,7 +24,7 @@ const Description: FC<DescriptionProps> = () => {
       <Heading
         name="description"
         clearable={!!description.length}
-        info="Press the Right Arrow when the description is empty to fill in with the placeholder"
+        info="Press the Right Arrow when the description is empty to fill it with the placeholder"
       >
         Describe your day
       </Heading>

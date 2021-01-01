@@ -10,7 +10,7 @@ Do you feel that your life is cluttered or wasting away with no purpose or direc
 
 **If so, Introspect is the perfect extension for you!**
 
-### What does Introspect offer?
+### What can you do with Introspect?
 
 - Rate, describe, and reflect on your daily life
 - Gain insight into a period of your life with statistics

@@ -21,7 +21,11 @@ const Description: FC<DescriptionProps> = () => {
 
   return (
     <>
-      <Heading name="description" clearable={!!description.length}>
+      <Heading
+        name="description"
+        clearable={!!description.length}
+        info="Press Right Arrow when empty to fill in with the placeholder"
+      >
         Describe your day
       </Heading>
       <TextArea

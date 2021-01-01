@@ -17,6 +17,7 @@ interface BaseHeadingProps {
   iconTitle: string;
   IconButtonProps: IconButtonProps;
   className?: string;
+  typographyClassName?: string;
 }
 
 const BaseHeading: FC<BaseHeadingProps> = ({
@@ -25,6 +26,7 @@ const BaseHeading: FC<BaseHeadingProps> = ({
   iconTitle,
   IconButtonProps,
   className,
+  typographyClassName,
 }) => {
   const classes = useStyles();
 
@@ -32,7 +34,7 @@ const BaseHeading: FC<BaseHeadingProps> = ({
     <>
       <Line />
       <div className={`${classes.baseHeading} ${className}`}>
-        <Typography variant="h5" align="center">
+        <Typography variant="h5" align="center" className={typographyClassName}>
           {children}
         </Typography>
         <SmallIcon

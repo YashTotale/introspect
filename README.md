@@ -10,17 +10,13 @@ Do you feel that your life is cluttered or wasting away with no purpose or direc
 
 **If so, Introspect is the perfect extension for you!**
 
-### Purpose
-
-- The purpose of this extension is to provide a platform for users to rate, describe, and reflect on their lives, day by day.
-- It also provides statistics such as rating over time and most frequent words that help users gain insight into a specific period of their lives.
-
 ### What does Introspect offer?
 
-- An easy & intuitive way to rate, describe, and reflect on your daily life
-- Insightful statistics such as most frequent words over a period of time
-- Ability to view and edit any previous response
-- Dark & Light Themes
+- Rate, describe, and reflect on your daily life
+- Gain insight into a period of your life with statistics
+- View and edit any previous response
+- Export your data as CSV
+- Customize your experience with dark & light themes
 
 ### Contributing
 
@@ -28,7 +24,7 @@ Contributions of any kind are welcome!
 
 You can contribute in two ways:
 
-- Go to the [GitHub repository](https://github.com/YashTotale/introspect) and open a new [issue](https://github.com/YashTotale/introspect/issues) for a [bug report](https://github.com/YashTotale/introspect/issues/new?labels=bug&template=bug_report.md) or [feature request](https://github.com/YashTotale/introspect/issues/new?labels=enhancement&template=feature_request.md)
+- Open a new [issue](https://github.com/YashTotale/introspect/issues) for a [bug report](https://github.com/YashTotale/introspect/issues/new?labels=bug&template=bug_report.md) or [feature request](https://github.com/YashTotale/introspect/issues/new?labels=enhancement&template=feature_request.md) in the [GitHub repository](https://github.com/YashTotale/introspect)
 - Create a [Pull Request](https://github.com/YashTotale/introspect/pulls) that fixes/enhances some part of the extension
   - Check out [first contributions](https://github.com/firstcontributions/first-contributions) if you are new to contributing
 

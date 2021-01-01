@@ -86,7 +86,7 @@ const reducers = combineReducers<State>({
 });
 
 const persistedReducer = persistReducer<State>(
-  { ...rootPersistConfig, key: "root" },
+  { ...rootPersistConfig, key: "root", blacklist: ["statistics"] },
   reducers
 );
 

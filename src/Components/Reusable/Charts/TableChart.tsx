@@ -1,5 +1,5 @@
 // React Imports
-import React, { FC, useState } from "react";
+import React, { FC, ReactNode, useState } from "react";
 
 // Material UI Imports
 import {
@@ -15,8 +15,8 @@ import {
 
 interface TableChartProps {
   title: string;
-  header: any[];
-  data: any[][];
+  header: ReactNode[];
+  data: ReactNode[][];
 }
 
 const TableChart: FC<TableChartProps> = ({ title, header, data }) => {

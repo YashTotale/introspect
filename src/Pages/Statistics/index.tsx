@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    margin: theme.spacing(1, 0),
   },
   dateSeperator: {
     margin: theme.spacing(0, 2),

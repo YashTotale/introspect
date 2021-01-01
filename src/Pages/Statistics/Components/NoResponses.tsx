@@ -4,7 +4,13 @@ import { Link as RouterLink } from "react-router-dom";
 
 // Material UI Imports
 import { Link, Typography } from "@material-ui/core";
-import {} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  noResponses: {
+    margin: theme.spacing(1, 0),
+  },
+}));
 
 interface NoResponsesProps {
   name?: string;
@@ -12,13 +18,13 @@ interface NoResponsesProps {
 }
 
 const NoResponses: FC<NoResponsesProps> = ({ name, verb }) => {
-  const text =
-    name && verb
-      ? `You have no ${name}. To view ${name} statistics, ${verb} a day in the `
-      : "You have no responses. To view statistics, respond and save your response in the ";
+  const classes = useStyles();
+
   return (
-    <Typography align="center">
-      {text}
+    <Typography className={classes.noResponses} align="center">
+      {name && verb
+        ? `You have no ${name} in the specified date range. To view ${name} statistics, ${verb} a day in this date range in the `
+        : "You have no responses in the specified date range. To view statistics, respond and save your response in the "}
       <Link component={RouterLink} to="">
         Home
       </Link>{" "}

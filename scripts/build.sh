@@ -3,7 +3,7 @@
 set -e
 
 build() {
-  echo 'Building Introspect...'
+  printf 'Building Introspect...\n\n'
 
   export INLINE_RUNTIME_CHUNK=false
   export GENERATE_SOURCEMAP=false
@@ -12,6 +12,7 @@ build() {
 
   mv build/index.html build/popup.html
 
+  printf 'Zipping Build Folder...\n'
   zip -r introspect.zip build
 }
 

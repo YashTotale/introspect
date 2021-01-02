@@ -15,10 +15,18 @@ Do you feel that your life is cluttered or wasting away with no purpose or direc
 ### What can you do with Introspect?
 
 - Rate, describe, and reflect on your daily life
-- Gain insight into a period of your life with statistics
+- Gain insight into a period of your life with informative statistics
 - View and edit any previous response
 - Export your data as CSV
 - Customize your experience with dark & light themes
+
+### Permissions
+
+Introspect requires NO permissions. We don't access your browser tabs, history, identity, etc.
+
+### Privacy Policy
+
+Unlike other extensions, we don't find you to be all that interesting. Your questionable browsing history should remain between you and the NSA. Introspect collects nothing but your responses. Period.
 
 ### Contributing
 

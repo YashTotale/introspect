@@ -4,6 +4,8 @@
 
 <h2 align="center">Lightweight Life Tracker</h2>
 
+[![Join the chat at https://gitter.im/introspect-extension/community](https://badges.gitter.im/introspect-extension/community.svg)](https://gitter.im/introspect-extension/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Do you wish that you could look into a period of your life in the past and know what you did and how you felt?
 
 Do you feel that your life is cluttered or wasting away with no purpose or direction?

@@ -5,6 +5,7 @@
 <h2 align="center">Lightweight Life Tracker</h2>
 
 [![Join the chat at https://gitter.im/introspect-extension/community](https://badges.gitter.im/introspect-extension/community.svg)](https://gitter.im/introspect-extension/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+![Node CI](https://github.com/YashTotale/introspect/workflows/Node%20CI/badge.svg)
 
 Do you wish that you could look into a period of your life in the past and know what you did and how you felt?
 

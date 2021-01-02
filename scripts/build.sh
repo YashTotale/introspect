@@ -7,6 +7,9 @@ printf 'Building Introspect...\n\n'
 export INLINE_RUNTIME_CHUNK=false
 export GENERATE_SOURCEMAP=false
 
+rm -rf chrome
+rm -rf firefox
+
 react-scripts build
 
 cd build
@@ -17,10 +20,10 @@ printf '\nZipping build folder...\n'
 web-ext build --overwrite-dest
 
 printf '\nCreating Chrome Directory...\n'
-cp -r web-ext-artifacts chrome
+cp -r web-ext-artifacts ../chrome
 
 printf '\nCreating Firefox Directory...\n'
-cp -r web-ext-artifacts firefox
+cp -r web-ext-artifacts ../firefox
 
 printf '\nCleaning up...\n'
 rm -rf web-ext-artifacts

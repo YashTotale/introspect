@@ -8,6 +8,8 @@ coverage/
 
 # production
 build/
+chrome/
+firefox/
 
 # misc
 .DS_Store

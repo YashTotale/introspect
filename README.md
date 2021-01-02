@@ -27,6 +27,7 @@ You can contribute in two ways:
 - Open a new [issue](https://github.com/YashTotale/introspect/issues) for a [bug report](https://github.com/YashTotale/introspect/issues/new?labels=bug&template=bug_report.md) or [feature request](https://github.com/YashTotale/introspect/issues/new?labels=enhancement&template=feature_request.md) in the [GitHub repository](https://github.com/YashTotale/introspect)
 - Create a [Pull Request](https://github.com/YashTotale/introspect/pulls) that fixes/enhances some part of the extension
   - Check out [first contributions](https://github.com/firstcontributions/first-contributions) if you are new to contributing
+  - Follow the wiki page on [building & viewing Introspect locally](https://github.com/YashTotale/introspect/wiki/Building-&-Viewing-Locally)
 
 ### Useful Links
 

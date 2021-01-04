@@ -6,7 +6,7 @@
 
 <p align="center">
 <a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img alt="Firefox Add-On" src="https://discourse-prod-uploads-81679984178418.s3.dualstack.us-west-2.amazonaws.com/original/3X/c/0/c03e12b8fae82e431eabaf0f6e250bfc78504182.png"></a>
-<img alt="Chrome Extension" src="https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png">
+<a href="https://chrome.google.com/webstore/detail/introspect/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp"><img alt="Chrome Extension" src="https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png"></a>
 </p>
 
 <p align="center">

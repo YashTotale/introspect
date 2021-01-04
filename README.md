@@ -1,11 +1,18 @@
 <p align="center">
-<img src="https://raw.githubusercontent.com/YashTotale/introspect/main/static/banners/banner920.png">
+<img alt="Banner" src="https://raw.githubusercontent.com/YashTotale/introspect/main/static/banners/banner920.png">
 </p>
 
 <h2 align="center">Lightweight Life Tracker</h2>
 
-[![Join the chat at https://gitter.im/introspect-extension/community](https://badges.gitter.im/introspect-extension/community.svg)](https://gitter.im/introspect-extension/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Node CI](https://github.com/YashTotale/introspect/workflows/Node%20CI/badge.svg)](https://github.com/YashTotale/introspect/actions?query=workflow%3A%22Node+CI%22)
+<p align="center">
+<a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img alt="Firefox Add-On" src="https://discourse-prod-uploads-81679984178418.s3.dualstack.us-west-2.amazonaws.com/original/3X/c/0/c03e12b8fae82e431eabaf0f6e250bfc78504182.png"></a>
+<img alt="Chrome Extension" src="https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png">
+</p>
+
+<p align="center">
+<a href="https://gitter.im/introspect-extension/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img alt="Join the chat at https://gitter.im/introspect-extension/community" src="https://badges.gitter.im/introspect-extension/community.svg"></a>
+<a href="https://github.com/YashTotale/introspect/actions?query=workflow%3A%22Node+CI%22"><img alt="Node CI" src="https://github.com/YashTotale/introspect/workflows/Node%20CI/badge.svg"></a>
+</p>
 
 Do you wish that you could look into a period of your life in the past and know what you did and how you felt?
 

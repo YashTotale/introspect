@@ -12,7 +12,7 @@ The active community will be eager to assist you. Your well-worded question will
 
 ## Reporting Issues
 
-Have you identified a reproducible problem in Introspect Have a feature request? We want to hear about it! Here's how you can make reporting your issue as effective as possible.
+Have you identified a reproducible problem in Introspect? Have a feature request? We want to hear about it! Here's how you can make reporting your issue as effective as possible.
 
 ### Look For an Existing Issue
 

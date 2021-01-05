@@ -7,13 +7,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 **Table of Contents**
 
 - [Unreleased](#unreleased)
-- [[1.0.0] - (2020-12-03)](#100---2020-12-03)
+- [[1.0.0] - (2021-01-03)](#100---2021-01-03)
 
 ## Unreleased
 
 ---
 
-## [1.0.0] - (2020-12-03)
+## [1.0.0] - (2021-01-03)
 
 - Initial Release
 

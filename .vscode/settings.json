@@ -13,6 +13,8 @@
     ".eslintrc": "json",
     ".eslintcache": "json",
 
-    ".huskyrc": "json"
+    ".huskyrc": "json",
+
+    ".firebaserc": "json"
   }
 }

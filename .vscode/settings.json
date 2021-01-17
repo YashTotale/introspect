@@ -1,7 +1,9 @@
 {
   "files.associations": {
     ".gitignore": "ignore",
+
     ".env": "text",
+    ".env.example": "text",
 
     ".markdownlintignore": "ignore",
     ".markdownlintrc": "json",
@@ -11,10 +13,10 @@
 
     ".eslintignore": "ignore",
     ".eslintrc": "json",
-    ".eslintcache": "json",
 
     ".huskyrc": "json",
+    ".lintstagedrc": "json",
 
-    ".firebaserc": "json"
+    ".snyk": "yaml"
   }
 }

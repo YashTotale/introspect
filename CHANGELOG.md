@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 **Table of Contents**
 
 - [Unreleased](#unreleased)
-- [[1.0.1] - (2020-01-05)](#101---2020-01-05)
+- [[1.0.1] - (2020-01-17)](#101---2020-01-17)
   - [Dependencies](#dependencies)
 - [[1.0.0] - (2021-01-03)](#100---2021-01-03)
 
@@ -15,7 +15,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ---
 
-## [1.0.1] - (2020-01-05)
+## [1.0.1] - (2020-01-17)
 
 ### Dependencies
 

@@ -17,7 +17,7 @@
     "@material-ui/pickers": "^3.2.10",
     "@reduxjs/toolkit": "^1.5.0",
     "apexcharts": "^3.23.1",
-    "firebase": "^8.2.1",
+    "firebase": "^8.2.3",
     "json-to-csv-export": "^1.0.2",
     "lodash.isequal": "^4.5.0",
     "moment": "^2.29.1",

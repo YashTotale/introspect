@@ -10,7 +10,6 @@
 </p>
 
 <p align="center">
-<a href="https://gitter.im/introspect-extension/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img alt="Join the chat at https://gitter.im/introspect-extension/community" src="https://badges.gitter.im/introspect-extension/community.svg"></a>
 <a href="https://github.com/YashTotale/introspect/actions?query=workflow%3A%22Node+CI%22"><img alt="Node CI" src="https://github.com/YashTotale/introspect/workflows/Node%20CI/badge.svg"></a>
 </p>
 

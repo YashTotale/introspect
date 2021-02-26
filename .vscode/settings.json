@@ -17,6 +17,9 @@
     ".huskyrc": "json",
     ".lintstagedrc": "json",
 
-    ".snyk": "yaml"
+    ".snyk": "yaml",
+    ".imgbotconfig": "json",
+
+    ".firebaserc": "json"
   }
 }

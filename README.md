@@ -9,8 +9,13 @@
 <a href="https://chrome.google.com/webstore/detail/introspect/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp"><img alt="Chrome Extension" src="https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png"></a>
 </p>
 
-<p align="center">
-<a href="https://github.com/YashTotale/introspect/actions?query=workflow%3A%22Node+CI%22"><img alt="Node CI" src="https://github.com/YashTotale/introspect/workflows/Node%20CI/badge.svg"></a>
+<p>
+<a href="https://chrome.google.com/webstore/detail/introspect/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp"><img src="https://img.shields.io/chrome-web-store/v/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp?logo=google-chrome&logoColor=FFFFFF&labelColor=000000&label=Version&style=flat-square" alt="Chrome Version"></a>
+<a href="https://chrome.google.com/webstore/detail/introspect/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp/reviews"><img src="https://img.shields.io/chrome-web-store/rating/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp?logo=google-chrome&logoColor=FFFFFF&labelColor=000000&label=Rating&style=flat-square" alt="Chrome Rating"></a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img src="https://img.shields.io/amo/v/introspect?logo=firefox-browser&logoColor=FFFFFF&labelColor=000000&label=Version&style=flat-square" alt="Firefox Version"></a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img src="https://img.shields.io/amo/rating/introspect?logo=firefox-browser&logoColor=FFFFFF&labelColor=000000&label=Rating&style=flat-square" alt="Firefox Rating"></a>
+<a href="https://github.com/YashTotale/introspect/actions?query=workflow%3A%22Node+CI%22"><img src="https://img.shields.io/github/workflow/status/YashTotale/introspect/Node%20CI?logo=github&logoColor=FFFFFF&labelColor=000000&label=Build&style=flat-square" alt="Build"></a>
+<a href="https://lgtm.com/projects/g/YashTotale/introspect/context:javascript"><img src="https://img.shields.io/lgtm/grade/javascript/github/YashTotale/introspect?labelColor=000000&logo=lgtm&label=Code%20Quality&style=flat-square" alt="Code Quality"></a>
 </p>
 
 Do you wish that you could look into a period of your life in the past and know what you did and how you felt?

@@ -1,8 +1,6 @@
 <p align="center">
-<img alt="Banner" src="https://raw.githubusercontent.com/YashTotale/introspect/main/static/banners/banner920.png">
+<img alt="Banner" src="https://raw.githubusercontent.com/YashTotale/introspect/main/static/banners/banner920.png" width="300px">
 </p>
-
-<h2 align="center">Lightweight Life Tracker</h2>
 
 <p align="center">
 <a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img alt="Firefox Add-On" src="https://discourse-prod-uploads-81679984178418.s3.dualstack.us-west-2.amazonaws.com/original/3X/c/0/c03e12b8fae82e431eabaf0f6e250bfc78504182.png"></a>
@@ -18,11 +16,21 @@
 <a href="https://lgtm.com/projects/g/YashTotale/introspect/context:javascript"><img src="https://img.shields.io/lgtm/grade/javascript/github/YashTotale/introspect?labelColor=000000&logo=lgtm&label=Code%20Quality&style=flat-square" alt="Code Quality"></a>
 </p>
 
-Do you wish that you could look into a period of your life in the past and know what you did and how you felt?
+### Initial Purpose
 
-Do you feel that your life is cluttered or wasting away with no purpose or direction?
+Introspect started out as a data collection tool for a self-guided research project that attempted to find the cause of the decline in student mental health during the COVID lockdown.
 
-**If so, Introspect is the perfect extension for you!**
+It employed machine learning algorithms to find correlations between words used when describing one's day and the overall rating for that day. The algorithms were trained for a few weeks with responses from students at my high school. After that, they were able to predict the rating of a day accurately (**about 87% of the time**) based on the description of that day.
+
+Using this data, I was able to find certain words and phrases that often correlated with negative/positive days. Here are a few of the results:
+
+- Words such as "club" and "walk" that indicated socialization and outdoors activity were heavily correlated with higher rated days.
+- On the other hand, words similar to "stuck" and "alone" correlated with lower rated days.
+- For almost every student surveyed, weekends and holidays were rated lower than school days.
+- Students that used words/phrases that indicated busy schedules generally rated their days much higher than other students.
+- ...
+
+After the conclusion of the research project, I modified Introspect to make it a Chrome/Firefox extension that allows users to rate, describe, and reflect on their daily lives. Here's how you can use Introspect:
 
 ### What can you do with Introspect?
 
@@ -34,11 +42,11 @@ Do you feel that your life is cluttered or wasting away with no purpose or direc
 
 ### Permissions
 
-Introspect requires NO permissions. We don't access your browser tabs, history, identity, etc.
+Introspect requires NO permissions. It doesn't access your browser tabs, history, identity, etc.
 
 ### Privacy Policy
 
-Unlike other extensions, we don't find you to be all that interesting. Your questionable browsing history should remain between you and the NSA. Introspect collects nothing but your responses. Period. **All data is encrypted using the [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)!**
+Introspect collects nothing but your responses. **All data is encrypted using the [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)**.
 
 ### Contributing
 
@@ -53,6 +61,5 @@ You can contribute in two ways:
 
 ### Useful Links
 
-- [Source Code](https://github.com/YashTotale/introspect)
 - [Report Bugs & Feature Requests](https://github.com/YashTotale/introspect/issues/new/choose)
 - [Screenshots](https://github.com/YashTotale/introspect/tree/main/static/screenshots)

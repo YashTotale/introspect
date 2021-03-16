@@ -19,6 +19,7 @@ import {
   getProfileLoaded,
   getSortedResponses,
   getStartDate,
+  Responses,
   setEndDate,
   setStartDate,
   useAppDispatch,
@@ -82,10 +83,12 @@ const Statistics: FC<StatisticsProps> = () => {
           IconButtonProps={{
             onClick: () => {
               csvDownload(
-                Object.entries(responses).map(([date, response]) => ({
-                  date: moment(date, "DD-MM-YYYY").format("MM/DD/YYYY"),
-                  ...response,
-                })),
+                Object.entries(responses as Responses).map(
+                  ([date, response]) => ({
+                    date: moment(date, "DD-MM-YYYY").format("MM/DD/YYYY"),
+                    ...response,
+                  })
+                ),
                 `introspect_${moment(realStartDate).format(
                   "MM-DD-YYYY"
                 )}_to_${moment(realEndDate).format("MM-DD-YYYY")}.csv`
@@ -141,9 +144,9 @@ const Statistics: FC<StatisticsProps> = () => {
         <NoResponses />
       ) : (
         <>
-          <Ratings responses={responses} />
-          <Descriptions responses={responses} />
-          <Reflections responses={responses} />
+          <Ratings responses={responses as Responses} />
+          <Descriptions responses={responses as Responses} />
+          <Reflections responses={responses as Responses} />
         </>
       )}
     </>

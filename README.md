@@ -38,7 +38,7 @@ Introspect requires NO permissions. We don't access your browser tabs, history, 
 
 ### Privacy Policy
 
-Unlike other extensions, we don't find you to be all that interesting. Your questionable browsing history should remain between you and the NSA. Introspect collects nothing but your responses. Period.
+Unlike other extensions, we don't find you to be all that interesting. Your questionable browsing history should remain between you and the NSA. Introspect collects nothing but your responses. Period. **All data is encrypted using the [Advanced Encryption Standard (AES)](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)!**
 
 ### Contributing
 

@@ -1,6 +1,7 @@
 import isEqual from "lodash.isequal";
 import moment from "moment";
 import { createSelector } from "@reduxjs/toolkit";
+import Crypto from "crypto-js";
 
 import { RootState, Responses } from "../Store";
 import { getHomeDate, getHomeData, initialData } from "./home.slice";
@@ -119,8 +120,33 @@ export type { StatisticsState } from "./statistics.slice";
 
 export const getUser = (state: RootState) => state.firebase.auth;
 export const getProfile = (state: RootState) => state.firebase.profile;
-export const getResponses = (state: RootState) =>
-  state.firebase.profile.responses;
+
+export const getResponses = (state: RootState) => {
+  if (!getProfileLoaded(state)) return undefined;
+
+  const responses = state.firebase.profile.responses;
+  if (!responses) return responses;
+
+  const user = getUser(state);
+
+  const decrypted = Object.entries(responses).reduce((obj, [key, data]) => {
+    return {
+      ...obj,
+      [key]: {
+        ...data,
+        description: Crypto.AES.decrypt(data.description, user.uid).toString(
+          Crypto.enc.Utf8
+        ),
+        reflection: Crypto.AES.decrypt(data.reflection, user.uid).toString(
+          Crypto.enc.Utf8
+        ),
+      },
+    };
+  }, {} as Responses);
+
+  return decrypted;
+};
+
 export const getProfileLoaded = (state: RootState) =>
   state.firebase.profile.isLoaded;
 

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import isEqual from "lodash.isequal";
 import moment from "moment";
+import AES from "crypto-js/aes";
 
 import {
   RootState,
@@ -8,7 +9,9 @@ import {
   getIsHomeDataSaved,
   getSavedHomeData,
   getResponses,
+  getUser,
 } from "./index";
+import { Responses } from "../Store";
 
 export type HomeDataType = "rating" | "description" | "reflection";
 
@@ -159,8 +162,16 @@ export const saveHomeData = (date?: string): AppThunk => async (
     const responses = getResponses(getState());
     const firebase = getFirebase();
     const data = getHomeData(getState());
+    const user = getUser(getState());
 
-    const newResponses = { ...responses, [saveDate]: data };
+    const newResponses: Responses = {
+      ...responses,
+      [saveDate]: {
+        ...data,
+        description: AES.encrypt(data.description, user.uid).toString(),
+        reflection: AES.encrypt(data.reflection, user.uid).toString(),
+      },
+    };
 
     if (isEqual(data, initialData)) delete newResponses[saveDate];
 

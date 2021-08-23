@@ -58,7 +58,7 @@ const Theme: React.FC = ({ children }) => {
       },
     },
     typography: {
-      fontFamily: "Palatino, Georgia, Serif",
+      fontFamily: "Roboto, sans-serif",
       fontWeightBold: 600,
     },
     palette: {

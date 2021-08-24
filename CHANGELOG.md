@@ -7,7 +7,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 **Table of Contents**
 
 - [Unreleased](#unreleased)
-- [[1.1.0] - (2020-03-15)](#110---2020-03-15)
+- [[1.1.1] - (2021-08-23)](#111---2021-08-23)
+  - [Changed](#changed)
+- [[1.1.0] - (2021-03-15)](#110---2021-03-15)
   - [Added](#added)
 - [[1.0.1] - (2020-01-17)](#101---2020-01-17)
   - [Dependencies](#dependencies)
@@ -17,11 +19,21 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/), and this 
 
 ---
 
-## [1.1.0] - (2020-03-15)
+## [1.1.1] - (2021-08-23)
+
+### Changed
+
+- Font changed to `Roboto`
+
+---
+
+## [1.1.0] - (2021-03-15)
 
 ### Added
 
 - Advanced Encryption Standard (AES) Encryption
+
+---
 
 ## [1.0.1] - (2020-01-17)
 

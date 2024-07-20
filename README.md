@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-<a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img alt="Firefox Add-On" src="https://discourse-prod-uploads-81679984178418.s3.dualstack.us-west-2.amazonaws.com/original/3X/c/0/c03e12b8fae82e431eabaf0f6e250bfc78504182.png"></a>
-<a href="https://chrome.google.com/webstore/detail/introspect/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp"><img alt="Chrome Extension" src="https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png"></a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img height="50" alt="Firefox Add-On" src="https://raw.githubusercontent.com/YashTotale/introspect/main/static/browsers/firefox.png"></a>
+<a href="https://chromewebstore.google.com/detail/introspect/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp"><img height="50" alt="Chrome Extension" src="https://raw.githubusercontent.com/YashTotale/introspect/main/static/browsers/chrome.png"></a>
 </p>
 
 <p align="center">
@@ -12,8 +12,7 @@
 <a href="https://chrome.google.com/webstore/detail/introspect/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp/reviews"><img src="https://img.shields.io/chrome-web-store/rating/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp?logo=google-chrome&logoColor=FFFFFF&labelColor=000000&label=Rating&style=flat-square" alt="Chrome Rating"></a>
 <a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img src="https://img.shields.io/amo/v/introspect?logo=firefox-browser&logoColor=FFFFFF&labelColor=000000&label=Version&style=flat-square" alt="Firefox Version"></a>
 <a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img src="https://img.shields.io/amo/rating/introspect?logo=firefox-browser&logoColor=FFFFFF&labelColor=000000&label=Rating&style=flat-square" alt="Firefox Rating"></a>
-<a href="https://github.com/YashTotale/introspect/actions?query=workflow%3A%22Node+CI%22"><img src="https://img.shields.io/github/workflow/status/YashTotale/introspect/Node%20CI?logo=github&logoColor=FFFFFF&labelColor=000000&label=Build&style=flat-square" alt="Build"></a>
-<a href="https://lgtm.com/projects/g/YashTotale/introspect/context:javascript"><img src="https://img.shields.io/lgtm/grade/javascript/github/YashTotale/introspect?labelColor=000000&logo=lgtm&label=Code%20Quality&style=flat-square" alt="Code Quality"></a>
+<a href="https://github.com/YashTotale/introspect/actions/workflows/integrate.yml?query=branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/YashTotale/introspect/integrate.yml?branch=main&logo=github&logoColor=FFFFFF&labelColor=000000&label=Build&style=flat-square" alt="Build"></a>
 </p>
 
 ### Initial Purpose

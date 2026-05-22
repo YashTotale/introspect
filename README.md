@@ -12,24 +12,11 @@
 <a href="https://chrome.google.com/webstore/detail/introspect/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp/reviews"><img src="https://img.shields.io/chrome-web-store/rating/bbdoepdgmnjbcgmhgkfmnfcomjjoepcp?logo=google-chrome&logoColor=FFFFFF&labelColor=000000&label=Rating&style=flat-square" alt="Chrome Rating"></a>
 <a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img src="https://img.shields.io/amo/v/introspect?logo=firefox-browser&logoColor=FFFFFF&labelColor=000000&label=Version&style=flat-square" alt="Firefox Version"></a>
 <a href="https://addons.mozilla.org/en-US/firefox/addon/introspect/"><img src="https://img.shields.io/amo/rating/introspect?logo=firefox-browser&logoColor=FFFFFF&labelColor=000000&label=Rating&style=flat-square" alt="Firefox Rating"></a>
-<a href="https://github.com/YashTotale/introspect/actions/workflows/integrate.yml?query=branch%3Amain"><img src="https://img.shields.io/github/actions/workflow/status/YashTotale/introspect/integrate.yml?branch=main&logo=github&logoColor=FFFFFF&labelColor=000000&label=Build&style=flat-square" alt="Build"></a>
 </p>
 
 ### Initial Purpose
 
-Introspect started out as a data collection tool for a self-guided research project that attempted to find the cause of the decline in student mental health during the COVID lockdown.
-
-It employed machine learning algorithms to find correlations between words used when describing one's day and the overall rating for that day. The algorithms were trained for a few weeks with responses from students at my high school. After that, they were able to predict the rating of a day accurately (**about 87% of the time**) based on the description of that day.
-
-Using this data, I was able to find certain words and phrases that often correlated with negative/positive days. Here are a few of the results:
-
-- Words such as "club" and "walk" that indicated socialization and outdoors activity were heavily correlated with higher rated days.
-- On the other hand, words similar to "stuck" and "alone" correlated with lower rated days.
-- For almost every student surveyed, weekends and holidays were rated lower than school days.
-- Students that used words/phrases that indicated busy schedules generally rated their days much higher than other students.
-- ...
-
-After the conclusion of the research project, I modified Introspect to make it a Chrome/Firefox extension that allows users to rate, describe, and reflect on their daily lives. Here's how you can use Introspect:
+Introspect started out as a data collection tool for a self-guided research project on student mental health during the COVID lockdown. I eventually turned it into a Chrome/Firefox extension that allows users to rate, describe, and reflect on their daily lives. Here's how you can use Introspect:
 
 ### What can you do with Introspect?
 
